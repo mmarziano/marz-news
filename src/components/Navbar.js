@@ -11,9 +11,9 @@ export default class Navbar extends React.Component {
                     </div>
                     <div className="col-md-10">
                         <menu className="right">
-                            <li>Explore</li>
-                            <li>Login</li>
+                            <li>Top Headlines</li>
                             <li>Search</li>
+                            <li><i className="fa fa-sign-in"></i></li>
                         </menu>
                     </div>
                 </div>

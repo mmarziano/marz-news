@@ -11,14 +11,28 @@
 /* NavBar */
 .navbar {
   background-color: rgba(0,0,0,1);
+  max-height: 75px;
+  margin: auto;
 }
 
 .navbar li {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5rem;
-  display: inline;
+  display: table-cell;
   color: #fff;
-  padding: 20px;
+  padding-right: 15px;
+  vertical-align: center;
+}
+
+.navbar li:hover {
+  color: rgb(3, 131, 190);
+}
+
+#login-btn {
+  color: #fff;
+  display: table-cell;
+  vertical-align: center;
+  font-size: 2rem;
 }
 
 /* Logo */
