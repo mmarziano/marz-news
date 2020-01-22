@@ -1,5 +1,5 @@
 import React from 'react';
-import placeholder from '../assets/images/imgplaceholder.jpg'
+import MainHeadline from './MainHeadline'
 
 export default class MainImage extends React.Component {
     render() {
@@ -7,7 +7,7 @@ export default class MainImage extends React.Component {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-lg-12 main-img">
-                    
+                        <MainHeadline />
                     </div>
                 </div>
             </div>
