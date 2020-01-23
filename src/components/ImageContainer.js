@@ -7,9 +7,6 @@ import { fetchTopHeadlines } from "../actions/articleActions";
 
 class ImageContainer extends React.Component {
 
-    componentDidMount() {
-        this.props.dispatch(fetchTopHeadlines());
-    }
 
     render() {
         const { error, loading, articles } = this.props;
@@ -27,9 +24,9 @@ class ImageContainer extends React.Component {
         } else {
         return(
             <div className="container-fluid col-lg-12">
-                <div className="row">
-                        <HeroImage articles={this.props.articles}/>
-                        <MainHeadline articles={this.props.articles}/>
+                <div className="row hero">
+                        <HeroImage articles={articles}/>
+                        <MainHeadline articles={articles}/>
                 </div>
             </div>
         )     
@@ -37,16 +34,7 @@ class ImageContainer extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        articles: state.topHeadlines.articles,
-        loading: state.loading,
-        error: state.error
-    }
-}
 
-
-
-export default connect(mapStateToProps)(ImageContainer)
+export default ImageContainer
 
     

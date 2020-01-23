@@ -3,28 +3,48 @@ import './App.css';
 import { connect } from 'react-redux'
 import Navbar from './components/Navbar'
 import ImageContainer from './components/ImageContainer'
+import { fetchTopHeadlines } from "./actions/articleActions";
 
 
 class App extends React.Component {
 
-    getArticles = () => {
-      fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=36ae05704c7044be99dbb50a732950d1')
-      .then(response => response.json())
-      .then(json => this.props.mapStateToProps(json))
+    componentDidMount() {
+      this.props.dispatch(fetchTopHeadlines());
     }
 
     render() {
-      console.log(this.props)
-        return (
-          <div>
-            <Navbar />
-            <ImageContainer articles={this.props.articles}/>
-          </div> 
-        );
-      
+        const { error, loading, articles } = this.props;
 
+        if (error) {
+            return <div>Error! {error.message}</div>;
+            }
+
+        if (loading) {
+            return <div>Loading...</div>;
+        }
+
+        if (articles === null) {
+            return null;
+        } else {
+          return (
+            <div>
+              <Navbar articles={this.props.articles}/>
+              <ImageContainer articles={this.props.articles}/>
+            </div> 
+          );
+        }
     }
   }
 
+  const mapStateToProps = state => {
+    return {
+        articles: state.topHeadlines.articles,
+        loading: state.loading,
+        error: state.error
+    }
+}
 
-export default App
+
+
+export default connect(mapStateToProps)(App)
+

@@ -4,21 +4,24 @@ class Carousel extends React.Component {
     top5 = (props) => {
         let top5articles = [];
         for (let i = 0; i < 5; i++) {
-            {top5articles.push(props.articles[i])}
+            top5articles.push(props[i])
         }
-        return top5articles
+        return top5articles.map((article, idx) => <i className="fa fa-circle-o" id={idx}></i>)
     }
 
+
     render() {
-        return(
-            <div className="carousel col-md-6 text-center">
-                        <i className="fa fa-circle-o"></i>
-                        <i className="fa fa-circle-o"></i>
-                        <i className="fa fa-circle-o"></i>
-                        <i className="fa fa-circle-o"></i>
-                        <i className="fa fa-circle-o"></i>
-            </div>
-        )
+        const { articles } = this.props.articles;
+
+        if (this.props.articles === null) {
+            return null
+        } else {
+            return(
+                <div className="carousel col-md-6 text-center">
+                    {this.top5({articles})}
+                </div>
+            )
+        }  
     }
 } 
 

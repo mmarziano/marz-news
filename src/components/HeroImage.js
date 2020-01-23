@@ -8,8 +8,7 @@ export default class HeroImage extends React.Component {
     render() {
         return(
             <>
-            <div className="overlay h-100 w-100"></div> 
-            <img className="main-img" src={this.renderImgURL()} alt={""} />
+                <img className="main-img" src={this.renderImgURL()} alt={""} />
             </>
         )
     }
