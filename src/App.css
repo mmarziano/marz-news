@@ -44,6 +44,10 @@
   color: #fff;
 }
 
+.fa-active {
+  color: green;
+}
+
 .navbar li {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5rem;

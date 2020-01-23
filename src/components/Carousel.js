@@ -1,12 +1,24 @@
 import React from 'react';
 
 class Carousel extends React.Component {
+    constructor(props) {
+        super(props);
+        this.setActive = this.setActive.bind(this);
+        this.state = {
+            activeImg: 0,
+        };
+    }
+
+    setActive = (id) => {
+        this.setState({ activeImg: id});
+    }
+    
     top5 = (props) => {
         let top5articles = [];
         for (let i = 0; i < 5; i++) {
             top5articles.push(props[i])
         }
-        return top5articles.map((article, idx) => <i className="fa fa-circle-o" id={idx}></i>)
+        return top5articles.map((article, idx) => <i className='fa fa-circle-o' id={idx} key={idx}></i>)
     }
 
 
