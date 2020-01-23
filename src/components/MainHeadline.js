@@ -10,11 +10,10 @@ class MainImage extends React.Component {
     }
 
     render() {
-        this.top5(this.props);
         return(
             <div className="main-img-card">
                 <header className="text-center">
-                    <h1 className="headline">{this.props.articles[0].title.split('-').join}</h1>
+                    <h1 className="headline">{this.props.articles[0].title}</h1>
                 </header>
             </div>
         )

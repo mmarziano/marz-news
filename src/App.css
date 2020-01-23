@@ -28,6 +28,22 @@
   z-index: 1000;
 }
 
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(3, 131, 190);
+  font-size: 20px;
+}
+
+.carousel .fa {
+  padding-right: 15px;
+}
+
+.carousel .fa:hover {
+  color: #fff;
+}
+
 .navbar li {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5rem;
@@ -81,6 +97,9 @@
   top: 30%;
   right: 5%;
   vertical-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .headline {
