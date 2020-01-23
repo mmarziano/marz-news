@@ -2,28 +2,29 @@ import React from 'react';
 import './App.css';
 import { connect } from 'react-redux'
 import Navbar from './components/Navbar'
-import MainImage from './components/MainImage'
+import ImageContainer from './components/ImageContainer'
 
-function App() {
-  return (
-    <div>
-      <Navbar />
-      <MainImage />
-     </div> 
-  );
-}
 
-const mapStateToProps = state => {
-  return {
-    catPics: state.cats,
-    loading: state.loading
+class App extends React.Component {
+
+    getArticles = () => {
+      fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=36ae05704c7044be99dbb50a732950d1')
+      .then(response => response.json())
+      .then(json => this.props.mapStateToProps(json))
+    }
+
+    render() {
+      console.log(this.props)
+        return (
+          <div>
+            <Navbar />
+            <ImageContainer articles={this.props.articles}/>
+          </div> 
+        );
+      
+
+    }
   }
-}
 
-const mapDispatchToProps = dispatch => {
-  return {
-    
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
