@@ -31,3 +31,5 @@ export const fetchTopHeadlinesBegin = () => ({
     type: FETCH_TOPHEADLINES_FAILURE,
     payload: { error }
   });
+
+  
