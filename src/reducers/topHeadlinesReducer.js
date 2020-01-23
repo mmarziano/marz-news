@@ -2,10 +2,10 @@ import {
     FETCH_TOPHEADLINES_BEGIN,
     FETCH_TOPHEADLINES_SUCCESS,
     FETCH_TOPHEADLINES_FAILURE
-  } from './actions/articleActions';
+  } from '../actions/articleActions';
   
   const initialState = {
-    articles: [],
+    articles: null,
     loading: false,
     error: null
   };
@@ -27,7 +27,7 @@ import {
         return {
           ...state,
           loading: false,
-          items: action.payload.articles
+          articles: action.payload.articles
         };
   
       case FETCH_TOPHEADLINES_FAILURE:
@@ -42,7 +42,7 @@ import {
           ...state,
           loading: false,
           error: action.payload.error,
-          items: []
+          articles: []
         };
   
       default:
