@@ -16,7 +16,7 @@ class ImageContainer extends React.Component {
     setFocus = (e) => {
         this.setState(
             { active: e.target.id },
-            () => console.log(this.state)
+            () => {return (this.state)}
           );
     }
 
@@ -27,7 +27,9 @@ class ImageContainer extends React.Component {
         }
 
         return top5articles.map((article, idx) =>  
-            <i className={this.props.activeArticle !== idx ? 'fa fa-circle-o' : 'fa fa-circle fa-active'} onClick={this.setFocus} id={idx} key={idx}></i>)
+            <img className={this.state.active !== idx ? 'thumbnail' : 'thumbnail-active'} src={article.urlToImage} onClick={this.setFocus} id={idx} key={idx} />
+            // <i className={this.props.activeArticle !== idx ? 'fa fa-circle-o' : 'fa fa-circle fa-active'} onClick={this.setFocus} id={idx} key={idx}></i>
+            )
     }
 
     render() {
