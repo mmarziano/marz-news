@@ -13,7 +13,7 @@ class MainImage extends React.Component {
         return(
             <div className="main-img-card">
                 <header className="text-center">
-                    <h1 className="headline">{this.props.articles[0].title}</h1>
+                    <h1 className="headline">{this.props.articles[this.props.activeArticle].title}</h1>
                 </header>
             </div>
         )

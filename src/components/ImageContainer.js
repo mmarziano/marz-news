@@ -1,15 +1,14 @@
 import React from 'react';
 import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
-import { connect } from 'react-redux';
-import { fetchTopHeadlines } from "../actions/articleActions";
+import Navbar from './Navbar'
+
 
 
 class ImageContainer extends React.Component {
 
-
     render() {
-        const { error, loading, articles } = this.props;
+        const { error, loading, articles, activeArticle } = this.props;
 
         if (error) {
             return <div>Error! {error.message}</div>;
@@ -25,8 +24,9 @@ class ImageContainer extends React.Component {
         return(
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
-                        <HeroImage articles={articles}/>
-                        <MainHeadline articles={articles}/>
+                        <Navbar articles={articles} activeArticle={this.props.active}/>
+                        <HeroImage articles={articles} activeArticle={this.props.active}/>
+                        <MainHeadline articles={articles} activeArticle={this.props.active}/>
                 </div>
             </div>
         )     

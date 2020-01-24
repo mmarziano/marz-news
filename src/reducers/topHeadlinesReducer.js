@@ -17,6 +17,7 @@ import {
         // Also, reset any errors. We're starting fresh.
         return {
           ...state,
+          activeArticle: 0,
           loading: true,
           error: null
         };
@@ -26,6 +27,7 @@ import {
         // Also, replace the items with the ones from the server
         return {
           ...state,
+          activeArticle: 0,
           loading: false,
           articles: action.payload.articles
         };
@@ -37,6 +39,7 @@ import {
 
         return {
           ...state,
+          activeArticle: null,
           loading: false,
           error: action.payload.error,
           articles: []

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { connect } from 'react-redux'
-import Navbar from './components/Navbar'
 import ImageContainer from './components/ImageContainer'
 import { fetchTopHeadlines } from "./actions/articleActions";
 
@@ -13,7 +12,7 @@ class App extends React.Component {
     }
 
     render() {
-        const { error, loading, articles } = this.props;
+        const { error, loading, articles, activeArticle } = this.props;
 
         if (error) {
             return <div>Error! {error.message}</div>;
@@ -28,8 +27,7 @@ class App extends React.Component {
         } else {
           return (
             <div>
-              <Navbar articles={this.props.articles}/>
-              <ImageContainer articles={this.props.articles}/>
+              <ImageContainer articles={this.props.articles} active={this.props.activeArticle}/>
             </div> 
           );
         }
@@ -39,6 +37,7 @@ class App extends React.Component {
   const mapStateToProps = state => {
     return {
         articles: state.topHeadlines.articles,
+        activeArticle: 0,
         loading: state.loading,
         error: state.error
     }
