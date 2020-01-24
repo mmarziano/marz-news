@@ -9,10 +9,25 @@ class ImageContainer extends React.Component {
         this.state = {
             active: 0,
         }
+        this.setFocus = this.setFocus.bind(this);
+        this.top5 = this.top5.bind(this)
     }
 
-    setFocus = () => {
-        alert('here')
+    setFocus = (e) => {
+        this.setState(
+            { active: e.target.id },
+            () => console.log(this.state)
+          );
+    }
+
+    top5 = () => {
+        let top5articles = [];
+        for (let i = 0; i < 5; i++) {
+            top5articles.push(this.props.articles[i])
+        }
+
+        return top5articles.map((article, idx) =>  
+            <i className={this.props.activeArticle !== idx ? 'fa fa-circle-o' : 'fa fa-circle fa-active'} onClick={this.setFocus} id={idx} key={idx}></i>)
     }
 
     render() {
@@ -30,18 +45,17 @@ class ImageContainer extends React.Component {
         if (articles === null) {
             return null;
         } else {
-
-
+        
         return(
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
-                        <Navbar articles={articles} activeArticle={this.state.active} setFocus={this.setFocus}/>
+                        <Navbar articles={articles} activeArticle={this.state.active} top5={this.top5}/>
                         <HeroImage articles={articles} activeArticle={this.state.active}/>
                         <MainHeadline articles={articles} activeArticle={this.state.active}/>
                 </div>
             </div>
         )     
-        }     
+      }     
     }
 }
 
