@@ -4,7 +4,7 @@ import  logo  from '../assets/images/marz-newslogo.png'
 
 export default class Navbar extends React.Component {
     render() {
-        const { articles, activeArticle } = this.props;
+        const { articles } = this.props;
 
         return(
             <div className="container-fluid navbar">
@@ -12,7 +12,7 @@ export default class Navbar extends React.Component {
                     <div className="col-md-3">
                         <img src={ logo } alt="Marz News Logo" className="logo" />
                     </div>
-                    <Carousel articles={articles} activeArticle={activeArticle}/>
+                    <Carousel articles={articles} />
                     <div className="col-md-3">
                         <menu className="right">
                             <li>Top Headlines</li>

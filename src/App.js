@@ -8,11 +8,11 @@ import { fetchTopHeadlines } from "./actions/articleActions";
 class App extends React.Component {
 
     componentDidMount() {
-      this.props.dispatch(fetchTopHeadlines());
+      this.props.fetchTopHeadlines();
     }
 
     render() {
-        const { error, loading, articles, activeArticle } = this.props;
+        const { error, loading, articles} = this.props;
 
         if (error) {
             return <div>Error! {error.message}</div>;
@@ -27,7 +27,7 @@ class App extends React.Component {
         } else {
           return (
             <div>
-              <ImageContainer articles={this.props.articles} activeArticle={this.props.activeArticle}/>
+              <ImageContainer articles={this.props.articles} />
             </div> 
           );
         }
@@ -37,13 +37,16 @@ class App extends React.Component {
   const mapStateToProps = state => {
     return {
         articles: state.topHeadlines.articles,
-        activeArticle: state.topHeadlines.activeArticle,
         loading: state.topHeadlines.loading,
         error: state.topHeadlines.error
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return  {
+    fetchTopHeadlines: () => dispatch(fetchTopHeadlines()),
+    }
+  };
 
-
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 

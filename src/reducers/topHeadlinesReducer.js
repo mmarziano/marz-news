@@ -1,12 +1,11 @@
 import {
     FETCH_TOPHEADLINES_BEGIN,
     FETCH_TOPHEADLINES_SUCCESS,
-    FETCH_TOPHEADLINES_FAILURE
+    FETCH_TOPHEADLINES_FAILURE,
   } from '../actions/articleActions';
   
   const initialState = {
     articles: null,
-    activeArticle: 0,
     loading: false,
     error: null
   };
@@ -27,7 +26,6 @@ import {
         // Also, replace the items with the ones from the server
         return {
           ...state,
-          activeArticle: 0,
           loading: false,
           articles: action.payload.articles
         };
@@ -39,11 +37,11 @@ import {
 
         return {
           ...state,
-          activeArticle: null,
           loading: false,
           error: action.payload.error,
           articles: []
         };
+
   
       default:
         return state;
