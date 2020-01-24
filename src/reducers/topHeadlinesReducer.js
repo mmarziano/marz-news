@@ -6,6 +6,7 @@ import {
   
   const initialState = {
     articles: null,
+    activeArticle: 0,
     loading: false,
     error: null
   };
@@ -17,7 +18,6 @@ import {
         // Also, reset any errors. We're starting fresh.
         return {
           ...state,
-          activeArticle: 0,
           loading: true,
           error: null
         };

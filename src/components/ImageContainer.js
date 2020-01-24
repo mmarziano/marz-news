@@ -8,7 +8,8 @@ import Navbar from './Navbar'
 class ImageContainer extends React.Component {
 
     render() {
-        const { error, loading, articles, activeArticle } = this.props;
+        const { error, loading, articles } = this.props;
+        
 
         if (error) {
             return <div>Error! {error.message}</div>;
@@ -24,9 +25,9 @@ class ImageContainer extends React.Component {
         return(
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
-                        <Navbar articles={articles} activeArticle={this.props.active}/>
-                        <HeroImage articles={articles} activeArticle={this.props.active}/>
-                        <MainHeadline articles={articles} activeArticle={this.props.active}/>
+                        <Navbar articles={articles} activeArticle={this.props.activeArticle}/>
+                        <HeroImage articles={articles} activeArticle={this.props.activeArticle}/>
+                        <MainHeadline articles={articles} activeArticle={this.props.activeArticle}/>
                 </div>
             </div>
         )     

@@ -1,13 +1,6 @@
 import React from 'react';
 
 class MainImage extends React.Component {
-    top5 = (props) => {
-        let top5articles = [];
-        for (let i = 0; i < 5; i++) {
-            {top5articles.push(props.articles[i])}
-        }
-        return top5articles
-    }
 
     render() {
         return(

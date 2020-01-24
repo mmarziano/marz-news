@@ -27,7 +27,7 @@ class App extends React.Component {
         } else {
           return (
             <div>
-              <ImageContainer articles={this.props.articles} active={this.props.activeArticle}/>
+              <ImageContainer articles={this.props.articles} activeArticle={this.props.activeArticle}/>
             </div> 
           );
         }
@@ -37,9 +37,9 @@ class App extends React.Component {
   const mapStateToProps = state => {
     return {
         articles: state.topHeadlines.articles,
-        activeArticle: 0,
-        loading: state.loading,
-        error: state.error
+        activeArticle: state.topHeadlines.activeArticle,
+        loading: state.topHeadlines.loading,
+        error: state.topHeadlines.error
     }
 }
 
