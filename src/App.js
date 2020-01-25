@@ -3,6 +3,7 @@ import './App.css';
 import { connect } from 'react-redux'
 import ImageContainer from './components/ImageContainer'
 import { fetchTopHeadlines } from "./actions/articleActions";
+import { fetchSearch } from './actions/searchActions';
 
 
 class App extends React.Component {
@@ -27,7 +28,7 @@ class App extends React.Component {
         } else {
           return (
             <div>
-              <ImageContainer articles={this.props.articles} />
+              <ImageContainer articles={this.props.articles}/>
             </div> 
           );
         }
@@ -45,6 +46,7 @@ class App extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return  {
     fetchTopHeadlines: () => dispatch(fetchTopHeadlines()),
+    fetchSearch: () => dispatch(fetchSearch()),
     }
   };
 

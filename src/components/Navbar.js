@@ -15,6 +15,11 @@ export default class Navbar extends React.Component {
        this.toggleSearch()
     }
 
+    handleSearchSubmit = (e) => {
+        console.log(e)
+        this.props.fetchSearch(e.target.value)
+     }
+
     toggleSearch = () => {
         this.setState(
             { clicked: !this.state.clicked },
@@ -42,8 +47,8 @@ export default class Navbar extends React.Component {
                                 <li className="searchbar">
                                     <i className="fa fa-search" onClick={this.handleOpenSearch} aria-hidden="true"></i>
                                     <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
-                                        <input type="text" placeholder=""/>
-                                        <input type="button" onClick={this.handleOpenSearch} value="Search"/>
+                                            <input type="text" placeholder="Search articles"/>
+                                            <input type="button" onClick={this.handleSearchSubmit} value="Search"/>
                                     </div>
                                 </li>
                                 <li><i className="fa fa-sign-in"></i></li>
