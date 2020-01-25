@@ -34,13 +34,35 @@ export default class Navbar extends React.Component {
             
             <div className="container-fluid navbar">
                 <div className="row col-md-12">
-                    <div className="col-md-3">
+                    <div class="col-md-4">
                         <img src={ logo } alt="Marz News Logo" className="logo" />
                     </div>
-                    <div className="carousel col-md-6 text-center">
-                        {this.props.top5()}
-                    </div> 
-                    <div className="col-md-3">
+                        <div class="col-md-8">
+                            <menu className="right">
+                                <ul>
+                                    <li>Top Headlines</li>
+                                    <li>Politics</li>
+                                    <li>Finance</li>
+                                    <li>Sports</li>
+                                    <li>Entertainment</li>
+                                    <li className="searchbar">
+                                        <i className="fa fa-search" onClick={this.handleOpenSearch} aria-hidden="true"></i>
+                                        <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
+                                                <input type="text" placeholder="Search articles"/>
+                                                <input type="button" onClick={this.handleSearchSubmit} value="Search"/>
+                                        </div>
+                                    </li>
+                                    <li><i className="fa fa-sign-in"></i></li>
+                                </ul>
+                            </menu>
+                        </div>
+                    </div>
+                    <div className="row col-md-12">
+                        <div className="carousel col-md-4 text-center">
+                            {this.props.top5()}
+                        </div> 
+                    </div>
+                    {/* <div className="col-md-3">
                         <menu className="right">
                             <ul>
                                 <li>Top Headlines</li>
@@ -54,9 +76,8 @@ export default class Navbar extends React.Component {
                                 <li><i className="fa fa-sign-in"></i></li>
                             </ul>
                         </menu>
-                    </div>
+                    </div> */}
                 </div>
-            </div>
         )
     }
 } 

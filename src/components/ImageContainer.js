@@ -49,10 +49,11 @@ class ImageContainer extends React.Component {
         } else {
         
         return(
+
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
                         <Navbar articles={articles} activeArticle={this.state.active} top5={this.top5}/>
-                        <HeroImage articles={articles} activeArticle={this.state.active} />
+                        <HeroImage articles={articles} activeArticle={this.state.active} top5={this.top5}/>
                         <MainHeadline articles={articles} activeArticle={this.state.active} />
                 </div>
             </div>
