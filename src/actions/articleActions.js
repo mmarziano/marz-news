@@ -10,7 +10,7 @@ export function fetchTopHeadlines() {
       .catch(error =>
         dispatch(fetchTopHeadlinesFailure(error))
       );
-      }, 3000);
+      }, 2000);
     };
   }
 

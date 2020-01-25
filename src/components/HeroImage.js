@@ -1,5 +1,4 @@
 import React from 'react';
-import main from '../assets/images/imgplaceholder.jpg';
 
 export default class HeroImage extends React.Component {
 

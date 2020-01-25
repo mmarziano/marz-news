@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './css/loading.css';
 import { connect } from 'react-redux'
 import ImageContainer from './components/ImageContainer'
 import { fetchTopHeadlines } from "./actions/articleActions";

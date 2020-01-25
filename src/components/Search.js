@@ -1,14 +1,28 @@
 import React from 'react';
-
+import { connect } from 'react-redux'
+import { fetchSearch } from '../actions/searchActions';
 
 class Search extends React.Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            userInput: "",
+        }
+    }
+
     handleOpenSearch = () => {
         this.props.toggleSearch()
      }
  
-    handleSearchSubmit = (e) => {
-         console.log(e)
+    handleUserInput = (e) => {
+        this.setState(
+            { userInput: e.target.value },
+            () => {return (this.state)}
+          );
+    }
+
+    handleSearchSubmit = () => {
+        this.props.fetchSearch(this.state.userInput)
     }
 
     render() {
@@ -16,7 +30,7 @@ class Search extends React.Component {
             <li className="searchbar">
                 <i className="fa fa-search" onClick={this.handleOpenSearch} aria-hidden="true"></i>
                 <div className={this.props.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
-                        <input type="text" placeholder="Search articles"/>
+                        <input type="text" onChange={this.handleUserInput} placeholder="Search articles"/>
                         <input type="button" onClick={this.handleSearchSubmit} value="Search"/>
                 </div>
             </li>
@@ -24,4 +38,10 @@ class Search extends React.Component {
     }
 } 
 
-export default Search
+const mapDispatchToProps = (dispatch) => {
+    return  {
+      fetchSearch: () => dispatch(fetchSearch()),
+      }
+    };
+
+export default connect(null, mapDispatchToProps)(Search)
