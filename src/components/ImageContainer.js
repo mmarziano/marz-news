@@ -8,6 +8,7 @@ class ImageContainer extends React.Component {
         super(props);
         this.state = {
             active: 0,
+            isActive: false,
         }
         this.setFocus = this.setFocus.bind(this);
         this.top5 = this.top5.bind(this)
@@ -15,7 +16,7 @@ class ImageContainer extends React.Component {
 
     setFocus = (e) => {
         this.setState(
-            { active: e.target.id },
+            { active: e.target.id, isActive: true },
             () => {return (this.state)}
           );
     }
@@ -27,9 +28,8 @@ class ImageContainer extends React.Component {
         }
 
         return top5articles.map((article, idx) =>  
-            <img className={this.state.active !== idx ? 'thumbnail' : 'thumbnail-active'} src={article.urlToImage} onClick={this.setFocus} id={idx} key={idx} />
-            // <i className={this.props.activeArticle !== idx ? 'fa fa-circle-o' : 'fa fa-circle fa-active'} onClick={this.setFocus} id={idx} key={idx}></i>
-            )
+            <img className='thumbnail' src={article.urlToImage} onClick={this.setFocus} id={idx} key={idx} />
+        )
     }
 
     render() {
@@ -52,8 +52,8 @@ class ImageContainer extends React.Component {
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
                         <Navbar articles={articles} activeArticle={this.state.active} top5={this.top5}/>
-                        <HeroImage articles={articles} activeArticle={this.state.active}/>
-                        <MainHeadline articles={articles} activeArticle={this.state.active}/>
+                        <HeroImage articles={articles} activeArticle={this.state.active} />
+                        <MainHeadline articles={articles} activeArticle={this.state.active} />
                 </div>
             </div>
         )     

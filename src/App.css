@@ -33,19 +33,6 @@
   align-items: center;
   justify-content: center;
   color: rgb(3, 131, 190);
-  font-size: 20px;
-}
-
-.carousel .fa {
-  padding-right: 15px;
-}
-
-.carousel .fa:hover {
-  color: #fff;
-}
-
-.fa-active {
-  color: green;
 }
 
 .navbar li {
@@ -59,6 +46,81 @@
 
 .navbar li:hover {
   color: rgb(3, 131, 190);
+}
+
+.navbar {
+  width: 100%;
+  background: #000000;
+  display: inline-block;
+  padding: 5px;
+}
+.navbar ul{
+list-style: none;
+margin: 0 auto;
+padding:0;
+}
+
+.navbar ul li{
+color: #fff;
+float: left;
+line-height: 50px;
+text-align: center;
+cursor: pointer;
+font-family: 'Bebas Neue', sans-serif;
+transition: 0.5s;
+position: relative;
+padding:0 20px;
+}
+
+.togglesearch{
+  background: transparent;
+  position: absolute;
+  top: 75px;
+  right: 28.7%;
+  width: 300px;
+  height: 40px;
+  line-height: 30px;
+  display: none;
+}
+
+.togglesearch-clicked{
+  background: transparent;
+  position: absolute;
+  top: 75px;
+  right: 28.7%;
+  width: 300px;
+  height: 40px;
+  line-height: 30px;
+  display: inline;
+}
+ 
+.togglesearch input[type="text"]{
+  background-color: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 1px 0 rgba(3, 131, 190, 0.2), 0 3px 4px 0 rgba(3, 131, 190, 0.19);
+  width: 200px;
+  padding: 5px 5px;
+  margin-left: 23px;
+  border: 1px solid white;
+}
+ 
+.togglesearch input[type="button"]{
+  width: 80px;
+  padding: 5px 0;
+  background: rgb(3, 131, 190);
+  color: #fff;
+  margin-left: -6px;
+  border: 1px solid rgb(3, 131, 190);
+  outline: none;
+  cursor: pointer;
+}
+
+@media only screen and (min-width:240px) and (max-width: 768px){
+  .navbar ul li{
+      float:none;
+      display:block;
+      text-align:center;
+      margin:0 auto;
+  }
 }
 
 #login-btn {
@@ -87,16 +149,13 @@
 
 .thumbnail {
   height: 50px;
-  width: 70px;
+  width: 80px;
   margin: 5px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.2), 0 4px 8px 0 rgba(255, 255, 255, 0.19);
 }
 
-.thumbnail-active {
-  height: 50px;
-  width: 70px;
-  margin: 5px;
-  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
-}
 
 .main-img {
   left: 0;
@@ -114,7 +173,7 @@
 
 .main-img-card {
   background-color: rgba(0,0,0,0.5);
-  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 8px 0 rgba(255, 255, 255, 0.19);
   width: 40%;
   height: 30%;
   max-width: 40%;
@@ -133,6 +192,18 @@
   padding: 10px;
   z-index: 10;
 }
+
+/* Search */
+
+.search {
+  
+  width: 200px;
+  height: 75px;
+  background-color: white;
+  position: relative;
+}
+
+
 
 @keyframes App-logo-spin {
   from {

@@ -1,7 +1,27 @@
 import React from 'react';
 import  logo  from '../assets/images/marz-newslogo.png'
 
+
 export default class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            clicked: false,
+        }
+        this.toggleSearch = this.toggleSearch.bind(this)
+    }
+
+    handleOpenSearch = () => {
+       this.toggleSearch()
+    }
+
+    toggleSearch = () => {
+        this.setState(
+            { clicked: !this.state.clicked },
+            () => {return (this.state)}
+          );
+    }
+    
     render() {
         const { articles } = this.props;
     
@@ -14,12 +34,20 @@ export default class Navbar extends React.Component {
                     </div>
                     <div className="carousel col-md-6 text-center">
                         {this.props.top5()}
-                    </div>  
+                    </div> 
                     <div className="col-md-3">
                         <menu className="right">
-                            <li>Top Headlines</li>
-                            <li>Search</li>
-                            <li><i className="fa fa-sign-in"></i></li>
+                            <ul>
+                                <li>Top Headlines</li>
+                                <li className="searchbar">
+                                    <i className="fa fa-search" onClick={this.handleOpenSearch} aria-hidden="true"></i>
+                                    <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
+                                        <input type="text" placeholder=""/>
+                                        <input type="button" onClick={this.handleOpenSearch} value="Search"/>
+                                    </div>
+                                </li>
+                                <li><i className="fa fa-sign-in"></i></li>
+                            </ul>
                         </menu>
                     </div>
                 </div>
