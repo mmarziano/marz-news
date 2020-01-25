@@ -1,7 +1,7 @@
 export function fetchTopHeadlines() {
     return dispatch => {
       dispatch(fetchTopHeadlinesBegin());
-      return fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=36ae05704c7044be99dbb50a732950d1')
+      setTimeout(() => {return fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=36ae05704c7044be99dbb50a732950d1')
       .then(response => response.json())
       .then(json => {
         dispatch(fetchTopHeadlinesSuccess(json.articles));
@@ -10,6 +10,7 @@ export function fetchTopHeadlines() {
       .catch(error =>
         dispatch(fetchTopHeadlinesFailure(error))
       );
+      }, 3000);
     };
   }
 

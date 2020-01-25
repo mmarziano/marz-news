@@ -20,7 +20,26 @@ class App extends React.Component {
             }
 
         if (loading) {
-            return <div>Loading...</div>;
+            return ( 
+              <div className="container-fluid col-lg-12">
+                    <section className="wrapper dark">
+                      <div className="row text-center">
+                          <h1>Scanning headlines...</h1>
+                      </div>
+                      <div className="row">
+                        <div className="spinner">
+                          <i></i>
+                          <i></i>
+                          <i></i>
+                          <i></i>
+                          <i></i>
+                          <i></i>
+                          <i></i>
+                        </div>
+                      </div>
+                  </section>
+              </div>
+            )
         }
 
         if (articles === null) {
