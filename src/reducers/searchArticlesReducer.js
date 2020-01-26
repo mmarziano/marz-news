@@ -5,7 +5,7 @@ import {
   } from '../actions/searchActions';
   
   const initialState = {
-    articles: null,
+    searchArticles: null,
     loading: false,
     error: null
   };
@@ -27,7 +27,7 @@ import {
         return {
           ...state,
           loading: false,
-          articles: action.payload.articles
+          searchArticles: action.payload.articles
         };
   
       case FETCH_SEARCH_FAILURE:
@@ -39,7 +39,7 @@ import {
           ...state,
           loading: false,
           error: action.payload.error,
-          articles: []
+          searchArticles: []
         };
 
   

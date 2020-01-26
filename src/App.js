@@ -1,63 +1,68 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
 import './css/loading.css';
 import { connect } from 'react-redux'
 import ImageContainer from './components/ImageContainer'
+import Loading from './components/Loading'
 import { fetchTopHeadlines } from "./actions/articleActions";
 import { fetchSearch } from './actions/searchActions';
 
 
 class App extends React.Component {
+    constructor() {
+      super();
+      this.state = {
+        firstRender: true,
+      };
+    }
 
     componentDidMount() {
-      this.props.fetchTopHeadlines();
+        this.props.fetchTopHeadlines();
     }
-
+    
     render() {
-        const { error, loading, articles} = this.props;
+            const { error, loading, topHeadlines} = this.props;
 
-        if (error) {
-            return <div>Error! {error.message}</div>;
+            if (error) {
+                return <div>Error! {error.message}</div>;
+                }
+
+            if (loading && topHeadlines === null) {
+              return (<Loading />)
             }
 
-        if (loading) {
-            return ( 
-              <div className="container-fluid col-lg-12">
-                    <section className="wrapper dark">
-                      <div className="row text-center">
-                          <h1>Scanning headlines...</h1>
-                      </div>
-                      <div className="row">
-                        <div className="spinner">
-                          <i></i>
-                          <i></i>
-                          <i></i>
-                          <i></i>
-                          <i></i>
-                          <i></i>
-                          <i></i>
-                        </div>
-                      </div>
-                  </section>
-              </div>
-            )
-        }
-
-        if (articles === null) {
-            return null;
-        } else {
-          return (
-            <div>
-              <ImageContainer articles={this.props.articles}/>
-            </div> 
-          );
+            if (topHeadlines !== null) {
+              return (
+                <Router>
+                  <div>
+                    <Switch>
+                      <Route path="/about">
+                        <h2>Testing</h2>
+                      </Route>
+                      <Route path="/users">
+                        <h2>Test again</h2>
+                      </Route>
+                      <Route path="/">
+                        <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                      </Route>
+                    </Switch>
+                  </div>
+                </Router>);
+            } else {
+              return null;
+            }
         }
     }
-  }
 
   const mapStateToProps = state => {
     return {
-        articles: state.topHeadlines.articles,
+        topHeadlines: state.topHeadlines.topHeadlines,
         loading: state.topHeadlines.loading,
         error: state.topHeadlines.error
     }

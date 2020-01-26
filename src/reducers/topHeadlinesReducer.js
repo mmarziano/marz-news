@@ -5,7 +5,7 @@ import {
   } from '../actions/articleActions';
   
   const initialState = {
-    articles: null,
+    topHeadlines: null,
     loading: false,
     error: null
   };
@@ -27,7 +27,7 @@ import {
         return {
           ...state,
           loading: false,
-          articles: action.payload.articles
+          topHeadlines: action.payload.articles
         };
   
       case FETCH_TOPHEADLINES_FAILURE:
@@ -39,7 +39,7 @@ import {
           ...state,
           loading: false,
           error: action.payload.error,
-          articles: []
+          topHeadlines: []
         };
 
   

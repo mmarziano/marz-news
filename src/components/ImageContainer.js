@@ -2,6 +2,7 @@ import React from 'react';
 import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
 import Navbar from './Navbar'
+import MainContainer from './MainContainer'
 
 class ImageContainer extends React.Component {
     constructor(props) {
@@ -9,6 +10,7 @@ class ImageContainer extends React.Component {
         this.state = {
             active: 0,
             isActive: false,
+            showing: true,
         }
         this.setFocus = this.setFocus.bind(this);
         this.top5 = this.top5.bind(this)
@@ -21,10 +23,17 @@ class ImageContainer extends React.Component {
           );
     }
 
+    // handleHideHeroImg = () => {
+    //     this.setState(
+    //         { showing: !showing },
+    //         () => {console.log (this.state.showing)}
+    //       );
+    // }
+
     top5 = () => {
         let top5articles = [];
         for (let i = 0; i < 5; i++) {
-            top5articles.push(this.props.articles[i])
+            top5articles.push(this.props.topHeadlines[i])
         }
 
         return top5articles.map((article, idx) =>  
@@ -33,33 +42,28 @@ class ImageContainer extends React.Component {
     }
 
     render() {
-        const { error, loading, articles } = this.props;
-        
+        const { topHeadlines } = this.props;
 
-        if (error) {
-            return <div>Error! {error.message}</div>;
-            }
-
-        if (loading) {
-            return <div>Loading...</div>;
-        }
-
-        if (articles === null) {
-            return null;
-        } else {
-        
-        return(
-
+        if (this.state.showing) {
+            return(
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
-                        <Navbar articles={articles} activeArticle={this.state.active} top5={this.top5}/>
-                        <HeroImage articles={articles} activeArticle={this.state.active} top5={this.top5}/>
-                        <MainHeadline articles={articles} activeArticle={this.state.active} />
+                    <Navbar topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
+                    <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
+                    <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
+                </div>
+            </div>)
+        } else {
+            return(
+            <div className="container-fluid col-lg-12">
+                <div className="row hero">
+                    <Navbar topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
+                    <MainContainer />
                 </div>
             </div>
-        )     
-      }     
-    }
+            )
+        }     
+    }     
 }
 
 
