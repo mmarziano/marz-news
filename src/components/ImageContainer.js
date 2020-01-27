@@ -11,9 +11,11 @@ class ImageContainer extends React.Component {
             active: 0,
             isActive: false,
             showing: true,
+            showCarousel: true,
         }
         this.setFocus = this.setFocus.bind(this);
         this.top5 = this.top5.bind(this)
+        this.handleHideHeroImg = this.handleHideHeroImg.bind(this)
     }
 
     setFocus = (e) => {
@@ -23,12 +25,12 @@ class ImageContainer extends React.Component {
           );
     }
 
-    // handleHideHeroImg = () => {
-    //     this.setState(
-    //         { showing: !showing },
-    //         () => {console.log (this.state.showing)}
-    //       );
-    // }
+    handleHideHeroImg = () => {
+        this.setState(
+            { showCarousel: false, showing: !this.state.showing },
+            () => {return (this.state)}
+          );
+    }
 
     top5 = () => {
         let top5articles = [];
@@ -48,7 +50,7 @@ class ImageContainer extends React.Component {
             return(
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
-                    <Navbar topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
+                    <Navbar top5={this.top5} hideHeroImg={this.handleHideHeroImg} showCarousel={this.showCarousel}/>
                     <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                     <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
                 </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from './Search'
 import  logo  from '../assets/images/marz-newslogo.png'
+import { fetchSearch } from '../actions/searchActions';
 
 
 class Navbar extends React.Component {
@@ -8,7 +9,6 @@ class Navbar extends React.Component {
         super(props);
         this.state = {
             clicked: false,
-            showCarousel: true,
         }
         this.toggleSearch = this.toggleSearch.bind(this);
         this.handleHideCarousel = this.handleHideCarousel.bind(this);
@@ -22,10 +22,7 @@ class Navbar extends React.Component {
     }
 
     handleHideCarousel = () => {
-        this.setState(
-            {showCarousel: !this.state.showCarousel },
-            () => {return (this.state.showCarousel)}
-          );
+        this.props.hideHeroImg();
     }
     
     render() {
@@ -50,7 +47,7 @@ class Navbar extends React.Component {
                         </div>
                     </div>
                     <div className="row col-md-12">
-                        <div className={this.state.showCarousel === true ? "carousel col-md-4 text-center" : "carousel hidden col-md-4 text-center"}>
+                        <div className={this.props.showCarousel === true ? "carousel col-md-4 text-center" : "carousel hidden col-md-4 text-center"}>
                             {this.props.top5()}
                         </div> 
                     </div>

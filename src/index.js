@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import AppContainer from './AppContainer';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -10,13 +10,13 @@ import rootReducer from './reducers/rootReducer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 
-
-const store = createStore(rootReducer, composeWithDevTools(
+const composeEnhancers = composeWithDevTools({ trace: true, traceLimit: 25 });
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)));
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <AppContainer />
     </Provider>,
     document.getElementById('root')
 );
