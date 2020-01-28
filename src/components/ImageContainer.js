@@ -2,6 +2,7 @@ import React from 'react';
 import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
 import Navbar from './Navbar'
+import { connect } from 'react-redux'
 import MainContainer from './MainContainer'
 
 class ImageContainer extends React.Component {
@@ -12,7 +13,6 @@ class ImageContainer extends React.Component {
             active: 0,
             isActive: false,
             showing: true,
-            showCarousel: true,
         }
         this.setFocus = this.setFocus.bind(this);
         this.top5 = this.top5.bind(this)
@@ -28,7 +28,7 @@ class ImageContainer extends React.Component {
 
     handleHideHeroImg = () => {
         this.setState(
-            { showCarousel: !this.state.showCarousel, showing: !this.state.showing },
+            { showing: !this.state.showing },
             () => {return (this.state)}
           );
     }
@@ -45,8 +45,8 @@ class ImageContainer extends React.Component {
     }
 
     render() {
-        const { topHeadlines } = this.props;
-
+        const { topHeadlines, searchResults } = this.props;
+        console.log(this.props.searchResults)
         if (this.state.showing) {
             return(
             <div className="container-fluid col-lg-12">
@@ -63,7 +63,7 @@ class ImageContainer extends React.Component {
                     <Navbar topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                 </div>
                 <div className="row">
-                    <MainContainer />
+                    <MainContainer searchResults={this.props.searchResults}/>
                 </div>
             </div>
             )
@@ -71,7 +71,14 @@ class ImageContainer extends React.Component {
     }     
 }
 
+const mapStateToProps = state => {
+    return {
+        searchResults: state.searchArticles,
+        loading: state.searchArticles.loading,
+        error: state.searchArticles.error
+    }
+}
 
-export default ImageContainer
+export default connect(mapStateToProps)(ImageContainer)
 
     

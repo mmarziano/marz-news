@@ -1,5 +1,4 @@
 import React from 'react';
-import Search from './Search'
 import { connect } from 'react-redux'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
