@@ -6,8 +6,8 @@ import { fetchSearch } from '../actions/searchActions';
 
 
 class Navbar extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             clicked: false,
             userInput: '',
@@ -32,11 +32,10 @@ class Navbar extends React.Component {
     handleSearchSubmit = (e) => {
         e.preventDefault();
         this.setState(
-            { showCarousel: false, userInput: '' },
-            () => {return (this.state)}
-          );
-        console.log(this.state)
+            { showCarousel: !this.state.showCarousel, userInput: '' }, () => {
+            return (this.state)});
         this.toggleSearch();
+        this.props.handleHideHeroImg();
         this.props.fetchSearch(this.state.userInput)
     }
 
@@ -71,7 +70,7 @@ class Navbar extends React.Component {
                         </div>
                     </div>
                     <div className="row col-md-12">
-                        <div className={this.state.showCarousel === true ? "carousel col-md-4 text-center" : "carousel hidden col-md-4 text-center"}>
+                        <div className={this.state.showCarousel ? "carousel col-md-4 text-center" : "hidden"}>
                             {this.props.top5()}
                         </div> 
                     </div>

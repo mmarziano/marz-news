@@ -51,7 +51,7 @@ class ImageContainer extends React.Component {
             return(
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
-                    <Navbar top5={this.top5} handleHideHeroImg={this.handleHideHeroImg} showCarousel={this.state.showCarousel}/>
+                    <Navbar top5={this.top5} handleHideHeroImg={this.handleHideHeroImg} />
                     <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                     <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
                 </div>
@@ -61,6 +61,8 @@ class ImageContainer extends React.Component {
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
                     <Navbar topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
+                </div>
+                <div className="row">
                     <MainContainer />
                 </div>
             </div>

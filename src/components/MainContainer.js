@@ -18,11 +18,8 @@ class MainContainer extends React.Component {
 
         return(
 
-            <div className="container-fluid">
-                <div className="row col-md-6">
                        <h1>Search Results here</h1>
-                </div>
-            </div>
+  
         )     
     }     
 }
