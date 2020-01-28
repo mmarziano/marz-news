@@ -5,9 +5,10 @@ import Navbar from './Navbar'
 import MainContainer from './MainContainer'
 
 class ImageContainer extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
+            articles: [],
             active: 0,
             isActive: false,
             showing: true,
@@ -27,7 +28,7 @@ class ImageContainer extends React.Component {
 
     handleHideHeroImg = () => {
         this.setState(
-            { showCarousel: false, showing: !this.state.showing },
+            { showCarousel: !this.state.showCarousel, showing: !this.state.showing },
             () => {return (this.state)}
           );
     }
@@ -50,7 +51,7 @@ class ImageContainer extends React.Component {
             return(
             <div className="container-fluid col-lg-12">
                 <div className="row hero">
-                    <Navbar top5={this.top5} hideHeroImg={this.handleHideHeroImg} showCarousel={this.showCarousel}/>
+                    <Navbar top5={this.top5} handleHideHeroImg={this.handleHideHeroImg} showCarousel={this.state.showCarousel}/>
                     <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                     <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
                 </div>

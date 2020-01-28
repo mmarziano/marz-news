@@ -12,12 +12,11 @@ import Loading from './components/Loading'
 
 
 class App extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        topHeadlines: this.props.topHeadlines,
+    state = {
+        topHeadlines: [],
+
       };
-    }
+ 
     
     render() {
             const { error, loading, topHeadlines} = this.props;

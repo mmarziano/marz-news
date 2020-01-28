@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { fetchSearch } from '../actions/searchActions';
 
 class Search extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             userInput: "",
 
@@ -22,7 +22,9 @@ class Search extends React.Component {
           );
     }
 
-    handleSearchSubmit = () => {
+    handleSearchSubmit = (e) => {
+        e.preventDefault();
+        alert('here')
         this.props.hideCarousel();
         this.setState(
             { userInput: '' },

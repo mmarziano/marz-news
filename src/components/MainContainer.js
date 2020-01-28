@@ -4,8 +4,8 @@ import HeroImage from './HeroImage'
 import Navbar from './Navbar'
 
 class MainContainer extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             active: 0,
             isActive: false,
