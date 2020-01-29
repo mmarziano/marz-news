@@ -14,7 +14,7 @@ class MainContainer extends React.Component {
                         <li className="card-article">
                             <img src={result.urlToImage} alt={result.title} />
                             <div className='article-overlay'>
-                                <h2 classname='headline'>{result.title}</h2>
+                                <h3 classname='headline'>{result.title}</h3>
                             </div>
                         </li>
                     </div>

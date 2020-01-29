@@ -26,7 +26,8 @@
     padding: 16px;
     text-align: center;
     background-color: #fff;
-    position: relative
+    position: relative;
+    margin: auto;
   }
 
   .card-article img {
@@ -45,16 +46,21 @@
   .article-overlay {
     background-color: rgba(0,0,0,0.5);
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 8px 0 rgba(255, 255, 255, 0.19);
-    width: 100%;
+    width: 90%;
+    max-width: 100%;
     height: 30%;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    bottom: 40px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .card-article:hover .article-overlay {
-      height: 100%;
+  .card-article h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2vw;
+      color: #fff;
   }
 
 
@@ -77,9 +83,3 @@
     }
   }
 
-/* .column .card-article figure {position: relative; overflow: hidden;}
-.column figure figcaption {padding: 45px; bottom: 0px; position: absolute; background: rgba(0,0,0,.85); width: 100%; transition: ease-in-out 0.5s; -webkit-transition: ease-in-out 0.5s; -moz-transition: ease-in-out 0.5s; -ms-transition: ease-in-out 0.5s; -o-transition: ease-in-out 0.5s;}
-.column .card-article figure figcaption p {margin-bottom:0; transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none; display: none}
-.column .card-article img {cursor: pointer; display: block; width: 100%; opacity: .9; transition: all 0.3s ease 0s; -webkit-transition: all 0.3s ease 0s; -moz-transition: all 0.3s ease 0s; -ms-transition: all 0.3s ease 0s; -o-transition: all 0.3s ease 0s; }
-.column .card-article .card-article:hover .card-article img {transform: scale(1.1); -webkit-transform: scale(1.1); -moz-transform: scale(1.1); -ms-transform: scale(1.1); -o-transform: scale(1.1); opacity: .5; transition: all 0.3s ease 0s; -webkit-transition: all 0.3s ease 0s; -moz-transition: all 0.3s ease 0s; -ms-transition: all 0.3s ease 0s; -o-transition: all 0.3s ease 0s; }
-.column .card-article a {position: relative; z-index:auto;} */
