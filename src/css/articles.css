@@ -1,0 +1,84 @@
+/* Float four columns side by side */
+.main {
+    background: rgba(233, 233, 233, 0.75);
+}
+
+.column {
+    width: 80%;
+    padding: 20px;
+    margin: auto;
+    display: block;
+  }
+  
+  /* Remove extra left and right margins, due to padding in columns */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Style the counter cards */
+  .card-article {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+    padding: 16px;
+    text-align: center;
+    background-color: #fff;
+  }
+
+  .card-article img {
+    left: 0;
+    max-width:100%;
+    max-height:100%;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .article-overlay {
+    background-color: rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 8px 0 rgba(255, 255, 255, 0.19);
+    width: 40%;
+    height: 30%;
+    max-width: 40%;
+    position: absolute;
+    top: 30%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .article-grid {
+    width: 100%;
+  }
+
+  .article-grid ul {
+      list-style: none;
+  }
+
+  
+  
+  /* Responsive columns - one column layout (vertical) on small screens */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+
+/* .column .card-article figure {position: relative; overflow: hidden;}
+.column figure figcaption {padding: 45px; bottom: 0px; position: absolute; background: rgba(0,0,0,.85); width: 100%; transition: ease-in-out 0.5s; -webkit-transition: ease-in-out 0.5s; -moz-transition: ease-in-out 0.5s; -ms-transition: ease-in-out 0.5s; -o-transition: ease-in-out 0.5s;}
+.column .card-article figure figcaption p {margin-bottom:0; transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none; display: none}
+.column .card-article img {cursor: pointer; display: block; width: 100%; opacity: .9; transition: all 0.3s ease 0s; -webkit-transition: all 0.3s ease 0s; -moz-transition: all 0.3s ease 0s; -ms-transition: all 0.3s ease 0s; -o-transition: all 0.3s ease 0s; }
+.column .card-article .card-article:hover .card-article img {transform: scale(1.1); -webkit-transform: scale(1.1); -moz-transform: scale(1.1); -ms-transform: scale(1.1); -o-transform: scale(1.1); opacity: .5; transition: all 0.3s ease 0s; -webkit-transition: all 0.3s ease 0s; -moz-transition: all 0.3s ease 0s; -ms-transition: all 0.3s ease 0s; -o-transition: all 0.3s ease 0s; }
+.column .card-article a {position: relative; z-index:auto;} */

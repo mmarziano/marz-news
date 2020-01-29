@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import './css/loading.css';
+import './css/articles.css';
 import { connect } from 'react-redux'
 import { fetchTopHeadlines } from "./actions/articleActions";
 import ImageContainer from './components/ImageContainer'

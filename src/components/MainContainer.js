@@ -8,16 +8,31 @@ class MainContainer extends React.Component {
 
     renderResults = () => {
         return this.props.searchResults.searchArticles.map(result => 
-            <li><p>{result.title}</p></li>
+            <div className="column">
+                <figure>
+                    <div className="container-article">
+                        <li className="card-article">
+                            <img src={result.urlToImage} alt={result.title} />
+                            <div className='article-overlay'>
+                                <h2 classname='headline'>{result.title}</h2>
+                            </div>
+                        </li>
+                    </div>
+                </figure>
+            </div>
         )
     }
 
+        
     render() {
         if (this.props.searchResults.searchArticles !== null ) {
             return( 
-                <div>
-                    {this.renderResults()}
-                </div>
+                    <div className="article-grid">
+                        <ul>
+                            {this.renderResults()}
+                  
+                        </ul>
+                    </div>
             )
         } else {
             return null;
