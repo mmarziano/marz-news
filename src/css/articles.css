@@ -47,7 +47,7 @@
     background-color: rgba(0,0,0,0.5);
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 8px 0 rgba(255, 255, 255, 0.19);
     width: 90%;
-    max-width: 100%;
+    max-width: 90%;
     height: 30%;
     position: absolute;
     bottom: 40px;
@@ -56,6 +56,47 @@
     align-items: center;
     justify-content: center;
   }
+
+  .article-overlay a {
+    text-decoration: none;
+   }
+
+  .article-overlay h3:hover {
+    text-decoration: none;
+    color: rgb(3, 131, 190);
+   }
+
+  .article-overlay p {
+      color: #fff;
+  }
+
+  .card-article a {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      color: #fff;
+      font-size: 1em;
+      font-family: 'Bebas Neue', sans-serif;
+  }
+
+  #author {
+      color: #fff;
+      position: absolute;
+      top: 50px;
+      left: 25px;
+      font-size: 1em;
+      font-family: 'Bebas Neue', sans-serif;
+  }
+
+  #article-date {
+    color: #fff;
+    position: absolute;
+    top: 75px;
+    left: 25px;
+    font-size: 1em;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
 
   .card-article h3 {
       font-family: 'Bebas Neue', sans-serif;
@@ -72,7 +113,9 @@
       list-style: none;
   }
 
-  
+  .header {
+      width: 100%;
+  }
   
   /* Responsive columns - one column layout (vertical) on small screens */
   @media screen and (max-width: 600px) {
