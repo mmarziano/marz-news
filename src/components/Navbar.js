@@ -2,16 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
+import { fetchFirstUserPreference } from "../actions/articleActions";
+import { fetchSecondUserPreference } from "../actions/articleActions";
+import { fetchThirdUserPreference } from "../actions/articleActions";
 
 
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            userPrefs: ['politics', 'entertainment', 'sports', 'business'],
             clicked: false,
             userInput: '',
             showCarousel: true,
         }
+    }
+
+    componentDidMount() {
+        this.props.fetchFirstUserPreference(this.state.userPrefs[0]);
+        this.props.fetchSecondUserPreference(this.state.userPrefs[1]);
+        this.props.fetchThirdUserPreference(this.state.userPrefs[2])
     }
 
     toggleSearch = () => {
@@ -38,6 +48,11 @@ class Navbar extends React.Component {
         this.props.fetchSearch(this.state.userInput)
     }
 
+    renderUserLinks = () => {
+        return this.state.userPrefs.map(p => 
+            <li>{p}</li>
+        )
+    }
     
     render() {
         return(
@@ -50,10 +65,7 @@ class Navbar extends React.Component {
                             <menu className="right">
                                 <ul>
                                     <li>Top Headlines</li>
-                                    <li>Politics</li>
-                                    <li>Finance</li>
-                                    <li>Sports</li>
-                                    <li>Entertainment</li>
+                                    {this.renderUserLinks()}
                                     <li className="searchbar">
                                         <i className="fa fa-search" onClick={this.toggleSearch} aria-hidden="true"></i>
                                         <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
@@ -81,6 +93,9 @@ class Navbar extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return  {
       fetchSearch: (input) => dispatch(fetchSearch(input)),
+      fetchFirstUserPreference: (preference) => dispatch(fetchFirstUserPreference(preference)),
+      fetchSecondUserPreference: (preference) => dispatch(fetchSecondUserPreference(preference)),
+      fetchThirdUserPreference: (preference) => dispatch(fetchThirdUserPreference(preference)),
       }
     };
 

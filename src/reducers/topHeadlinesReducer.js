@@ -13,8 +13,7 @@ import {
   export default function topHeadlinesReducer(state = initialState, action) {
     switch(action.type) {
       case FETCH_TOPHEADLINES_BEGIN:
-        // Mark the state as "loading" so we can show a spinner or something
-        // Also, reset any errors. We're starting fresh.
+        // Mark the state as "loading" to signal Loading container
         return {
           ...state,
           loading: true,
@@ -22,8 +21,6 @@ import {
         };
   
       case FETCH_TOPHEADLINES_SUCCESS:
-        // All done: set loading "false".
-        // Also, replace the items with the ones from the server
         return {
           ...state,
           loading: false,
@@ -31,10 +28,6 @@ import {
         };
   
       case FETCH_TOPHEADLINES_FAILURE:
-        // The request failed. It's done. So set loading to "false".
-        // Save the error, so we can display it somewhere.
-        // Since it failed, we don't have items to display anymore, so set `items` empty.
-
         return {
           ...state,
           loading: false,
@@ -42,7 +35,6 @@ import {
           topHeadlines: []
         };
 
-  
       default:
         return state;
     }

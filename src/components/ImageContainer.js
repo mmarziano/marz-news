@@ -3,7 +3,7 @@ import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
 import Navbar from './Navbar'
 import { connect } from 'react-redux'
-import MainContainer from './MainContainer'
+import SearchContainer from './SearchContainer'
 
 class ImageContainer extends React.Component {
     constructor() {
@@ -63,7 +63,7 @@ class ImageContainer extends React.Component {
                     <Navbar topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                 </div>
                 <div className="row main">
-                    <MainContainer searchResults={this.props.searchResults}/>
+                    <SearchContainer searchResults={this.props.searchResults}/>
                 </div>
             </div>
             )
