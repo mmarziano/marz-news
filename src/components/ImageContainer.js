@@ -46,7 +46,7 @@ class ImageContainer extends React.Component {
 
     render() {
         const { topHeadlines, searchResults } = this.props;
-        console.log(this.props.searchResults)
+
         if (this.state.showing) {
             return(
             <div className="container-fluid col-lg-12">
