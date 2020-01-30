@@ -57,7 +57,7 @@
     justify-content: center;
   }
 
-  .article-overlay a {
+  .article-overlay a:link a:visited a:hover a:active {
     text-decoration: none;
    }
 
@@ -77,6 +77,10 @@
       color: #fff;
       font-size: 1em;
       font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .card-article a:link a:visited a:hover a:active{
+      text-decoration: none;
   }
 
   #author {
