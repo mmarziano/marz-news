@@ -21,7 +21,7 @@ export function fetchTopHeadlines() {
       .then(response => response.json())
       .then(json => {
         dispatch(fetchFirstUserPreferenceSuccess(json.articles));
-        console.log(json.articles);
+        return json.articles;
       })
       .catch(error =>
         dispatch(fetchFirstUserPreferenceFailure(error))
@@ -31,30 +31,31 @@ export function fetchTopHeadlines() {
 
   export function fetchSecondUserPreference(preference) {
     return dispatch => {
-      dispatch(fetchFirstUserPreferenceBegin());
+      dispatch(fetchSecondUserPreferenceBegin());
       return fetch('https://newsapi.org/v2/everything?q=' + preference + '&sortBy=relevance&apiKey=36ae05704c7044be99dbb50a732950d1')
       .then(response => response.json())
       .then(json => {
-        dispatch(fetchFirstUserPreferenceSuccess(json.articles));
-        console.log(json.articles);
+        dispatch(fetchSecondUserPreferenceSuccess(json.articles));
+        return json.articles;
       })
       .catch(error =>
-        dispatch(fetchFirstUserPreferenceFailure(error))
+        dispatch(fetchSecondUserPreferenceFailure(error))
       );
     };
   }
 
   export function fetchThirdUserPreference(preference) {
     return dispatch => {
-      dispatch(fetchFirstUserPreferenceBegin());
+      dispatch(fetchThirdUserPreferenceBegin());
       return fetch('https://newsapi.org/v2/everything?q=' + preference + '&sortBy=relevance&apiKey=36ae05704c7044be99dbb50a732950d1')
       .then(response => response.json())
       .then(json => {
-        dispatch(fetchFirstUserPreferenceSuccess(json.articles));
-        console.log(json.articles);
+        dispatch(fetchThirdUserPreferenceSuccess(json.articles));
+        return json.articles;
       })
       .catch(error =>
-        dispatch(fetchFirstUserPreferenceFailure(error))
+        dispatch(fetchThirdUserPreferenceFailure(error))
+        
       );
     };
   }

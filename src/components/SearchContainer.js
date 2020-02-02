@@ -1,15 +1,12 @@
 import React from 'react';
-import search from '../assets/images/searchresults.jpg';
 import Moment from 'react-moment';
-import MainHeadline from './MainHeadline'
-import HeroImage from './HeroImage'
-import Navbar from './Navbar'
 
-class MainContainer extends React.Component {
+
+class SearchContainer extends React.Component {
     
 
     renderResults = () => {
-        return this.props.searchResults.searchArticles.map(result => 
+        return this.props.results.searchArticles.map(result => 
             
             <div className="column">
                 <figure>
@@ -20,9 +17,9 @@ class MainContainer extends React.Component {
                             <p id="article-date"><Moment format="MM/DD/YYYY">
                                 {result.publishedAt}
                             </Moment> </p>
-                            <a href={result.url} target="_blank"><i className="fa fa-external-link" aria-hidden="true"></i> Link to Article</a>
+                            <a href={result.url} target="_blank" rel="noopener noreferrer"><i className="fa fa-external-link" aria-hidden="true"></i> Link to Article</a>
                             <div className='article-overlay'>
-                                <a href={result.url} target="_blank"><h3 className='headline'>{result.title}</h3></a>
+                                <a href={result.url} target="_blank" rel="noopener noreferrer"><h3 className='headline'>{result.title}</h3></a>
                             </div>
                         </li>
                     </div>
@@ -33,10 +30,10 @@ class MainContainer extends React.Component {
 
         
     render() {
-        if (this.props.searchResults.searchArticles !== null ) {
+        if (this.props.results.searchArticles !== null ) {
             return( 
-                    <div className="article-grid">
-                        <img src={ search } alt="search results" className="header" />
+                    <div className="article-grid text-center">
+                        <h3>Displaying results...</h3>
                         <ul>
                             {this.renderResults()}
                   
@@ -51,6 +48,6 @@ class MainContainer extends React.Component {
 
 
 
-export default MainContainer
+export default SearchContainer
 
     

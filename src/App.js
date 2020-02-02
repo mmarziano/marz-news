@@ -33,7 +33,24 @@ class App extends React.Component {
 
           if (topHeadlines !== null) {
             return (
-              <ImageContainer topHeadlines={this.props.topHeadlines}/>
+              <Router>
+                <div>
+                    <Switch>
+                        <Route path="/:userPref1">
+                          <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                        </Route>
+                        <Route path="/:userPref2">
+                          <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                        </Route>
+                        <Route path="/:userPref3">
+                          <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                        </Route>
+                        <Route path="/">
+                          <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                        </Route>
+                    </Switch>
+                </div>
+            </Router>
             );
           } else {
             return null;

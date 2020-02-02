@@ -8,12 +8,12 @@ import { fetchThirdUserPreference } from "../actions/articleActions";
 
 
 class Navbar extends React.Component {
-        state = {
+       state = {
             clicked: false,
             userInput: '',
-            showCarousel: true,
             defaultNav: ['Top Headlines', 'Finance', 'Sports', 'Politics'],
         }
+
 
     componentDidMount() {
         if (this.props.userPrefs !== undefined) {
@@ -40,7 +40,7 @@ class Navbar extends React.Component {
     handleSearchSubmit = (e) => {
         e.preventDefault();
         this.setState(
-            { showCarousel: !this.state.showCarousel, userInput: '' }, () => {
+            { userInput: '' }, () => {
             return (this.state)});
         this.toggleSearch();
         this.props.handleHideHeroImg();
@@ -61,8 +61,8 @@ class Navbar extends React.Component {
     
     render() {
         return(
-            <div className="container-fluid navbar">
-                <div className="row col-md-12 sticky">
+            <div className="container-fluid navbar sticky">
+                <div className="row col-md-12">
                     <div className="col-md-4">
                         <img src={ logo } alt="Marz News Logo" className="logo" />
                     </div>
@@ -83,11 +83,6 @@ class Navbar extends React.Component {
                                 </ul>
                             </menu>
                         </div>
-                    </div>
-                    <div className="row col-md-12">
-                        <div className={this.state.showCarousel ? "carousel col-md-4 text-center" : "hidden"}>
-                            {this.props.top5()}
-                        </div> 
                     </div>
                 </div>
         )

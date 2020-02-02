@@ -3,7 +3,7 @@ import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
 import Navbar from './Navbar'
 import { connect } from 'react-redux'
-import SearchContainer from './SearchContainer'
+import MainContainer from './MainContainer'
 
 class ImageContainer extends React.Component {
     constructor() {
@@ -40,7 +40,7 @@ class ImageContainer extends React.Component {
         }
 
         return top5articles.map((article, idx) =>  
-            <img className='thumbnail' src={article.urlToImage} onClick={this.setFocus} id={idx} key={idx} />
+            <img className='thumbnail' src={article.urlToImage} onClick={this.setFocus} id={idx} key={idx} alt=""/>
         )
     }
 
@@ -49,23 +49,18 @@ class ImageContainer extends React.Component {
 
         if (this.state.showing) {
             return(
-            <div className="container-fluid col-lg-12">
-                <div className="row hero">
-                    <Navbar top5={this.top5} handleHideHeroImg={this.handleHideHeroImg} />
-                    <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
-                    <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
-                </div>
-            </div>)
-        } else {
-            return(
-            <div className="container-fluid col-lg-12">
-                <div className="row">
-                    <Navbar topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
-                </div>
-                <div className="row main">
-                    <SearchContainer searchResults={this.props.searchResults}/>
+                <>
+                <div className="container-fluid col-lg-12">
+                    <div className="row hero">
+                        <Navbar top5={this.top5} handleHideHeroImg={this.handleHideHeroImg} />
+                        <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
+                        <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
                 </div>
             </div>
+            </>)
+        } else {
+            return(
+                <MainContainer results={this.props.searchResults} topHeadlines={topHeadlines}/>
             )
         }     
     }     
