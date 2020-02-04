@@ -85,7 +85,7 @@ class App extends React.Component {
                           <MainContainer topHeadlines={this.props.topHeadlines}/>
                         </Route>
                         <Route path="/login">
-                          <Login />
+                          <Login userPrefs={this.props.userPrefs}/>
                         </Route>
                         <Route path="/">
                           <MainContainer topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles}/>
@@ -101,7 +101,9 @@ class App extends React.Component {
   }
 
 const mapStateToProps = state => {
+  
     return {
+        userPrefs: state.topHeadlines.userPrefs,
         topHeadlines: state.topHeadlines.topHeadlines,
         searchArticles: state.searchArticles.searchArticles,
         loading: state.topHeadlines.loading,

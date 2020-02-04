@@ -38,15 +38,15 @@ class MainContainer extends React.Component {
     }
         
     render() {
-        if (this.props.loading) {
-            return (<Loading />)
-          }
+        // if (this.props.loading) {
+        //     return (<Loading />)
+        //   }
 
         if (this.props.searchArticles !== null ) {
             return( 
                 <div className="container-fluid col-lg-12">
                     <div className="row">
-                        <Navbar topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} top5={this.top5} userPrefs={this.state.userPrefs} showCarousel={this.state.showCarousel}/>
+                        <Navbar userPrefs={this.state.userPrefs}/>
                     </div>
                     <div className="row main">
                         <SearchContainer results={this.props.searchResults}/>
@@ -63,7 +63,6 @@ class MainContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
         searchResults: state.searchArticles,
         loading: state.searchArticles.loading,

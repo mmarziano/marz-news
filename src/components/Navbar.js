@@ -23,7 +23,7 @@ class Navbar extends React.Component {
         state = {
             clicked: false,
             userInput: '',
-            showCarousel: true,
+            showLogin: false,
             defaultNav: ['Top Headlines', 'Finance', 'Sports', 'Politics'],
         }
 
@@ -52,11 +52,18 @@ class Navbar extends React.Component {
     handleSearchSubmit = (e) => {
         e.preventDefault();
         this.setState(
-            { showCarousel: !this.state.showCarousel, userInput: '' }, () => {
+            { userInput: '' }, () => {
             return (this.state)});
         this.toggleSearch();
         this.props.handleHideHeroImg();
         this.props.fetchSearch(this.state.userInput)
+    }
+
+    hideImg = () => {
+        this.setState(
+            { showLogin: !this.state.showLogin }, () => {
+            return (this.state)});
+        this.props.handleHideHeroImg();
     }
 
     renderUserLinks = () => {
@@ -73,6 +80,7 @@ class Navbar extends React.Component {
     
     render() {
         return(
+            <>
             <div className="container-fluid navbar">
                 <div className="row col-md-12 sticky">
                     <div className="col-md-4">
@@ -92,23 +100,16 @@ class Navbar extends React.Component {
                                                 </form>
                                             </div>
                                         </li>
-                                        <li><Link to="/login"><i className="fa fa-sign-in"></i></Link></li>
-                                        <Switch>
-                                            <Route exact path="/login">
-                                                <Login />
-                                            </Route>
-                                        </Switch>
+                                        <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.hideImg}></i></Link></li>
                                     </ul>
                                 </Router>
                             </menu>
                         </div>
                     </div>
-                    {/* <div className="row col-md-12">
-                        <div className={this.state.showCarousel ? "carousel col-md-4 text-center" : "hidden"}>
-                            {this.props.top5()}
-                        </div> 
-                    </div> */}
                 </div>
+                
+                <Login />
+                </>
         )
     }
 } 

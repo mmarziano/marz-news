@@ -1,5 +1,9 @@
 
-@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Lato|Anton&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Roboto+Condensed|Anton&display=swap');
+
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Bebas Neue', sans-serif;
@@ -160,6 +164,40 @@ padding:0 20px;
   z-index: 1;
   float: left;
 }
+
+/* Login Page */
+
+#login-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./assets/images/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-card {
+  width: 80%;
+  height: 50%;
+  margin-top: 25px;
+  background-color: #fff;
+  padding: 40px 30px 50px 40px;
+  border-radius: 10px;
+  border: 1px solid #f3f3f3;
+  box-shadow: 0 1px 1px 0 rgba(3, 131, 190, 0.2), 0 3px 4px 0 rgba(3, 131, 190, 0.19);
+  z-index: 5;
+}
+
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  line-height: 40px;
+  color: rgb(3, 131, 190);
+  margin-bottom: 25px;
+}
+
 
 /* Main Image */
 

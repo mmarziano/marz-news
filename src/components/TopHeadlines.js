@@ -52,7 +52,7 @@ class TopHeadlines extends React.Component {
             <>
                 <div className="container-fluid col-lg-12">
                     <div className="row">
-                        <Navbar topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} top5={this.top5} userPrefs={this.state.userPrefs} showCarousel={this.state.showCarousel}/>
+                        <Navbar userPrefs={this.state.userPrefs} handleHideHeroImg={this.handleHideHeroImg}/>
                     </div>
                     <div className="row hero">
                         <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
