@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 import { connect } from 'react-redux'
 import MainContainer from './MainContainer'
 
-class ImageContainer extends React.Component {
+class TopHeadlines extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -49,14 +49,16 @@ class ImageContainer extends React.Component {
 
         if (this.state.showing) {
             return(
-                <>
+            <>
                 <div className="container-fluid col-lg-12">
+                    <div className="row">
+                        <Navbar topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} top5={this.top5} userPrefs={this.state.userPrefs} showCarousel={this.state.showCarousel}/>
+                    </div>
                     <div className="row hero">
-                        <Navbar top5={this.top5} handleHideHeroImg={this.handleHideHeroImg} />
                         <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                         <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
+                    </div>
                 </div>
-            </div>
             </>)
         } else {
             return(
@@ -74,6 +76,6 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(ImageContainer)
+export default connect(mapStateToProps)(TopHeadlines)
 
     

@@ -1,8 +1,9 @@
 import React from 'react';
 import Moment from 'react-moment';
-import Navbar_Invert from './Navbar_Invert'
 import { connect } from 'react-redux'
 import SearchContainer from './SearchContainer'
+import Navbar from './Navbar'
+import TopHeadlines from './TopHeadlines'
 import Loading from '../components/Loading'
 
 class MainContainer extends React.Component {
@@ -11,17 +12,6 @@ class MainContainer extends React.Component {
         this.state = {
             userPrefs: ['politics', 'entertainment', 'sports', 'business'],
         }
-    }
-
-    top5 = () => {
-        let top5articles = [];
-        for (let i = 0; i < 5; i++) {
-            top5articles.push(this.props.topHeadlines[i])
-        }
-
-        return top5articles.map((article, idx) =>  
-            <img className='thumbnail' src={article.urlToImage} onClick={this.setFocus} id={idx} key={idx} alt=""/>
-        )
     }
 
     renderResults = () => {
@@ -46,31 +36,34 @@ class MainContainer extends React.Component {
             </div>
         )
     }
-
         
     render() {
         if (this.props.loading) {
             return (<Loading />)
           }
 
-        if (this.props.results.searchArticles !== null ) {
+        if (this.props.searchArticles !== null ) {
             return( 
                 <div className="container-fluid col-lg-12">
                     <div className="row">
-                        <Navbar_Invert topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} top5={this.top5} userPrefs={this.state.userPrefs} showCarousel={this.state.showCarousel}/>
+                        <Navbar topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} top5={this.top5} userPrefs={this.state.userPrefs} showCarousel={this.state.showCarousel}/>
                     </div>
                     <div className="row main">
                         <SearchContainer results={this.props.searchResults}/>
                     </div>
                 </div>
             )
-        } else {
-            return null;
+        } 
+        
+        if (this.props.topHeadlines && this.props.searchArticles === null) {
+            return (
+            <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.props.active}/>)
         }
     }     
 }
 
 const mapStateToProps = state => {
+    console.log(state)
     return {
         searchResults: state.searchArticles,
         loading: state.searchArticles.loading,

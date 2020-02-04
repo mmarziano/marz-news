@@ -9,16 +9,55 @@ import './App.css';
 import './css/loading.css';
 import './css/articles.css';
 import { connect } from 'react-redux'
+import Login from './components/Login'
 import { fetchTopHeadlines } from "./actions/articleActions";
-import ImageContainer from './components/ImageContainer'
+import MainContainer from './components/MainContainer'
 import Loading from './components/Loading'
 
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+        articles: [],
+        active: 0,
+        isActive: false,
+        showing: true,
+    }
+    this.setFocus = this.setFocus.bind(this)
+    this.top5 = this.top5.bind(this)
+    this.handleHideHeroImg = this.handleHideHeroImg.bind(this)
+}
+  
+  
   componentDidMount() {
     this.props.fetchTopHeadlines();
   }
 
+  setFocus = (e) => {
+    this.setState(
+        { active: e.target.id, isActive: true },
+        () => {return (this.state)}
+      );
+  }
+
+  top5 = () => {
+    let top5articles = [];
+    for (let i = 0; i < 5; i++) {
+        top5articles.push(this.props.topHeadlines[i])
+    }
+
+    return top5articles.map((article, idx) =>  
+        <img className='thumbnail' src={article.urlToImage} onClick={this.setFocus} id={idx} key={idx} alt=""/>
+        )
+    }
+
+    handleHideHeroImg = () => {
+      this.setState(
+          { showing: !this.state.showing },
+          () => {return (this.state)}
+        );
+    }
 
   render() {
           const { error, loading, topHeadlines} = this.props;
@@ -37,16 +76,19 @@ class App extends React.Component {
                 <div>
                     <Switch>
                         <Route path="/:userPref1">
-                          <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                          <MainContainer topHeadlines={this.props.topHeadlines} active={this.state.active}/>
                         </Route>
                         <Route path="/:userPref2">
-                          <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                          <MainContainer topHeadlines={this.props.topHeadlines}/>
                         </Route>
                         <Route path="/:userPref3">
-                          <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                          <MainContainer topHeadlines={this.props.topHeadlines}/>
+                        </Route>
+                        <Route path="/login">
+                          <Login />
                         </Route>
                         <Route path="/">
-                          <ImageContainer topHeadlines={this.props.topHeadlines}/>
+                          <MainContainer topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles}/>
                         </Route>
                     </Switch>
                 </div>
@@ -61,6 +103,7 @@ class App extends React.Component {
 const mapStateToProps = state => {
     return {
         topHeadlines: state.topHeadlines.topHeadlines,
+        searchArticles: state.searchArticles.searchArticles,
         loading: state.topHeadlines.loading,
         error: state.topHeadlines.error
     }

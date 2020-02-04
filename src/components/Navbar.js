@@ -1,5 +1,17 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect,
+    useHistory,
+    useLocation
+  } from "react-router-dom";
 import { connect } from 'react-redux'
+import Login from './Login'
+import SearchContainer from './SearchContainer'
+import MainContainer from './MainContainer'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
 import { fetchFirstUserPreference } from "../actions/articleActions";
@@ -68,27 +80,34 @@ class Navbar extends React.Component {
                     </div>
                         <div className="col-md-8">
                             <menu className="right">
-                                <ul>
-                                    {this.renderUserLinks()}
-                                    <li className="searchbar">
-                                        <i className="fa fa-search" onClick={this.toggleSearch} aria-hidden="true"></i>
-                                        <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
-                                            <form onSubmit={this.handleSearchSubmit}>
-                                                <input type="text" value={this.state.userInput} onChange={this.handleUserInput} placeholder="Search articles"/>
-                                                <input className="search-button" type="submit" value="Submit" />
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li><i className="fa fa-sign-in"></i></li>
-                                </ul>
+                                <Router>
+                                    <ul>
+                                        {this.renderUserLinks()}
+                                        <li className="searchbar">
+                                            <i className="fa fa-search" onClick={this.toggleSearch} aria-hidden="true"></i>
+                                            <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
+                                                <form onSubmit={this.handleSearchSubmit}>
+                                                    <input type="text" value={this.state.userInput} onChange={this.handleUserInput} placeholder="Search articles"/>
+                                                    <input className="search-button" type="submit" value="Submit" />
+                                                </form>
+                                            </div>
+                                        </li>
+                                        <li><Link to="/login"><i className="fa fa-sign-in"></i></Link></li>
+                                        <Switch>
+                                            <Route exact path="/login">
+                                                <Login />
+                                            </Route>
+                                        </Switch>
+                                    </ul>
+                                </Router>
                             </menu>
                         </div>
                     </div>
-                    <div className="row col-md-12">
+                    {/* <div className="row col-md-12">
                         <div className={this.state.showCarousel ? "carousel col-md-4 text-center" : "hidden"}>
                             {this.props.top5()}
                         </div> 
-                    </div>
+                    </div> */}
                 </div>
         )
     }
