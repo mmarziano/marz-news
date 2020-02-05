@@ -1,18 +1,17 @@
 import React from 'react';
 import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
-import Navbar from './Navbar'
 import { connect } from 'react-redux'
 import MainContainer from './MainContainer'
 
 class TopHeadlines extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             articles: [],
             active: 0,
             isActive: false,
-            showing: true,
+            showing: props.hide,
         }
         this.setFocus = this.setFocus.bind(this);
         this.top5 = this.top5.bind(this)
@@ -45,8 +44,8 @@ class TopHeadlines extends React.Component {
     }
 
     render() {
-        const { topHeadlines, searchResults } = this.props;
-
+        const { topHeadlines } = this.props;
+        
         if (this.state.showing) {
             return(
             <>

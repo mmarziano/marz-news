@@ -2,7 +2,6 @@ import React from 'react';
 import Moment from 'react-moment';
 import { connect } from 'react-redux'
 import SearchContainer from './SearchContainer'
-import Navbar from './Navbar'
 import TopHeadlines from './TopHeadlines'
 import Loading from '../components/Loading'
 
@@ -38,6 +37,7 @@ class MainContainer extends React.Component {
     }
         
     render() {
+        console.log(this.props)
         // if (this.props.loading) {
         //     return (<Loading />)
         //   }
@@ -52,7 +52,7 @@ class MainContainer extends React.Component {
             )
         } 
         
-        if (this.props.topHeadlines && this.props.searchArticles === null) {
+        if (this.props.topHeadlines && this.props.searchArticles === null && this.props.hide === true) {
             return (
             <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.props.active}/>)
         }

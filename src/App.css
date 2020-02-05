@@ -85,8 +85,8 @@ padding:0;
 }
 
 .navbar ul li{
+float: right;
 color: #fff;
-float: left;
 line-height: 50px;
 text-align: center;
 cursor: pointer;
@@ -185,7 +185,7 @@ padding:0 20px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
+  width: 100vw;
   height: auto;
   background-color: #fff;
   padding: 50px 50px 50px 50px;

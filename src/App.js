@@ -1,18 +1,12 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
 import './App.css';
 import './css/loading.css';
 import './css/articles.css';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Login from './components/Login';
 import { fetchTopHeadlines } from "./actions/articleActions";
+import TopHeadlines from './components/TopHeadlines'
 import MainContainer from './components/MainContainer'
 import Loading from './components/Loading'
 
@@ -63,7 +57,7 @@ class App extends React.Component {
 
   render() {
           const { error, loading, topHeadlines} = this.props;
-
+          console.log(this.state.showing)
           if (error) {
               return <div>Error! {error.message}</div>;
               }
@@ -72,37 +66,20 @@ class App extends React.Component {
             return (<Loading />)
           }
 
-          if (topHeadlines !== null) {
+          if (topHeadlines !== null && this.state.showing === true) {
             return (
-              <>
-             
-              {/* <Router> */}
-              <Navbar handleHideHeroImg={this.handleHideHeroImg}/>
-              <MainContainer topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles}/>
-                {/* <div>
-                    <Switch>
-                        <Route path="/:userPref1">
-                          <MainContainer topHeadlines={this.props.topHeadlines} active={this.state.active}/>
-                        </Route>
-                        <Route path="/:userPref2">
-                          <MainContainer topHeadlines={this.props.topHeadlines}/>
-                        </Route>
-                        <Route path="/:userPref3">
-                          <MainContainer topHeadlines={this.props.topHeadlines}/>
-                        </Route>
-                        <Route exact path="/login" component={Login} >
-                          <Login userPrefs={this.props.userPrefs}/>
-                        </Route>
-                        <Route path="/"> */}
-                         
-                        {/* </Route>
-                    </Switch> */}
-                {/* </div> */}
-            {/* </Router> */}
+            <>
+                <Navbar handleHideHeroImg={this.handleHideHeroImg}/>
+                <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles} hide={this.state.showing}/>
             </>
             );
           } else {
-            return null;
+            return (
+            <>
+              <Navbar handleHideHeroImg={this.handleHideHeroImg}/>
+              <MainContainer />
+            </>
+            );
           }
       }
   }

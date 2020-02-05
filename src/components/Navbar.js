@@ -4,15 +4,10 @@ import {
     Switch,
     Route,
     Link,
-    Redirect,
-    useHistory,
-    useLocation
   } from "react-router-dom";
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import Login from './Login'
-import SearchContainer from './SearchContainer'
-import MainContainer from './MainContainer'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
 import { fetchFirstUserPreference } from "../actions/articleActions";
@@ -61,10 +56,10 @@ class Navbar extends React.Component {
     }
 
     hideImg = () => {
+        this.props.handleHideHeroImg()
         this.setState(
             { showLogin: !this.state.showLogin }, () => {
             return (this.state)});
-        this.props.handleHideHeroImg();
     }
 
     renderUserLinks = () => {
@@ -82,16 +77,16 @@ class Navbar extends React.Component {
     render() {
         return(
             <>
-            <div className="container-fluid navbar">
-                <div className="row col-md-12 sticky">
-                    <div className="col-md-4">
-                        <img src={ logo } alt="Marz News Logo" className="logo" />
-                    </div>
+            <Router>
+                <div className="container-fluid navbar">
+                    <div className="row col-md-12 sticky">
+                        <div className="col-md-4">
+                            <img src={ logo } alt="Marz News Logo" className="logo" />
+                        </div>
                         <div className="col-md-8">
-                            <menu className="right">
-                                <Router>
+                                <menu>
                                     <ul>
-                                        {this.renderUserLinks()}
+                                        <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.hideImg}></i></Link></li>
                                         <li className="searchbar">
                                             <i className="fa fa-search" onClick={this.toggleSearch} aria-hidden="true"></i>
                                             <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
@@ -101,20 +96,20 @@ class Navbar extends React.Component {
                                                 </form>
                                             </div>
                                         </li>
-                                        <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.hideImg}></i></Link></li>
+                                        {this.renderUserLinks()}
                                     </ul>
-                                    <Switch>
-                                        <Route exact path="/login">
-                                            <Login />
-                                        </Route>
-                                    </Switch>
-                                </Router>
-                            </menu>
+                                </menu>
                         </div>
                     </div>
                 </div>
-                
-                   {/* <Login /> */}
+                <Switch>
+                    <Route exact path="/login">
+                        <Login />
+                    </Route>
+                </Switch>
+            </Router>
+               
+    
                 </>
         )
     }

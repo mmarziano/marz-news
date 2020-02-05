@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './Navbar'
+
 
 class Login extends React.Component {
     constructor() {
@@ -26,7 +26,7 @@ class Login extends React.Component {
 
     render() {
         return(
-            <div className="container-fluid col-lg-12">
+            <div className="container-fluid">
                 <div className="row" id="login-page">
                     <div className="col-md-5 login-card">
                           <div className="col-md-6 offset-5">  
