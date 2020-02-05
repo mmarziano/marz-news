@@ -45,9 +45,6 @@ class MainContainer extends React.Component {
         if (this.props.searchArticles !== null ) {
             return( 
                 <div className="container-fluid col-lg-12">
-                    <div className="row">
-                        <Navbar userPrefs={this.state.userPrefs}/>
-                    </div>
                     <div className="row main">
                         <SearchContainer results={this.props.searchResults}/>
                     </div>

@@ -9,6 +9,7 @@ import {
     useLocation
   } from "react-router-dom";
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
 import Login from './Login'
 import SearchContainer from './SearchContainer'
 import MainContainer from './MainContainer'
@@ -102,13 +103,18 @@ class Navbar extends React.Component {
                                         </li>
                                         <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.hideImg}></i></Link></li>
                                     </ul>
+                                    <Switch>
+                                        <Route exact path="/login">
+                                            <Login />
+                                        </Route>
+                                    </Switch>
                                 </Router>
                             </menu>
                         </div>
                     </div>
                 </div>
                 
-                <Login />
+                   {/* <Login /> */}
                 </>
         )
     }
@@ -132,6 +138,6 @@ const mapDispatchToProps = (dispatch) => {
       }
     };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar))
 
 

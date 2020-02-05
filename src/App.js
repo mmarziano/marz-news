@@ -9,7 +9,9 @@ import './App.css';
 import './css/loading.css';
 import './css/articles.css';
 import { connect } from 'react-redux'
-import Login from './components/Login'
+import { withRouter } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Login from './components/Login';
 import { fetchTopHeadlines } from "./actions/articleActions";
 import MainContainer from './components/MainContainer'
 import Loading from './components/Loading'
@@ -72,8 +74,12 @@ class App extends React.Component {
 
           if (topHeadlines !== null) {
             return (
-              <Router>
-                <div>
+              <>
+             
+              {/* <Router> */}
+              <Navbar handleHideHeroImg={this.handleHideHeroImg}/>
+              <MainContainer topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles}/>
+                {/* <div>
                     <Switch>
                         <Route path="/:userPref1">
                           <MainContainer topHeadlines={this.props.topHeadlines} active={this.state.active}/>
@@ -84,15 +90,16 @@ class App extends React.Component {
                         <Route path="/:userPref3">
                           <MainContainer topHeadlines={this.props.topHeadlines}/>
                         </Route>
-                        <Route path="/login">
+                        <Route exact path="/login" component={Login} >
                           <Login userPrefs={this.props.userPrefs}/>
                         </Route>
-                        <Route path="/">
-                          <MainContainer topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles}/>
-                        </Route>
-                    </Switch>
-                </div>
-            </Router>
+                        <Route path="/"> */}
+                         
+                        {/* </Route>
+                    </Switch> */}
+                {/* </div> */}
+            {/* </Router> */}
+            </>
             );
           } else {
             return null;
@@ -117,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
       }
     };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

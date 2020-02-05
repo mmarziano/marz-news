@@ -51,9 +51,6 @@ class TopHeadlines extends React.Component {
             return(
             <>
                 <div className="container-fluid col-lg-12">
-                    <div className="row">
-                        <Navbar userPrefs={this.state.userPrefs} handleHideHeroImg={this.handleHideHeroImg}/>
-                    </div>
                     <div className="row hero">
                         <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                         <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
