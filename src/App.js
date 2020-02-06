@@ -57,7 +57,7 @@ class App extends React.Component {
 
   render() {
           const { error, loading, topHeadlines} = this.props;
-          console.log(this.state.showing)
+
           if (error) {
               return <div>Error! {error.message}</div>;
               }
