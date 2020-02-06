@@ -31,6 +31,13 @@ class Navbar extends React.Component {
         }
     }
 
+    toggleLogin = () => {
+        this.props.handleHideHeroImg()
+        this.setState(
+            { showLogin: !this.state.showLogin }, () => {
+            return (this.state)});
+    }
+
     toggleSearch = () => {
         this.setState(
             {clicked: !this.state.clicked },
@@ -53,13 +60,6 @@ class Navbar extends React.Component {
         this.toggleSearch();
         this.props.handleHideHeroImg();
         this.props.fetchSearch(this.state.userInput)
-    }
-
-    hideImg = () => {
-        this.props.handleHideHeroImg()
-        this.setState(
-            { showLogin: !this.state.showLogin }, () => {
-            return (this.state)});
     }
 
     renderUserLinks = () => {
@@ -86,7 +86,7 @@ class Navbar extends React.Component {
                         <div className="col-md-8">
                                 <menu>
                                     <ul>
-                                        <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.hideImg}></i></Link></li>
+                                        <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.toggleLogin}></i></Link></li>
                                         <li className="searchbar">
                                             <i className="fa fa-search" onClick={this.toggleSearch} aria-hidden="true"></i>
                                             <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
@@ -104,13 +104,13 @@ class Navbar extends React.Component {
                 </div>
                 <Switch>
                     <Route exact path="/login">
-                        <Login />
+                        <div className={this.state.showLogin === false ? "hidden" : null }>
+                            <Login />
+                        </div>
                     </Route>
                 </Switch>
             </Router>
-               
-    
-                </>
+        </>
         )
     }
 } 

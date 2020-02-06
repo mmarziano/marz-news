@@ -45,22 +45,18 @@ class TopHeadlines extends React.Component {
 
     render() {
         const { topHeadlines } = this.props;
-        
-        if (this.state.showing) {
             return(
             <>
-                <div className="container-fluid col-lg-12">
+                <div className={this.state.showing ? "container-fluid col-lg-12" : "hidden"}>
                     <div className="row hero">
                         <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                         <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
                     </div>
                 </div>
+                <div className={this.state.showing ? "hidden" : null}>
+                    <MainContainer results={this.props.searchResults} topHeadlines={topHeadlines}/>
+                </div>
             </>)
-        } else {
-            return(
-                <MainContainer results={this.props.searchResults} topHeadlines={topHeadlines}/>
-            )
-        }     
     }     
 }
 
