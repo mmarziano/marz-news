@@ -11,8 +11,16 @@ class Signup extends React.Component {
             password: '',
             passwordConfirmation: '',
             passwordConfirmed: false,
+            signupError: false,
+            errors: [],
             preferences: [],
         }
+    }
+
+    toggleError = () => {
+        this.setState({signupError: false}, 
+            () => {return (this.state)}
+        )
     }
 
     updateFields = (event) => {
@@ -38,17 +46,12 @@ class Signup extends React.Component {
             )
         }
     }
-    
-
-    handleErrors = (response) => {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }
 
     handleSignupSubmit = (e) => {
         e.preventDefault();
+        if (this.state.signupError === true) {
+            this.toggleError();
+        }
         let url = 'http://localhost:3001/api/v1/signup';
         let options = {
             method: 'POST', 
@@ -67,32 +70,55 @@ class Signup extends React.Component {
         fetch(url, options)
         // .then(this.handleErrors)
         .then(response => response.json())
-        .then(json => console.log(json))
+        .then(json => {this.handleResponse(json)})
         .catch(error => console.log(error) );
+    }
+
+    handleResponse = (response) => {
+        if (response.errors !== null) {
+        this.setState(
+            { signupError: true, errors: response.errors }, () => {
+            return (this.state)});
+        } else {
+            return (response)
+        }
+
+    }
+
+    renderErrorMsg = (errors) => {
+        if (errors !== undefined) {
+        return (
+                errors.map(e => 
+                    <li>{e}</li>
+                )
+        )};
     }
 
     render() {
         return(
             <div className="container-fluid">
+                <div className={`row ${this.state.signupError ? "error" : "hidden"}`}>
+                        {this.renderErrorMsg(this.state.errors)}
+                </div>
                 <div className="row" id="login-page">
                     <div className="col-md-5 signup-card">
                           <div className="col-md-6 offset-5">  
                           <br/>
                             <h1 className="title">Create Your Account</h1><br/>
                             <form onSubmit={this.handleSignupSubmit}>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <input type="text" className="form-control" name="firstName" placeholder="First Name" onChange={this.updateFields}/>
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <input type="text" className="form-control" name="lastName" placeholder="Last Name" onChange={this.updateFields}/>
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <input type="email" className="form-control" name="email" placeholder="Email Address" onChange={this.updateFields}/>
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <input type="password" className={`form-control${this.state.passwordConfirmed ? "-confirmed" : ""}`} name="password" placeholder="Password" onChange={this.updateFields}/>
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <input type="password" className={`form-control${this.state.passwordConfirmed === true ? "-confirmed" : ""}`} name="passwordConfirmation" placeholder="Confirm Password" onChange={this.confirmPassword}/><br/>
                                 </div>
                                 

@@ -333,7 +333,15 @@ padding:0 20px;
   position: relative;
 }
 
-
+/* Error */
+.error {
+  position: absolute;
+  padding: 20px;
+  margin-bottom: 10px;
+  width: 100vw;
+  background-color: rgba(255, 0, 0, 0.705);
+  z-index: 10;
+}
 
 @keyframes App-logo-spin {
   from {
