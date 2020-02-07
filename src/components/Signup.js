@@ -10,6 +10,7 @@ class Signup extends React.Component {
             email: '',
             password: '',
             passwordConfirmation: '',
+            passwordConfirmed: false,
             preferences: [],
         }
     }
@@ -19,6 +20,24 @@ class Signup extends React.Component {
             () => {return (this.state)}
         )
       }
+
+    confirmPassword = (event) => {
+        this.setState({[event.target.name]: event.target.value}, 
+            () => {this.validatePassword(this.state)}
+        )
+    }
+
+    validatePassword = (state) => {
+        if (state.password === state.passwordConfirmation) {
+            this.setState({passwordConfirmed: !this.state.passwordConfirmed}, 
+                () => {console.log (this.state)}
+            )
+        } else {
+            this.setState({passwordConfirmed: false}, 
+                () => {console.log (this.state)}
+            )
+        }
+    }
     
 
     handleErrors = (response) => {
@@ -56,27 +75,26 @@ class Signup extends React.Component {
                 <div className="row" id="login-page">
                     <div className="col-md-5 signup-card">
                           <div className="col-md-6 offset-5">  
-                            <h1 className="title">Create Your Account</h1>
+                            <h1 className="title">Create Your Account</h1><br/>
                             <form onSubmit={this.handleSignupSubmit}>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="firstName" placeholder="First Name" onChange={this.updateFields}/>
+                                    <input type="text" className="form-control" name="firstName" placeholder="First Name" onChange={this.updateFields}/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="lastName" placeholder="Last Name" onChange={this.updateFields}/>
+                                    <input type="text" className="form-control" name="lastName" placeholder="Last Name" onChange={this.updateFields}/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="email" placeholder="Email Address" onChange={this.updateFields}/>
+                                    <input type="email" className="form-control" name="email" placeholder="Email Address" onChange={this.updateFields}/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="password" placeholder="Password" onChange={this.updateFields}/>
+                                    <input type="password" className={`form-control${this.state.passwordConfirmed ? "-confirmed" : ""}`} name="password" placeholder="Password" onChange={this.updateFields}/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="passwordConfirmation" placeholder="Confirm Password" onChange={this.updateFields}/><br/>
+                                    <input type="password" className={`form-control${this.state.passwordConfirmed === true ? "-confirmed" : ""}`} name="passwordConfirmation" placeholder="Confirm Password" onChange={this.confirmPassword}/><br/>
                                 </div>
                                 
-                                <button type="submit" class="btn btn-primary">Signup</button>
+                                <button type="submit" className="btn btn-primary">Signup</button>
                             </form>
-                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
                         </div>
                     </div>
                 </div>
