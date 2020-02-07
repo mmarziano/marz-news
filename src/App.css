@@ -202,7 +202,7 @@ padding:0 20px;
   background-size: cover;
   width: 100vw;
   height: 75%;
-  background-color: #transparent;
+  background-color: transparent;
   padding: 50px 50px 50px 50px;
   border-radius: 10px;
   border-bottom: 1px solid #f3f3f3;
@@ -210,11 +210,12 @@ padding:0 20px;
   z-index: 6;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
 }
 
 
 .title {
+  padding-top: 40px;
   font-family: 'Bebas Neue', sans-serif;
   margin: auto;
   font-size: 36px;

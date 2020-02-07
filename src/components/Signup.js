@@ -49,7 +49,7 @@ class Signup extends React.Component {
 
     handleSignupSubmit = (e) => {
         e.preventDefault();
-        let url = 'http://localhost:3001/api/v1/login';
+        let url = 'http://localhost:3001/api/v1/signup';
         let options = {
             method: 'POST', 
             headers: { 
@@ -58,8 +58,10 @@ class Signup extends React.Component {
             }, 
             body: JSON.stringify({
                 user: {
+                    first_name: this.state.firstName,
+                    last_name: this.state.lastName,
                     email: this.state.email,
-                    password: this.state.password
+                    password: this.state.password,
                 }})
             };
         fetch(url, options)
@@ -75,6 +77,7 @@ class Signup extends React.Component {
                 <div className="row" id="login-page">
                     <div className="col-md-5 signup-card">
                           <div className="col-md-6 offset-5">  
+                          <br/>
                             <h1 className="title">Create Your Account</h1><br/>
                             <form onSubmit={this.handleSignupSubmit}>
                                 <div class="form-group">
