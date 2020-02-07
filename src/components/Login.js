@@ -63,12 +63,12 @@ class Login extends React.Component {
                             <span>Login to access your profile and preferences.</span>
                             <form onSubmit={this.handleLoginSubmit}>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Email Address" onChange={this.handleEmailInput}/><br/>
+                                    <input type="email" class="form-control" id="email" placeholder="Email Address" onChange={this.handleEmailInput}/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" id="password" placeholder="Password" onChange={this.handlePasswordInput}/><br/>
+                                    <input type="password" class="form-control" id="password" placeholder="Password" onChange={this.handlePasswordInput}/>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Login</button><br/>
+                                <button type="submit" class="btn btn-primary">Login</button>
                             </form>
                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
                         </div>

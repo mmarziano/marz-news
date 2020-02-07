@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import Login from './Login'
+import Signup from './Signup'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
 import { fetchFirstUserPreference } from "../actions/articleActions";
@@ -105,7 +106,7 @@ class Navbar extends React.Component {
                 <Switch>
                     <Route exact path="/login">
                         <div className={this.state.showLogin === false ? "hidden" : null }>
-                            <Login />
+                            <Signup />
                         </div>
                     </Route>
                 </Switch>
