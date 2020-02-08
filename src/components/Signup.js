@@ -11,16 +11,11 @@ class Signup extends React.Component {
             password: '',
             passwordConfirmation: '',
             passwordConfirmed: false,
+            signupSuccess: false,
             signupError: false,
             errors: [],
             preferences: [],
         }
-    }
-
-    toggleError = () => {
-        this.setState({signupError: false}, 
-            () => {return (this.state)}
-        )
     }
 
     updateFields = (event) => {
@@ -38,20 +33,17 @@ class Signup extends React.Component {
     validatePassword = (state) => {
         if (state.password === state.passwordConfirmation) {
             this.setState({passwordConfirmed: !this.state.passwordConfirmed}, 
-                () => {console.log (this.state)}
+                () => {return (this.state)}
             )
         } else {
             this.setState({passwordConfirmed: false}, 
-                () => {console.log (this.state)}
+                () => {return (this.state)}
             )
         }
     }
 
     handleSignupSubmit = (e) => {
         e.preventDefault();
-        if (this.state.signupError === true) {
-            this.toggleError();
-        }
         let url = 'http://localhost:3001/api/v1/signup';
         let options = {
             method: 'POST', 
@@ -68,37 +60,46 @@ class Signup extends React.Component {
                 }})
             };
         fetch(url, options)
-        // .then(this.handleErrors)
         .then(response => response.json())
         .then(json => {this.handleResponse(json)})
         .catch(error => console.log(error) );
     }
 
     handleResponse = (response) => {
-        if (response.errors !== null) {
-        this.setState(
-            { signupError: true, errors: response.errors }, () => {
-            return (this.state)});
+        if (response.errors !== undefined) {
+            this.setState({signupError: true, errors: response.errors}, 
+                () => {return (this.state)}
+            )
         } else {
-            return (response)
+            this.setState({
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
+                passwordConfirmation: '',
+                passwordConfirmed: false,
+                signupSuccess: true,
+                signupError: false,
+                errors: [], 
+            }, () => {
+                return (this.state)});
         }
-
     }
 
     renderErrorMsg = (errors) => {
         if (errors !== undefined) {
-        return (
-                errors.map(e => 
-                    <li>{e}</li>
-                )
-        )};
+            return (
+                    errors.map(e => <li>{e}</li>)
+            )};
     }
 
     render() {
         return(
-            <div className="container-fluid">
-                <div className={`row ${this.state.signupError ? "error" : "hidden"}`}>
+            <div className={this.state.signupSuccess ? "hidden" : "container-fluid"}>
+                <div className="row">
+                    <div className={this.state.signupError ? "error" : "hidden"}>
                         {this.renderErrorMsg(this.state.errors)}
+                    </div>
                 </div>
                 <div className="row" id="login-page">
                     <div className="col-md-5 signup-card">
