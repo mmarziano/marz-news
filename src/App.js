@@ -15,6 +15,13 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+        currentUser: {
+          id: null, 
+          first_name: null, 
+          last_name: null, 
+          email: null,
+          comments: [],
+        },
         articles: [],
         active: 0,
         isActive: false,
@@ -23,11 +30,25 @@ class App extends React.Component {
     this.setFocus = this.setFocus.bind(this)
     this.top5 = this.top5.bind(this)
     this.handleHideHeroImg = this.handleHideHeroImg.bind(this)
+    this.setCurrentUser = this.setCurrentUser.bind(this)
 }
   
   
   componentDidMount() {
     this.props.fetchTopHeadlines();
+  }
+
+  setCurrentUser = (user) => {
+    console.log(user)
+    this.setState(prevState => {
+      let currentUser = { ...prevState.currentUser };  
+      currentUser.id = user.id;         
+      currentUser.first_name = user.first_name;
+      currentUser.last_name = user.last_name;
+      currentUser.email = user.email;
+      currentUser.comments = user.comments;                       
+      return { currentUser } 
+    }, () => console.log(this.state));
   }
 
   setFocus = (e) => {
@@ -69,14 +90,16 @@ class App extends React.Component {
           if (topHeadlines !== null && this.state.showing === true) {
             return (
             <>
-                <Navbar handleHideHeroImg={this.handleHideHeroImg}/>
+                <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser}/>
                 <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles} hide={this.state.showing}/>
             </>
             );
           } else {
+            console.log(this.state)
             return (
+              
             <>
-              <Navbar handleHideHeroImg={this.handleHideHeroImg}/>
+              <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser}/>
               <MainContainer />
             </>
             );

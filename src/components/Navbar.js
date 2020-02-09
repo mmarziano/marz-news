@@ -106,7 +106,7 @@ class Navbar extends React.Component {
                 <Switch>
                     <Route exact path="/login">
                         <div className={this.state.showLogin === false ? "hidden" : null }>
-                            <Signup />
+                            <Signup setCurrentUser={this.props.setCurrentUser}/>
                         </div>
                     </Route>
                 </Switch>

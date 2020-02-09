@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class Signup extends React.Component {
+class Profile extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -71,7 +71,6 @@ class Signup extends React.Component {
                 () => {return (this.state)}
             )
         } else {
-            this.setUser(response);
             this.setState({
                 firstName: '',
                 lastName: '',
@@ -83,12 +82,8 @@ class Signup extends React.Component {
                 signupError: false,
                 errors: [], 
             }, () => {
-                return(this.state)});
+                return (this.state)});
         }
-    }
-
-    setUser = (response) => {
-        this.props.setCurrentUser(response)
     }
 
     renderErrorMsg = (errors) => {
@@ -138,7 +133,4 @@ class Signup extends React.Component {
     }
   }
 
-export default Signup
-
-
- 
+export default Profile
