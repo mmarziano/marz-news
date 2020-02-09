@@ -2,13 +2,39 @@ import React from 'react';
 
 
 class Login extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            currentUser: {
+                id: null,
+                first_Name: null,
+                last_Name: null,
+                email: null,
+                comments: [],
+            },
             email: '',
             password: '',
+            loginSuccess: false,
+            loginError: false,
+            errors: null,
         }
     }
+
+    setCurrentUser = (user) => {
+        this.setState(prevState => {
+          let currentUser = { ...prevState.currentUser };  
+          currentUser.id = user.id;         
+          currentUser.first_name = user.first_name;
+          currentUser.last_name = user.last_name;
+          currentUser.email = user.email;
+          currentUser.comments = user.comments;                      
+          return { currentUser }
+        }, () => {return (this.state)});
+        this.setState(
+            { loginSuccess: true },
+            () => {console.log (this.state)}
+          );
+      }
 
     handleEmailInput = (e) => {
         this.setState(
@@ -22,13 +48,6 @@ class Login extends React.Component {
             { password: e.target.value },
             () => {return (this.state)}
           );
-    }
-
-    handleErrors = (response) => {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
     }
 
     handleLoginSubmit = (e) => {
@@ -47,15 +66,37 @@ class Login extends React.Component {
                 }})
             };
         fetch(url, options)
-        // .then(this.handleErrors)
         .then(response => response.json())
-        .then(json => console.log(json))
+        .then(json => this.handleResponse(json))
         .catch(error => console.log(error) );
+    }
+
+    handleResponse = (response) => {
+        if (response.message !== undefined) {
+            this.setState({loginError: true, errors: response.message}, 
+                () => {console.log (this.state)}
+            )
+        } else {
+            this.setCurrentUser(response);
+        }
+    }
+    
+    renderErrorMsg = (errors) => {
+        if (errors !== null) {
+            return (
+                    <li>{errors}</li>
+            )
+        };
     }
 
     render() {
         return(
-            <div className="container-fluid">
+            <div className={this.state.loginSuccess ? "hidden" : "container-fluid"}>
+                <div className="row">
+                    <div className={this.state.loginError ? "error" : "hidden"}>
+                        {this.renderErrorMsg(this.state.errors)}
+                    </div>
+                </div>
                 <div className="row" id="login-page">
                     <div className="col-md-5 login-card">
                           <div className="col-md-6 offset-5">  
@@ -77,7 +118,7 @@ class Login extends React.Component {
             </div>
         ); 
     }
-  }
+}
 
 export default Login
 

@@ -39,7 +39,6 @@ class App extends React.Component {
   }
 
   setCurrentUser = (user) => {
-    console.log(user)
     this.setState(prevState => {
       let currentUser = { ...prevState.currentUser };  
       currentUser.id = user.id;         
@@ -90,16 +89,15 @@ class App extends React.Component {
           if (topHeadlines !== null && this.state.showing === true) {
             return (
             <>
-                <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser}/>
+                <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
                 <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles} hide={this.state.showing}/>
             </>
             );
           } else {
-            console.log(this.state)
             return (
               
             <>
-              <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser}/>
+              <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
               <MainContainer />
             </>
             );

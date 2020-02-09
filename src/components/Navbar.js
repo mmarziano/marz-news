@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import Login from './Login'
+import Profile from './Profile'
 import Signup from './Signup'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
@@ -74,6 +75,18 @@ class Navbar extends React.Component {
             )
         }
     }
+
+    renderSignIn = () => {
+        if (this.props.currentUser.email === null) {
+            return (
+                <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.toggleLogin}></i></Link></li>
+            )
+        } else {
+            return (
+                <li><Link to="/profile"><i className="fa fa-user"></i></Link></li>
+            )
+        }
+    }
     
     render() {
         return(
@@ -87,7 +100,7 @@ class Navbar extends React.Component {
                         <div className="col-md-8">
                                 <menu>
                                     <ul>
-                                        <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.toggleLogin}></i></Link></li>
+                                        {this.renderSignIn()}
                                         <li className="searchbar">
                                             <i className="fa fa-search" onClick={this.toggleSearch} aria-hidden="true"></i>
                                             <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
@@ -106,7 +119,12 @@ class Navbar extends React.Component {
                 <Switch>
                     <Route exact path="/login">
                         <div className={this.state.showLogin === false ? "hidden" : null }>
-                            <Signup setCurrentUser={this.props.setCurrentUser}/>
+                            <Login setCurrentUser={this.props.setCurrentUser}/>
+                        </div>
+                    </Route>
+                    <Route exact path="/profile">
+                        <div className={this.state.showLogin === false ? "hidden" : null }>
+                            <Profile setCurrentUser={this.props.setCurrentUser}/>
                         </div>
                     </Route>
                 </Switch>
