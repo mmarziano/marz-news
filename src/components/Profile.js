@@ -96,37 +96,8 @@ class Profile extends React.Component {
     render() {
         return(
             <div className={this.state.signupSuccess ? "hidden" : "container-fluid"}>
-                <div className="row">
-                    <div className={this.state.signupError ? "error" : "hidden"}>
-                        {this.renderErrorMsg(this.state.errors)}
-                    </div>
-                </div>
                 <div className="row" id="login-page">
-                    <div className="col-md-5 signup-card">
-                          <div className="col-md-6 offset-5">  
-                          <br/>
-                            <h1 className="title">Create Your Account</h1><br/>
-                            <form onSubmit={this.handleSignupSubmit}>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" name="firstName" placeholder="First Name" onChange={this.updateFields}/>
-                                </div>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" name="lastName" placeholder="Last Name" onChange={this.updateFields}/>
-                                </div>
-                                <div className="form-group">
-                                    <input type="email" className="form-control" name="email" placeholder="Email Address" onChange={this.updateFields}/>
-                                </div>
-                                <div className="form-group">
-                                    <input type="password" className={`form-control${this.state.passwordConfirmed ? "-confirmed" : ""}`} name="password" placeholder="Password" onChange={this.updateFields}/>
-                                </div>
-                                <div className="form-group">
-                                    <input type="password" className={`form-control${this.state.passwordConfirmed === true ? "-confirmed" : ""}`} name="passwordConfirmation" placeholder="Confirm Password" onChange={this.confirmPassword}/><br/>
-                                </div>
-                                
-                                <button type="submit" className="btn btn-primary">Signup</button>
-                            </form>
-                        </div>
-                    </div>
+                    Hello!
                 </div>
             </div>
         ); 

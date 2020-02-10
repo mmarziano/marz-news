@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import { fetchTopHeadlines } from "./actions/articleActions";
 import TopHeadlines from './components/TopHeadlines'
 import MainContainer from './components/MainContainer'
+import Profile from './components/Profile'
 import Loading from './components/Loading'
 
 
@@ -22,6 +23,7 @@ class App extends React.Component {
           email: null,
           comments: [],
         },
+        isLoggedIn: false,
         articles: [],
         active: 0,
         isActive: false,
@@ -48,6 +50,10 @@ class App extends React.Component {
       currentUser.comments = user.comments;                       
       return { currentUser } 
     }, () => console.log(this.state));
+    this.setState(
+      { isLoggedIn: true },
+      () => {return (this.state)}
+    );
   }
 
   setFocus = (e) => {
@@ -93,16 +99,25 @@ class App extends React.Component {
                 <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles} hide={this.state.showing}/>
             </>
             );
+          } else if (this.state.isLoggedIn === true) {
+            return (
+              <>
+                <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
+                <Profile />
+              </>
+            );
           } else {
             return (
-              
-            <>
-              <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
-              <MainContainer />
-            </>
-            );
+              <>
+                  <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
+                  <MainContainer />
+              </>
+              )
+
           }
       }
+
+
   }
 
 const mapStateToProps = state => {

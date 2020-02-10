@@ -4,6 +4,9 @@ import {
     Switch,
     Route,
     Link,
+    Redirect,
+    useHistory,
+    useLocation,
   } from "react-router-dom";
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
@@ -83,7 +86,7 @@ class Navbar extends React.Component {
             )
         } else {
             return (
-                <li><Link to="/profile"><i className="fa fa-user"></i></Link></li>
+                <li><Link to="/profile"><i className="fa fa-user-circle"></i></Link></li>
             )
         }
     }
@@ -127,6 +130,9 @@ class Navbar extends React.Component {
                             <Profile setCurrentUser={this.props.setCurrentUser}/>
                         </div>
                     </Route>
+                    {/* <PrivateRoute path="/profile">
+                        <Profile />
+                    </PrivateRoute> */}
                 </Switch>
             </Router>
         </>
