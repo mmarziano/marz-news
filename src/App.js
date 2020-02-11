@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
         currentUser: {
           id: null, 
+          googleid: null,
           first_name: null, 
           last_name: null, 
           email: null,
@@ -43,7 +44,8 @@ class App extends React.Component {
   setCurrentUser = (user) => {
     this.setState(prevState => {
       let currentUser = { ...prevState.currentUser };  
-      currentUser.id = user.id;         
+      currentUser.id = user.id;  
+      currentUser.googleid = user.googleid;       
       currentUser.first_name = user.first_name;
       currentUser.last_name = user.last_name;
       currentUser.email = user.email;

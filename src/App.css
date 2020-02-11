@@ -156,6 +156,10 @@ padding:0 20px;
   font-size: 2rem;
 }
 
+.login {
+  width: 100%;
+}
+
 /* Logo */
 
 .logo {
@@ -348,6 +352,11 @@ padding:0 20px;
   color: #fff;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.3rem;
+}
+
+#google {
+  width: 100%;
+  margin-top: 10px;
 }
 
 @keyframes App-logo-spin {

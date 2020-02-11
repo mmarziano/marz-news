@@ -1,9 +1,6 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 
-const responseGoogle = (response) => {
-    console.log(response);
-  }
 
 class Login extends React.Component {
     constructor(props) {
@@ -23,6 +20,35 @@ class Login extends React.Component {
             errors: null,
         }
     }
+
+    responseGoogle = (response) => {
+        console.log(response)
+        if (response.googleId !== undefined) {
+            this.handleGoogleSubmit(response);
+        }
+      }
+
+      handleGoogleSubmit = (response) => {
+        let url = 'http://localhost:3001/api/v1/signup';
+        let options = {
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json'
+            }, 
+            body: JSON.stringify({
+                user: {
+                    first_name: response.profileObj.givenName,
+                    last_name: response.profileObj.familyName,
+                    email: response.profileObj.email,
+                    googleId: response.googleId
+                }})
+            };
+        fetch(url, options)
+        .then(response => response.json())
+        .then(json => {this.handleResponse(json)})
+        .catch(error => console.log(error) );
+    } 
 
       
     setCurrentUser = (user) => {
@@ -113,9 +139,11 @@ class Login extends React.Component {
                 </div>
                 <div className="row" id="login-page">
                     <div className="col-md-5 login-card">
-                          <div className="col-md-6 offset-5">  
+                        <div className="col-md-6 offset-5">
                             <h1 className="title">Welcome Back!</h1>
                             <span>Login to access your profile and preferences.</span><br/>
+                        </div>
+                          <div className="col-md-6 offset-5 text-center">  
                             <form onSubmit={this.handleLoginSubmit}>
                                 <div className="form-group">
                                     <input type="email" className="form-control" id="email" placeholder="Email Address" onChange={this.handleEmailInput}/>
@@ -123,16 +151,19 @@ class Login extends React.Component {
                                 <div className="form-group">
                                     <input type="password" className="form-control" id="password" placeholder="Password" onChange={this.handlePasswordInput}/>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Login</button>
+                                <button type="submit" className="btn btn-primary login">Login</button>
                             </form>
-                            <GoogleLogin
-                                clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                                buttonText="Login"
-                                onSuccess={responseGoogle}
-                                onFailure={responseGoogle}
-                                cookiePolicy={'single_host_origin'}
-                                />
-                        </div>
+                            <hr />
+                            <div id="google">
+                                <GoogleLogin
+                                        clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                        buttonText="Login with Google"
+                                        onSuccess={this.responseGoogle}
+                                        onFailure={this.responseGoogle}
+                                        cookiePolicy={'single_host_origin'}
+                                        />
+                            </div>
+                         </div>
                     </div>
                 </div>
             </div>
