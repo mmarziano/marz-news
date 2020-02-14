@@ -359,6 +359,44 @@ padding:0 20px;
   margin-top: 10px;
 }
 
+
+/* Profile Page */
+
+.profile-banner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  width: 100vw;
+  background-color: rgb(3, 131, 190);
+  height: 200px;
+}
+
+.profile-img {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.19);
+}
+
+.profile {
+  background-image: url('./assets/images/background.jpg');
+  background-color: rgba(3, 131, 190, 0.5);
+  background-blend-mode: darken;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile h2 {
+  position: absolute;
+  top: 80px;
+  left: 120px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

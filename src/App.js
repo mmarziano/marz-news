@@ -110,7 +110,7 @@ class App extends React.Component {
             return (
               <>
                 <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />
-                <Profile />
+                <Profile currentUser={this.state.currentUser}/>
               </>
               )
           } else {
