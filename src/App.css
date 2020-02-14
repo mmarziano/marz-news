@@ -389,12 +389,33 @@ padding:0 20px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  border-bottom: 1px solid #e7e7e7;
 }
 
 .profile h2 {
   position: absolute;
   top: 80px;
   left: 120px;
+}
+
+.nav-item {
+  line-height: 30px;
+}
+
+.nav-tabs a{
+  color: #b6b6b6;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5em;
+  
+}
+
+.profile-tabs li {
+  border-right: 1px solid #e7e7e7;
+  display: inline;
+  list-style: none;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  padding: 10px;
 }
 
 @keyframes App-logo-spin {
