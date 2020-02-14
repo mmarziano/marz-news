@@ -18,10 +18,11 @@ class App extends React.Component {
     this.state = {
         currentUser: {
           id: null, 
-          googleid: null,
+          oauthID: null,
           first_name: null, 
           last_name: null, 
           email: null,
+          profileImg: null,
           comments: [],
         },
         isLoggedIn: false,
@@ -42,20 +43,24 @@ class App extends React.Component {
   }
 
   setCurrentUser = (user) => {
-    this.setState(prevState => {
-      let currentUser = { ...prevState.currentUser };  
-      currentUser.id = user.id;  
-      currentUser.googleid = user.googleid;       
-      currentUser.first_name = user.first_name;
-      currentUser.last_name = user.last_name;
-      currentUser.email = user.email;
-      currentUser.comments = user.comments;                       
-      return { currentUser } 
-    }, () => console.log(this.state));
-    this.setState(
-      { isLoggedIn: true },
-      () => {return (this.state)}
-    );
+    if (user.email !== undefined) {
+      this.setState(prevState => {
+        let currentUser = { ...prevState.currentUser };  
+        currentUser.id = user.id;  
+        currentUser.oauthID = user.oauthID;       
+        currentUser.first_name = user.first_name;
+        currentUser.last_name = user.last_name;
+        currentUser.email = user.email;
+        currentUser.profileImg = user.profileImg;
+        currentUser.comments = user.comments;                       
+        return { currentUser } 
+      }, () => {return (this.state)});
+      this.setState(
+        { isLoggedIn: true },
+        () => {return (this.state)}
+      );
+    }
+      console.log(this.state)
   }
 
   setFocus = (e) => {
@@ -94,29 +99,38 @@ class App extends React.Component {
             return (<Loading />)
           }
 
-          if (topHeadlines !== null && this.state.showing === true) {
+          if (topHeadlines !== null && this.state.isLoggedIn === false) {
             return (
             <>
                 <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
                 <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles} hide={this.state.showing}/>
             </>
             );
-          } else if (this.state.isLoggedIn === true) {
+          } else if (this.state.isLoggedIn) {
             return (
               <>
-                <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
+                <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />
                 <Profile />
               </>
-            );
-          } else {
-            return (
-              <>
-                  <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
-                  <MainContainer />
-              </>
               )
-
+          } else {
+            return null;
           }
+          
+          
+          // else {
+          //   return (
+          //     <>
+          //       <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
+          //       <div className={this.state.isLoggedIn ? "hidden" : null}>
+          //           <MainContainer />
+          //       </div>
+          //       <div className={this.state.isLoggedIn ? null : 'hidden'}>
+          //           <Profile />
+          //       </div>
+          //     </>
+          //   );
+          // } 
       }
 
 

@@ -6,13 +6,6 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentUser: {
-                id: null,
-                first_Name: null,
-                last_Name: null,
-                email: null,
-                comments: [],
-            },
             email: '',
             password: '',
             isLoggedIn: false,
@@ -29,7 +22,7 @@ class Login extends React.Component {
       }
 
       handleGoogleSubmit = (response) => {
-        let url = 'http://localhost:3001/api/v1/signup';
+        let url = 'http://localhost:3001/api/v1/googleAuth';
         let options = {
             method: 'POST', 
             headers: { 
@@ -40,8 +33,10 @@ class Login extends React.Component {
                 user: {
                     first_name: response.profileObj.givenName,
                     last_name: response.profileObj.familyName,
+                    password: response.googleId + response.profileObj.email,
                     email: response.profileObj.email,
-                    googleId: response.googleId
+                    oauthID: response.googleId,
+                    profileImg: response.profileObj.imageUrl,
                 }})
             };
         fetch(url, options)
@@ -50,22 +45,6 @@ class Login extends React.Component {
         .catch(error => console.log(error) );
     } 
 
-      
-    setCurrentUser = (user) => {
-        this.setState(prevState => {
-          let currentUser = { ...prevState.currentUser };  
-          currentUser.id = user.id;         
-          currentUser.first_name = user.first_name;
-          currentUser.last_name = user.last_name;
-          currentUser.email = user.email;
-          currentUser.comments = user.comments;                      
-          return { currentUser }
-        }, () => {return (this.state)});
-        this.setState(
-            { isLoggedIn: true },
-            () => {console.log (this.state)}
-          );
-      }
 
     handleEmailInput = (e) => {
         this.setState(
@@ -105,13 +84,17 @@ class Login extends React.Component {
     handleResponse = (response) => {
         if (response.message !== undefined) {
             this.setState({loginError: true, errors: response.message}, 
-                () => {console.log (this.state)}
+                () => {return (this.state)}
+            )
+        } else if (response.errors) {
+            this.setState({loginError: true, errors: response.errors}, 
+                () => {return (this.state)}
             )
         } else {
             this.setUser(response);
             this.setState(
                 { isLoggedIn: true },
-                () => {console.log (this.state)}
+                () => {return (this.state)}
               );
         }
     }
@@ -131,7 +114,7 @@ class Login extends React.Component {
 
     render() {
         return(
-            <div className={this.state.loginSuccess ? "hidden" : "container-fluid"}>
+            <div className={this.state.isLoggedIn ? "hidden" : "container-fluid"}>
                 <div className="row">
                     <div className={this.state.loginError ? "error" : "hidden"}>
                         {this.renderErrorMsg(this.state.errors)}
