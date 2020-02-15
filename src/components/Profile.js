@@ -1,6 +1,7 @@
 import React from 'react';
 import  detective  from '../assets/images/young-detective.png';
 import Nav from 'react-bootstrap/Nav';
+import Preferences from './Preferences';
 
 
 class Profile extends React.Component {
@@ -54,7 +55,7 @@ class Profile extends React.Component {
                         </Nav.Item>
                     </Nav>
                 </div>
-                <div className={this.state.showPreferences ? null : "hidden"}>
+                <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
                     <Preferences />
                 </div>
             </div>
