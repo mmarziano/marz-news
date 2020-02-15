@@ -17,8 +17,17 @@ class Profile extends React.Component {
                 comments: [],
               },
               isLoggedIn: props.isLoggedIn,
+              showPreferences: false,
+              showComments: false,
+              showArticles: false,
         }      
     }
+
+    handlePreferencesClick = () => {
+        this.setState({showPreferences: !this.state.showPreferences}, 
+            () => {return (this.state)}
+        )
+      }
 
     render() {
         return(
@@ -40,15 +49,13 @@ class Profile extends React.Component {
                         <Nav.Item>
                             <Nav.Link eventKey="link-1">My Comments</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="link-2">Preferences</Nav.Link>
+                        <Nav.Item onClick={this.handlePreferencesClick}>
+                            <Nav.Link href="#preferences" eventKey="link-2">Preferences</Nav.Link>
                         </Nav.Item>
                     </Nav>
-                    {/* <ul className="nav nav-pills">
-                        <li className="nav-item active"><a href="#home" data-toggle="tab">Home</a></li>
-                        <li className="nav-item">My Comments</li>
-                        <li className="nav-item">Manage Preferences</li>
-                    </ul> */}
+                </div>
+                <div className={this.state.showPreferences ? null : "hidden"}>
+                    <Preferences />
                 </div>
             </div>
         ); 
