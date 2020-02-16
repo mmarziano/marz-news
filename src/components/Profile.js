@@ -24,10 +24,73 @@ class Profile extends React.Component {
         }      
     }
 
-    handlePreferencesClick = () => {
-        this.setState({showPreferences: !this.state.showPreferences}, 
-            () => {return (this.state)}
-        )
+    handleArticlesClick = (e) => {
+        e.preventDefault();
+            this.setState({
+                showArticles: !this.state.showArticles,
+            }, 
+                () => {return (this.state)}
+            )
+        if (this.state.showPreferences) {
+            this.setState({
+                showPreferences: false,
+            }, 
+                () => {return (this.state)}
+            )
+        }
+        if (this.state.showComments) {
+            this.setState({
+                showComments: false,
+            }, 
+                () => {return (this.state)}
+            )
+        }
+      }
+
+      handleCommentsClick = (e) => {
+        e.preventDefault();
+            this.setState({
+                showComments: !this.state.showComments,
+            }, 
+                () => {return (this.state)}
+            )
+            if (this.state.showPreferences) {
+                this.setState({
+                    showPreferences: false,
+                }, 
+                    () => {return (this.state)}
+                )
+            }
+            if (this.state.showArticles) {
+                this.setState({
+                    showArticles: false,
+                }, 
+                    () => {return (this.state)}
+                )
+            }
+      }
+
+      handlePreferencesClick = (e) => {
+        e.preventDefault();
+            this.setState({
+                showPreferences: !this.state.showPreferences,
+            }, 
+                () => {return (this.state)}
+            )
+            if (this.state.showComments) {
+                this.setState({
+                    showComments: false,
+                }, 
+                    () => {return (this.state)}
+                )
+            }
+            if (this.state.showArticles) {
+                this.setState({
+                    showArticles: false,
+                }, 
+                    () => {return (this.state)}
+                )
+            }
       }
 
     render() {
@@ -44,10 +107,10 @@ class Profile extends React.Component {
                 </div>
                 <div className="row col-md-12">
                     <Nav variant="tabs" defaultActiveKey="/Bookmarked">
-                        <Nav.Item>
+                        <Nav.Item onClick={this.handleArticlesClick}>
                             <Nav.Link href="/home">Bookmarked Articles</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        <Nav.Item onClick={this.handleCommentsClick}>
                             <Nav.Link eventKey="link-1">My Comments</Nav.Link>
                         </Nav.Item>
                         <Nav.Item onClick={this.handlePreferencesClick}>
@@ -56,6 +119,15 @@ class Profile extends React.Component {
                     </Nav>
                 </div>
                 <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
+                    Preferences
+                    <Preferences />
+                </div>
+                <div className={this.state.showComments ? "container-fluid" : "hidden"}>
+                    Comments
+                    <Preferences />
+                </div>
+                <div className={this.state.showArticles ? "container-fluid" : "hidden"}>
+                    Articles
                     <Preferences />
                 </div>
             </div>
