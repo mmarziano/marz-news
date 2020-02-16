@@ -119,7 +119,6 @@ class Profile extends React.Component {
                     </Nav>
                 </div>
                 <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
-                    Preferences
                     <Preferences />
                 </div>
                 <div className={this.state.showComments ? "container-fluid" : "hidden"}>

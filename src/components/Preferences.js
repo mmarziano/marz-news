@@ -36,19 +36,36 @@ class Preferences extends React.Component {
 
     renderSubcategoriesCheckboxes = () => {
         return this.state.subcategories.map((category, idx) =>  
-            <Form.Group controlId="formSelectSubCategories">
+            <Form.Group controlId="formSelectLanguages">
                 <Form.Check type="checkbox" label={category} id={idx}/>
             </Form.Group>
         )
     }
     
+    renderLanguagesCheckboxes = () => {
+        return this.state.languages.map((language) =>  
+                <Form.Check type="checkbox" label={language.name} value={language.abbr} id={language.abbr}/>
+        )
+    }
+
+
     render() {
         return(
-                <div className="row col-md-8">
-                  <Form>
-                    {this.renderSubcategoriesCheckboxes()}
+                <div className="row col-md-12">
+                  <h4 className="preference-title">Select your 3 preferred subcategories to quickly access those news stories.</h4>
+                  <hr />  
+                  <Form className="form-inline">
+                    <Form.Group controlId="formSelectSubCategories">
+                        {this.renderSubcategoriesCheckboxes()}
+                    </Form.Group><br />
+                    <hr />
+                    <h4 className="preference-title">Select your preferred language.  Default is English.</h4>
+                    <Form.Group controlId="formSelectSubCategories">
+                        {this.renderLanguagesCheckboxes()}
+                    </Form.Group><br />
+                    
                     <Button variant="primary" type="submit">
-                        Submit
+                        Save Preferences
                     </Button>
                     </Form>
                 </div>
