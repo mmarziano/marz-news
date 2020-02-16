@@ -418,6 +418,17 @@ padding:0 20px;
   padding: 10px;
 }
 
+label.form-check-label {
+  color:rgb(3, 131, 190);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.3em;
+}
+
+input[type="checkbox"]{
+  display: inline-block;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
