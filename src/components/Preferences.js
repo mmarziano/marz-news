@@ -5,6 +5,10 @@ class Preferences extends React.Component {
     constructor() {
         super();
         this.state = {
+            controlId: 0,
+            isChecked: false,
+            selectedCategories: [],
+            selectedLanguage: null,
               subcategories: ['Business', 'Entertainment', 'Health', 'Science', 'Sports', 'Technology'],
               languages: [
                   {name: 'Arabic', 
@@ -28,42 +32,68 @@ class Preferences extends React.Component {
                    {name: 'Russian', 
                    abbr: 'ru'},
                    {name: 'Chinese', 
-                   abbr: 'zh'}]
-               
+                   abbr: 'zh'}],
         }      
+    }
+
+    handleLanguageChange = (event) => {
+        this.setState({
+            selectedLanguage: event.target.value,
+        }, 
+            () => {return (this.state)}
+        )
+      }
+
+    handleCategoriesChange = (event) => {
+        if (this.state.selectedCategories.length < 3) {
+                this.setState({
+                    selectedCategories: [...this.state.selectedCategories, event.target.value], 
+                    isChecked: !this.state.checked},
+                    () => {console.log (this.state)}
+                );
+        } else if (this.state.selectedCategories.length > 3) {
+            this.setState((prevState) => ({
+                selectedCategories: [...prevState.selectedCategories.slice(0,event.target.id), ...prevState.selectedCategoreis.slice(event.target.id)],
+                isChecked: !this.state.checked},
+              
+                () => {console.log (this.state)}
+            ));
+        } else {
+            event.preventDefault();
+            alert("Maximum allowed: 3 categories.")
+        }
     }
 
 
     renderSubcategoriesCheckboxes = () => {
-        return this.state.subcategories.map((category, idx) =>  
-            <Form.Group controlId="formSelectLanguages">
-                <Form.Check type="checkbox" label={category} id={idx}/>
-            </Form.Group>
-        )
+            return this.state.subcategories.map((category, idx) =>  
+                <Form.Group controlId={this.state.controlId}>
+                    <Form.Check type="checkbox" label={category} id={idx} value={category} onClick={(event) => this.handleCategoriesChange(event)}/>
+                </Form.Group>
+            )
     }
     
-    renderLanguagesCheckboxes = () => {
+    renderLanguagesRadio = () => {
         return this.state.languages.map((language) =>  
-                <Form.Check type="checkbox" label={language.name} value={language.abbr} id={language.abbr}/>
+                <Form.Check type="radio" label={language.name} value={language.abbr} id={language.abbr} onClick={this.handleLanguageChange}/>
         )
     }
-
 
     render() {
         return(
-                <div className="row col-md-12">
+                <div className="row col-md-12 card">
                   <h4 className="preference-title">Select your 3 preferred subcategories to quickly access those news stories.</h4>
                   <hr />  
-                  <Form className="form-inline">
+                  <Form>
                     <Form.Group controlId="formSelectSubCategories">
                         {this.renderSubcategoriesCheckboxes()}
                     </Form.Group><br />
-                    <hr />
-                    <h4 className="preference-title">Select your preferred language.  Default is English.</h4>
+                    <div className="line"></div>
+                    <h4 className="preference-title">Select your preferred language.  Default is English.</h4><br />
                     <Form.Group controlId="formSelectSubCategories">
-                        {this.renderLanguagesCheckboxes()}
-                    </Form.Group><br />
-                    
+                        {this.renderLanguagesRadio()}
+                    </Form.Group>
+                    <div className="line"></div>
                     <Button variant="primary" type="submit">
                         Save Preferences
                     </Button>

@@ -423,10 +423,12 @@ label.form-check-label {
   font-family: 'Archivo Narrow', sans-serif;
   font-size: 1.3rem;
   padding-right: 20px;
+  display: flex;
 }
 
 input[type="checkbox"]{
   display: inline-block;
+  vertical-align: middle;
 }
 
 .preference-title {
@@ -434,6 +436,14 @@ input[type="checkbox"]{
   color: #858383;
   padding-top: 25px;
   padding-bottom: 10px;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  padding-top: 15px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid rgb(3, 131, 190);
 }
 
 @keyframes App-logo-spin {
