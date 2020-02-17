@@ -114,7 +114,7 @@ class Profile extends React.Component {
                             <Nav.Link eventKey="link-1">My Comments</Nav.Link>
                         </Nav.Item>
                         <Nav.Item onClick={this.handlePreferencesClick}>
-                            <Nav.Link href="#preferences" eventKey="link-2">Preferences</Nav.Link>
+                            <Nav.Link href="#" eventKey="link-2">Preferences</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </div>
@@ -123,11 +123,11 @@ class Profile extends React.Component {
                 </div>
                 <div className={this.state.showComments ? "container-fluid" : "hidden"}>
                     Comments
-                    <Preferences />
+                    
                 </div>
                 <div className={this.state.showArticles ? "container-fluid" : "hidden"}>
                     Articles
-                    <Preferences />
+                    
                 </div>
             </div>
         ); 

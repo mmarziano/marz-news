@@ -403,10 +403,10 @@ padding:0 20px;
 }
 
 .nav-tabs a{
+  margin-top: 10px;
   color: #b6b6b6;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5em;
-  
 }
 
 .profile-tabs li {
@@ -418,10 +418,25 @@ padding:0 20px;
   padding: 10px;
 }
 
+.profile-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: rgba(3, 131, 190, 0.1);
+  background-clip: border-box;
+  border-radius: .25rem;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  border: 1px solid rgba(3, 131, 190, 0.3);
+  box-shadow: 0 1px 1px 0 rgba(3, 131, 190, 0.2), 0 3px 4px 0 rgba(3, 131, 190, 0.19);
+}
+
 label.form-check-label {
   color:rgb(3, 131, 190);
   font-family: 'Archivo Narrow', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   padding-right: 20px;
   display: flex;
 }
@@ -431,10 +446,16 @@ input[type="checkbox"]{
   vertical-align: middle;
 }
 
+
+input[type="radio"]{
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .preference-title {
   font-family: 'Bebas Neue', sans-serif;
-  color: #858383;
-  padding-top: 25px;
+  color: rgb(95, 95, 95);
+  padding-top: 20px;
   padding-bottom: 10px;
 }
 
