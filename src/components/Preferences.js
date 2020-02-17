@@ -56,22 +56,17 @@ class Preferences extends React.Component {
       }
 
     handleCategoriesChange = (event) => {
-        if (this.state.selectedCategories.length < 3) {
+        if (this.state.selectedCategories.length < 3 && this.state.subcategories[event.target.id].isChecked === false) {
             let newState = Object.assign({}, this.state);
-            newState.subcategories[event.target.id].isChecked = !this.state.subcategories[event.target.id].isChecked;
+            newState.selectedCategories.push(event.target.value);
+            newState.subcategories[event.target.id].isChecked = !newState.subcategories[event.target.id].isChecked;
             this.setState(newState, () => {console.log (this.state)})
-                // this.setState({
-                //     selectedCategories: [...this.state.selectedCategories, event.target.value], 
-                //     newState},
-                //     () => {console.log (this.staste)}
-                // );
-        } else if (this.state.selectedCategories.length > 3) {
-            this.setState((prevState) => ({
-                selectedCategories: [...prevState.selectedCategories.slice(0,event.target.id), ...prevState.selectedCategoreis.slice(event.target.id)],
-                },
-              
-                () => {console.log (this.state)}
-            ));
+        } else if (this.state.subcategories[event.target.id].isChecked) {
+            let newState = Object.assign({}, this.state);
+            let index = newState.selectedCategories.indexOf(event.target.value);
+            newState.selectedCategories = newState.selectedCategories.slice(0, index).concat(newState.selectedCategories.slice(index + 1));
+            newState.subcategories[event.target.id].isChecked = !newState.subcategories[event.target.id].isChecked;
+            this.setState(newState, () => {console.log (this.state)});
         } else {
             event.preventDefault();
             alert("Maximum allowed: 3 categories.")
