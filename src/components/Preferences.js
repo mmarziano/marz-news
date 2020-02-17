@@ -5,11 +5,22 @@ class Preferences extends React.Component {
     constructor() {
         super();
         this.state = {
-            controlId: 0,
-            isChecked: false,
-            selectedCategories: [],
-            selectedLanguage: null,
-              subcategories: ['Business', 'Entertainment', 'Health', 'Science', 'Sports', 'Technology'],
+              controlId: 0,
+              selectedCategories: [],
+              selectedLanguage: null,
+              subcategories: [
+                  {name: 'Business',
+                   isChecked: false},
+                   {name: 'Entertainment',
+                    isChecked: false}, 
+                    {name: 'Health',
+                   isChecked: false},
+                   {name: 'Science',
+                    isChecked: false},
+                    {name: 'Sports',
+                   isChecked: false},
+                   {name: 'Technology',
+                    isChecked: false},],
               languages: [
                   {name: 'Arabic', 
                    abbr: 'ar'}, 
@@ -46,15 +57,18 @@ class Preferences extends React.Component {
 
     handleCategoriesChange = (event) => {
         if (this.state.selectedCategories.length < 3) {
-                this.setState({
-                    selectedCategories: [...this.state.selectedCategories, event.target.value], 
-                    isChecked: !this.state.checked},
-                    () => {console.log (this.state)}
-                );
+            let newState = Object.assign({}, this.state);
+            newState.subcategories[event.target.id].isChecked = !this.state.subcategories[event.target.id].isChecked;
+            this.setState(newState, () => {console.log (this.state)})
+                // this.setState({
+                //     selectedCategories: [...this.state.selectedCategories, event.target.value], 
+                //     newState},
+                //     () => {console.log (this.staste)}
+                // );
         } else if (this.state.selectedCategories.length > 3) {
             this.setState((prevState) => ({
                 selectedCategories: [...prevState.selectedCategories.slice(0,event.target.id), ...prevState.selectedCategoreis.slice(event.target.id)],
-                isChecked: !this.state.checked},
+                },
               
                 () => {console.log (this.state)}
             ));
@@ -68,7 +82,7 @@ class Preferences extends React.Component {
     renderSubcategoriesCheckboxes = () => {
             return this.state.subcategories.map((category, idx) =>  
                 <Form.Group controlId={this.state.controlId}>
-                    <Form.Check type="checkbox" label={category} id={idx} value={category} onClick={(event) => this.handleCategoriesChange(event)}/>
+                    <Form.Check type="checkbox" label={category.name} id={idx} value={category.name} checked={category.isChecked} onClick={(event) => this.handleCategoriesChange(event)}/>
                 </Form.Group>
             )
     }
