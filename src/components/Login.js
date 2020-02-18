@@ -105,10 +105,6 @@ class Login extends React.Component {
         
     }
 
-    redirectToProfile = () => {
-        this.props.history.push('/profile');
-    }
-
     setUser = (response) => {
         this.props.setCurrentUser(response)
     }
