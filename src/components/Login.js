@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Redirect,
+    Link
   } from "react-router-dom";
 import Navbar from './Navbar'
 import GoogleLogin from 'react-google-login';
@@ -166,6 +167,7 @@ class Login extends React.Component {
                                             cookiePolicy={'single_host_origin'}
                                             />
                                 </div>
+                                <div><Link to="/signup">Create Free Account</Link></div>
                             </div>
                         </div>
                     </div>

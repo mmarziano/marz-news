@@ -122,7 +122,8 @@ class App extends React.Component {
                     currentUser={this.state.currentUser} 
                     updateCurrentUser={this.updateCurrentUser}/>}/>
                 <Route exact path='/profile' component={Profile} />
-                <Route exact path='/signup' component={Signup}/>
+                <Route exact path='/signup' component={() => <Signup currentUser={this.state.currentUser} 
+                  setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>}/>
                 <Route exact path='/login' component={() => <Login currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>} /> 
                 <Route path='/' render={() => <div>404</div>}/>

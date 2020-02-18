@@ -1,5 +1,9 @@
 import React from 'react';
-
+import Navbar from './Navbar'
+import {
+    Redirect,
+    Link
+  } from "react-router-dom";
 
 class Signup extends React.Component {
     constructor() {
@@ -99,7 +103,18 @@ class Signup extends React.Component {
     }
 
     render() {
+        if (this.props.isLoggedIn) {
+            return <Redirect
+                        to={{
+                        pathname: "/profile",
+                        state: { currentUser: this.props.currentUser }
+                        }}
+                    />
+        } 
+
         return(
+            <>
+            <Navbar currentUser={this.props.currentUser} />
             <div className={this.state.signupSuccess ? "hidden" : "container-fluid"}>
                 <div className="row">
                     <div className={this.state.signupError ? "error" : "hidden"}>
@@ -134,6 +149,7 @@ class Signup extends React.Component {
                     </div>
                 </div>
             </div>
+            </>
         ); 
     }
   }
