@@ -5,6 +5,7 @@ import Preferences from './Preferences';
 import Navbar from './Navbar'
 
 
+
 class Profile extends React.Component {
     constructor(props) {
         super(props);
@@ -98,15 +99,17 @@ class Profile extends React.Component {
             }
       }
 
+    
+
     render() {
-        console.log(this.props.location.state.currentUser)
-            return(
+        console.log(this.props.location.state)
+        return(
                 <>
                 <Navbar setCurrentUser={this.props.setCurrentUser}  currentUser={this.props.location.state.currentUser} />
                 <div className="container-fluid profile-banner profile">
                     <div className="row col-md-12" >
                         <div className="col-md-6 text-center">
-                            <img className="profile-img" src={this.props.location.state.currentUser.profileImg} alt={this.props.location.state.currentUser.first_name} />
+                            <img className="profile-img" src={this.props.location.state.profileImg} alt={this.props.location.state.currentUser.first_name} />
                             <h2>What's sparking your curiosity today, {this.props.location.state.currentUser.first_name}?</h2>
                         </div>
                         <div className="col-md-6 text-center">

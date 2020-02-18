@@ -135,7 +135,8 @@ class App extends React.Component {
                 <Profile 
                   currentUser={this.state.currentUser} 
                   updateCurrentUser={this.updateCurrentUser}
-                  setCurrentUser={this.setCurrentUser}/>
+                  setCurrentUser={this.setCurrentUser}
+                  />
               )
           } else {
             return null;

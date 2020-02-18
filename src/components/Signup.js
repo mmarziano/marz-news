@@ -61,6 +61,7 @@ class Signup extends React.Component {
                     last_name: this.state.lastName,
                     email: this.state.email,
                     password: this.state.password,
+                    profileImg: 'https://api.adorable.io/avatars/100/lol@adorable.io.png'
                 }})
             };
         fetch(url, options)
