@@ -3,6 +3,7 @@ import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
 import { connect } from 'react-redux'
 import MainContainer from './MainContainer'
+import Navbar from './Navbar'
 
 class TopHeadlines extends React.Component {
     constructor(props) {
@@ -15,19 +16,11 @@ class TopHeadlines extends React.Component {
         }
         this.setFocus = this.setFocus.bind(this);
         this.top5 = this.top5.bind(this)
-        this.handleHideHeroImg = this.handleHideHeroImg.bind(this)
     }
 
     setFocus = (e) => {
         this.setState(
             { active: e.target.id, isActive: true },
-            () => {return (this.state)}
-          );
-    }
-
-    handleHideHeroImg = () => {
-        this.setState(
-            { showing: !this.state.showing },
             () => {return (this.state)}
           );
     }
@@ -46,16 +39,13 @@ class TopHeadlines extends React.Component {
     render() {
         const { topHeadlines } = this.props;
             return(
-            <>
-                <div className={this.state.showing ? "container-fluid col-lg-12" : "hidden"}>
-                    <div className="row hero">
-                        <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
-                        <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
-                    </div>
-                </div>
-                <div className={this.state.showing ? "hidden" : null}>
-                    <MainContainer results={this.props.searchResults} topHeadlines={topHeadlines}/>
-                </div>
+            <> 
+            <Navbar setCurrentUser={this.props.setCurrentUser} currentUser={this.props.currentUser} updateCurrentUser={this.props.updateCurrentUser}/>    
+            <div className="row hero">
+                <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
+                <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
+            </div>
+
             </>)
     }     
 }

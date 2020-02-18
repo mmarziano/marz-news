@@ -2,8 +2,8 @@ import React from 'react';
 import {Form, Button} from 'react-bootstrap';
 
 class Preferences extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
               controlId: 0,
               selectedCategories: [],
@@ -68,7 +68,7 @@ class Preferences extends React.Component {
                 newState.languages[oldSelectionIndex].isChecked = !newState.languages[oldSelectionIndex].isChecked
             }
         newState.languages[index].isChecked = !newState.languages[index].isChecked;
-        this.setState(newState, () => {console.log (this.state)})
+        this.setState(newState, () => {return (this.state)})
       }
 
     handleCategoriesChange = (event) => {
@@ -106,12 +106,17 @@ class Preferences extends React.Component {
         )
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.updateCurrentUser(this.state.selectedCategories, this.state.selectedLanguage);
+    }
+
     render() {
         return(
                 <div className="row col-md-12 profile-card">
                   <h4 className="preference-title">Select your 3 preferred subcategories to quickly access those news stories.</h4>
                   <hr />  
-                  <Form>
+                  <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formSelectSubCategories">
                         {this.renderSubcategoriesCheckboxes()}
                     </Form.Group><br />

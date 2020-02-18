@@ -1,18 +1,9 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    Redirect,
-    useHistory,
-    useLocation,
   } from "react-router-dom";
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
-import Login from './Login'
-import Profile from './Profile'
-import Signup from './Signup'
+import { withRouter } from 'react-router-dom'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
 import { fetchFirstUserPreference } from "../actions/articleActions";
@@ -36,12 +27,11 @@ class Navbar extends React.Component {
         }
     }
 
-    toggleLogin = () => {
-        this.props.handleHideHeroImg()
-        this.setState(
-            { showLogin: !this.state.showLogin }, () => {
-            return (this.state)});
-    }
+    // toggleLogin = () => {
+    //     this.setState(
+    //         { showLogin: !this.state.showLogin }, () => {
+    //         return (this.state)});
+    // }
 
     toggleSearch = () => {
         this.setState(
@@ -63,7 +53,6 @@ class Navbar extends React.Component {
             { userInput: '' }, () => {
             return (this.state)});
         this.toggleSearch();
-        this.props.handleHideHeroImg();
         this.props.fetchSearch(this.state.userInput)
     }
 
@@ -82,7 +71,7 @@ class Navbar extends React.Component {
     renderSignIn = () => {
         if (this.props.currentUser.email === null) {
             return (
-                <li><Link to="/login"><i className="fa fa-sign-in" onClick={this.toggleLogin}></i></Link></li>
+                <li><Link to="/login"><i className="fa fa-sign-in"></i></Link></li>
             )
         } else {
             return (
@@ -94,8 +83,6 @@ class Navbar extends React.Component {
     render() {
 
         return(
-            <>
-            <Router>
                 <div className="container-fluid navbar sticky">
                     <div className="row col-md-12">
                         <div className="col-md-4">
@@ -120,23 +107,6 @@ class Navbar extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Switch>
-                    <Route exact path="/login">
-                        <div className={this.state.showLogin === false ? "hidden" : null }>
-                            <Login setCurrentUser={this.props.setCurrentUser}/>
-                        </div>
-                    </Route>
-                    <Route exact path="/profile">
-                        <div className={this.state.showLogin === false ? "hidden" : null }>
-                            <Profile setCurrentUser={this.props.setCurrentUser}/>
-                        </div>
-                    </Route>
-                    {/* <PrivateRoute path="/profile">
-                        <Profile />
-                    </PrivateRoute> */}
-                </Switch>
-            </Router>
-        </>
         )
     }
 } 

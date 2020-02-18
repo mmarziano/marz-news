@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux'
 import SearchContainer from './SearchContainer'
 import TopHeadlines from './TopHeadlines'
-import Loading from '../components/Loading'
+
 
 class MainContainer extends React.Component {
     constructor(props) {

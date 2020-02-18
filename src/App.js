@@ -3,8 +3,13 @@ import './App.css';
 import './css/loading.css';
 import './css/articles.css';
 import { connect } from 'react-redux'
+import {
+  Switch,
+  Route,
+} from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Login from './components/Login';
+import Signup from './components/Signup'
 import { fetchTopHeadlines } from "./actions/articleActions";
 import TopHeadlines from './components/TopHeadlines'
 import MainContainer from './components/MainContainer'
@@ -23,17 +28,19 @@ class App extends React.Component {
           last_name: null, 
           email: null,
           profileImg: null,
+          preferences: {
+             selectedCategories: null,
+             selectedLanguage: null,
+          },
           comments: [],
         },
         isLoggedIn: false,
         articles: [],
         active: 0,
         isActive: false,
-        showing: true,
     }
     this.setFocus = this.setFocus.bind(this)
     this.top5 = this.top5.bind(this)
-    this.handleHideHeroImg = this.handleHideHeroImg.bind(this)
     this.setCurrentUser = this.setCurrentUser.bind(this)
 }
   
@@ -52,6 +59,8 @@ class App extends React.Component {
         currentUser.last_name = user.last_name;
         currentUser.email = user.email;
         currentUser.profileImg = user.profileImg;
+        currentUser.preferences.selectedCategories = null;
+        currentUser.preferences.selectedLanguage = 'en';
         currentUser.comments = user.comments;                       
         return { currentUser } 
       }, () => {return (this.state)});
@@ -60,7 +69,16 @@ class App extends React.Component {
         () => {return (this.state)}
       );
     }
-      console.log(this.state)
+  }
+
+  updateCurrentUser = (categories, language) => {
+    this.setState(prevState => {
+      let currentUser = { ...prevState.currentUser };  
+      currentUser.preferences.selectedCategories = categories;
+      currentUser.preferences.selectedLanguage = language;                     
+      return { currentUser } 
+    }, () => {return (this.state)});
+
   }
 
   setFocus = (e) => {
@@ -81,13 +99,6 @@ class App extends React.Component {
         )
     }
 
-    handleHideHeroImg = () => {
-      this.setState(
-          { showing: !this.state.showing },
-          () => {return (this.state)}
-        );
-    }
-
   render() {
           const { error, loading, topHeadlines} = this.props;
 
@@ -99,38 +110,35 @@ class App extends React.Component {
             return (<Loading />)
           }
 
-          if (topHeadlines !== null && this.state.isLoggedIn === false) {
+          if (topHeadlines !== null) {
             return (
             <>
-                <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
-                <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.state.active} searchArticles={this.props.searchArticles} hide={this.state.showing}/>
+            <Switch>
+                <Route exact path='/' component={() => <TopHeadlines 
+                    topHeadlines={this.props.topHeadlines}
+                    active={this.state.active} 
+                    searchArticles={this.props.searchArticles} 
+                    setCurrentUser={this.setCurrentUser} 
+                    currentUser={this.state.currentUser} 
+                    updateCurrentUser={this.updateCurrentUser}/>}/>
+                <Route exact path='/profile' component={Profile} />
+                <Route exact path='/signup' component={Signup}/>
+                <Route exact path='/login' component={() => <Login currentUser={this.state.currentUser} 
+                  setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>} /> 
+                <Route path='/' render={() => <div>404</div>}/>
+            </Switch>
             </>
             );
-          } else if (this.state.isLoggedIn) {
+          } else if (this.state.isLoggedIn ) {
             return (
-              <>
-                <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />
-                <Profile currentUser={this.state.currentUser}/>
-              </>
+                <Profile 
+                  currentUser={this.state.currentUser} 
+                  updateCurrentUser={this.updateCurrentUser}
+                  setCurrentUser={this.setCurrentUser}/>
               )
           } else {
             return null;
           }
-          
-          
-          // else {
-          //   return (
-          //     <>
-          //       <Navbar handleHideHeroImg={this.handleHideHeroImg} setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
-          //       <div className={this.state.isLoggedIn ? "hidden" : null}>
-          //           <MainContainer />
-          //       </div>
-          //       <div className={this.state.isLoggedIn ? null : 'hidden'}>
-          //           <Profile />
-          //       </div>
-          //     </>
-          //   );
-          // } 
       }
 
 
@@ -139,7 +147,6 @@ class App extends React.Component {
 const mapStateToProps = state => {
   
     return {
-        userPrefs: state.topHeadlines.userPrefs,
         topHeadlines: state.topHeadlines.topHeadlines,
         searchArticles: state.searchArticles.searchArticles,
         loading: state.topHeadlines.loading,

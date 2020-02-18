@@ -5,7 +5,6 @@ import {
   } from '../actions/articleActions';
   
   const initialState = {
-    userPrefs: ['politics', 'entertainment', 'sports', 'business'],
     topHeadlines: null,
     loading: false,
     error: null

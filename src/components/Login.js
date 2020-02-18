@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+    Redirect,
+  } from "react-router-dom";
+import Navbar from './Navbar'
 import GoogleLogin from 'react-google-login';
 
 
@@ -8,7 +12,7 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            isLoggedIn: false,
+            isLoggedIn: props.isLoggedIn,
             loginError: false,
             errors: null,
         }
@@ -97,6 +101,11 @@ class Login extends React.Component {
                 () => {return (this.state)}
               );
         }
+        
+    }
+
+    redirectToProfile = () => {
+        this.props.history.push('/profile');
     }
 
     setUser = (response) => {
@@ -113,44 +122,56 @@ class Login extends React.Component {
 
 
     render() {
-        return(
-            <div className={this.state.isLoggedIn ? "hidden" : "container-fluid"}>
-                <div className="row">
-                    <div className={this.state.loginError ? "error" : "hidden"}>
-                        {this.renderErrorMsg(this.state.errors)}
-                    </div>
-                </div>
-                <div className="row" id="login-page">
-                    <div className="col-md-5 login-card">
-                        <div className="col-md-6 offset-5">
-                            <h1 className="title">Welcome Back!</h1>
-                            <span>Login to access your profile and preferences.</span><br/>
+        console.log(this.state)
+        if (this.state.isLoggedIn) {
+            return <Redirect
+                        to={{
+                        pathname: "/profile",
+                        state: { currentUser: this.props.currentUser }
+                        }}
+                    />
+        } 
+            return(
+                <>
+                <Navbar currentUser={this.props.currentUser} />
+                <div className={this.state.isLoggedIn ? "hidden" : "container-fluid"}>
+                    <div className="row">
+                        <div className={this.state.loginError ? "error" : "hidden"}>
+                            {this.renderErrorMsg(this.state.errors)}
                         </div>
-                          <div className="col-md-6 offset-5 text-center">  
-                            <form onSubmit={this.handleLoginSubmit}>
-                                <div className="form-group">
-                                    <input type="email" className="form-control" id="email" placeholder="Email Address" onChange={this.handleEmailInput}/>
-                                </div>
-                                <div className="form-group">
-                                    <input type="password" className="form-control" id="password" placeholder="Password" onChange={this.handlePasswordInput}/>
-                                </div>
-                                <button type="submit" className="btn btn-primary login">Login</button>
-                            </form>
-                            <hr />
-                            <div id="google">
-                                <GoogleLogin
-                                        clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                                        buttonText="Login with Google"
-                                        onSuccess={this.responseGoogle}
-                                        onFailure={this.responseGoogle}
-                                        cookiePolicy={'single_host_origin'}
-                                        />
+                    </div>
+                    <div className="row" id="login-page">
+                        <div className="col-md-5 login-card">
+                            <div className="col-md-6 offset-5">
+                                <h1 className="title">Welcome Back!</h1>
+                                <span>Login to access your profile and preferences.</span><br/>
                             </div>
-                         </div>
+                            <div className="col-md-6 offset-5 text-center">  
+                                <form onSubmit={this.handleLoginSubmit}>
+                                    <div className="form-group">
+                                        <input type="email" className="form-control" id="email" placeholder="Email Address" onChange={this.handleEmailInput}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <input type="password" className="form-control" id="password" placeholder="Password" onChange={this.handlePasswordInput}/>
+                                    </div>
+                                    <button type="submit" className="btn btn-primary login">Login</button>
+                                </form>
+                                <hr />
+                                <div id="google">
+                                    <GoogleLogin
+                                            clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                            buttonText="Login with Google"
+                                            onSuccess={this.responseGoogle}
+                                            onFailure={this.responseGoogle}
+                                            cookiePolicy={'single_host_origin'}
+                                            />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        ); 
+            </>
+        );
     }
 }
 
