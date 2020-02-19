@@ -18,7 +18,7 @@ class Profile extends React.Component {
                 email: null,
                 profileImg: null,
                 preferences: {
-                    selectedCategories: null,
+                    selectedCategories: [],
                     selectedLanguage: null
                 },
                 comments: [],
@@ -53,8 +53,30 @@ class Profile extends React.Component {
           currentUser.preferences.selectedCategories = categories;
           currentUser.preferences.selectedLanguage = language;                     
           return { currentUser } 
-        }, () => {return (this.state)});
-    
+        }, () => {this.saveUser(this.state)});
+    }
+
+    saveUser = () => {
+        if (this.state.currentUser.preferences.selectedCategories.length > 0) 
+            // Fetch request to update user based on selected preferences
+            let url = 'http://localhost:3001/api/v1/profile/' + this.state.currentUser.id;
+            let options = {
+                method: 'PATCH', 
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Accept': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    user: {
+                        preferences_categories: this.state.currentUser.preferences.selectedCategories,
+                        preferences_language: this.state.currentUser.preferences.selectedLanguage,
+                    }})
+                };
+            fetch(url, options)
+            .then(response => response.json())
+            .then(json => {console.log(json)})
+            .catch(error => console.log(error) );
+            }
       }
 
     handleArticlesClick = (e) => {
@@ -160,7 +182,7 @@ class Profile extends React.Component {
                             </Nav>
                         </div>
                         <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
-                            <Preferences currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/>
+                            <Preferences currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser} togglePreferences={this.handlePreferencesClick}/>
                         </div>
                         <div className={this.state.showComments ? "container-fluid" : "hidden"}>
                             Comments

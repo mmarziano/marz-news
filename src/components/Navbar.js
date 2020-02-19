@@ -59,11 +59,11 @@ class Navbar extends React.Component {
     renderUserLinks = () => {
         if (this.props.userPrefs !== undefined) {
             return this.props.userPrefs.map(p => 
-                <li>{p}</li>
+                <li key={p}>{p}</li>
             )
         } else {
             return this.state.defaultNav.map(p => 
-                <li>{p}</li>
+                <li key={p}>{p}</li>
             )
         }
     }

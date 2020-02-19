@@ -109,12 +109,21 @@ class Preferences extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.updateCurrentUser(this.state.selectedCategories, this.state.selectedLanguage);
+        this.props.togglePreferences(e);
     }
 
     
 
     render() {
+        if (this.props.selectedCategories === 0) {
+            return(
+                <div className={this.props.selectedCategories.length === 0 ? "row col-md-12 profile-card" : "hidden"}>
+                    Settings saved. Click to edit
+                </div>
+            )
+        }
         return(
+                <>
                 <div className="row col-md-12 profile-card">
                   <h4 className="preference-title">Select your 3 preferred subcategories to quickly access those news stories.</h4>
                   <hr />  
@@ -133,6 +142,7 @@ class Preferences extends React.Component {
                     </Button>
                     </Form>
                 </div>
+                </>
         )
     }
 } 

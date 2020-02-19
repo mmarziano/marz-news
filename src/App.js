@@ -29,7 +29,7 @@ class App extends React.Component {
           email: null,
           profileImg: null,
           preferences: {
-             selectedCategories: null,
+             selectedCategories: [],
              selectedLanguage: null,
           },
           comments: [],
@@ -59,7 +59,7 @@ class App extends React.Component {
         currentUser.last_name = user.last_name;
         currentUser.email = user.email;
         currentUser.profileImg = user.profileImg;
-        currentUser.preferences.selectedCategories = null;
+        currentUser.preferences.selectedCategories = [];
         currentUser.preferences.selectedLanguage = 'en';
         currentUser.comments = user.comments;                       
         return { currentUser } 
@@ -121,7 +121,7 @@ class App extends React.Component {
                     setCurrentUser={this.setCurrentUser} 
                     currentUser={this.state.currentUser} 
                     updateCurrentUser={this.updateCurrentUser}/>}/>
-                <Route exact path='/profile' component={Profile} />
+                <Route path='/profile/:id' component={Profile} />
                 <Route exact path='/signup' component={() => <Signup currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>}/>
                 <Route exact path='/login' component={() => <Login currentUser={this.state.currentUser} 
