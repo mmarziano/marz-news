@@ -47,6 +47,16 @@ class Profile extends React.Component {
         this.setState(newState, () => {return (this.state)})
     }
 
+    updateCurrentUser = (categories, language) => {
+        this.setState(prevState => {
+          let currentUser = { ...prevState.currentUser };  
+          currentUser.preferences.selectedCategories = categories;
+          currentUser.preferences.selectedLanguage = language;                     
+          return { currentUser } 
+        }, () => {return (this.state)});
+    
+      }
+
     handleArticlesClick = (e) => {
         e.preventDefault();
             this.setState({
@@ -150,7 +160,7 @@ class Profile extends React.Component {
                             </Nav>
                         </div>
                         <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
-                            <Preferences currentUser={this.state.currentUser} updateCurrentUser={this.props.updateCurrentUser}/>
+                            <Preferences currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/>
                         </div>
                         <div className={this.state.showComments ? "container-fluid" : "hidden"}>
                             Comments

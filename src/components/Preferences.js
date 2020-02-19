@@ -93,7 +93,7 @@ class Preferences extends React.Component {
     renderSubcategoriesCheckboxes = () => {
             return this.state.subcategories.map((category, idx) =>  
                 <Form.Group controlId={this.state.controlId}>
-                    <Form.Check type="checkbox" label={category.name} id={idx} value={category.name} checked={category.isChecked} onClick={(event) => this.handleCategoriesChange(event)}/>
+                    <Form.Check type="checkbox" label={category.name} id={idx} key={idx} value={category.name} checked={category.isChecked} onChange={(event) => this.handleCategoriesChange(event)}/>
                 </Form.Group>
             )
     }
@@ -101,7 +101,7 @@ class Preferences extends React.Component {
     renderLanguagesRadio = () => {
         return this.state.languages.map((language) =>  
             <Form.Group controlId={this.state.controlId}>
-                <Form.Check type="radio" label={language.name} value={language.abbr} id={language.abbr} checked={language.isChecked} onClick={this.handleLanguageChange}/>
+                <Form.Check type="radio" label={language.name} value={language.abbr} id={language.abbr} key={language.abbr} checked={language.isChecked} onChange={this.handleLanguageChange}/>
             </Form.Group>
         )
     }
@@ -110,6 +110,8 @@ class Preferences extends React.Component {
         e.preventDefault();
         this.props.updateCurrentUser(this.state.selectedCategories, this.state.selectedLanguage);
     }
+
+    
 
     render() {
         return(

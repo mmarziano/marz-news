@@ -164,6 +164,7 @@ class Login extends React.Component {
                                             cookiePolicy={'single_host_origin'}
                                             />
                                 </div>
+                                <hr />
                                 <div><Link to="/signup">Create Free Account</Link></div>
                             </div>
                         </div>

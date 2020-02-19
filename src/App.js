@@ -125,7 +125,7 @@ class App extends React.Component {
                 <Route exact path='/signup' component={() => <Signup currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>}/>
                 <Route exact path='/login' component={() => <Login currentUser={this.state.currentUser} 
-                  setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>} /> 
+                  setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn} updateCurrentUser={this.updateCurrentUser}/>} /> 
                 <Route path='/' render={() => <div>404</div>}/>
             </Switch>
             </>
@@ -147,7 +147,6 @@ class App extends React.Component {
   }
 
 const mapStateToProps = state => {
-  
     return {
         topHeadlines: state.topHeadlines.topHeadlines,
         searchArticles: state.searchArticles.searchArticles,
@@ -159,6 +158,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return  {
       fetchTopHeadlines: () => dispatch(fetchTopHeadlines()),
+
       }
     };
 
