@@ -12,12 +12,30 @@ import { fetchThirdUserPreference } from "../actions/articleActions";
 
 
 class Navbar extends React.Component {
-        state = {
-            clicked: false,
-            userInput: '',
-            showLogin: false,
-            defaultNav: ['Top Headlines', 'Finance', 'Sports', 'Politics'],
-        }
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentUser: {
+                id: this.props.currentUser.id,
+                oauthID: this.props.currentUser.oauthID,
+                first_name: this.props.currentUser.first_name, 
+                last_name:  this.props.currentUser.last_name,
+                email: this.props.currentUser.email,
+                profileImg: this.props.currentUser.profileImg,
+                preferences: {
+                    selectedCategories: this.props.currentUser.preferences.selectedCategories,
+                    selectedLanguage: this.props.currentUser.preferences.selectedLanguage
+                },
+                comments: [],
+              },
+              isLoggedIn: false,
+              defaultNav: ['Top Headlines', 'Finance', 'Sports', 'Politics'],
+              clicked: false,
+              userInput: '',
+              showLogin: false,
+              logout: false,
+        }      
+    }    
 
     componentDidMount() {
         if (this.props.userPrefs !== undefined) {
@@ -40,6 +58,11 @@ class Navbar extends React.Component {
           );
     }
     
+    logout = () => {
+        localStorage.clear();
+        window.location.href = '/';
+    }
+    
     handleUserInput = (e) => {
         this.setState(
             { userInput: e.target.value },
@@ -57,8 +80,8 @@ class Navbar extends React.Component {
     }
 
     renderUserLinks = () => {
-        if (this.props.userPrefs !== undefined) {
-            return this.props.userPrefs.map(p => 
+        if (this.state.currentUser.preferences.selectedCategories.length > 0) {
+            return this.state.currentUser.preferences.selectedCategories.map(p => 
                 <li key={p}>{p}</li>
             )
         } else {
@@ -73,11 +96,14 @@ class Navbar extends React.Component {
             return (
                 <li><Link to="/login"><i className="fa fa-sign-in"></i></Link></li>
             )
-        } else {
+        } else if (this.state.logout !== true) {
             return (
-                <li><Link to="/profile"><i className="fa fa-user-circle"></i></Link></li>
+            <>
+                <li onClick={this.logout}>Logout</li>
+                <li><i className="fa fa-user-circle"></i></li>
+            </>
             )
-        }
+        } 
     }
     
     render() {
@@ -91,6 +117,7 @@ class Navbar extends React.Component {
                         <div className="col-md-8">
                                 <menu>
                                     <ul>
+                                        <li><i className="fas fa-sign-out-alt" onClick={this.toggleLogout}></i></li>
                                         {this.renderSignIn()}
                                         <li className="searchbar">
                                             <i className="fa fa-search" onClick={this.toggleSearch} aria-hidden="true"></i>

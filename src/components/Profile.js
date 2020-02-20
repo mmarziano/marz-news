@@ -57,7 +57,7 @@ class Profile extends React.Component {
     }
 
     saveUser = () => {
-        if (this.state.currentUser.preferences.selectedCategories.length > 0) 
+        if (this.state.currentUser.preferences.selectedCategories.length > 0) {
             // Fetch request to update user based on selected preferences
             let url = 'http://localhost:3001/api/v1/profile/' + this.state.currentUser.id;
             let options = {

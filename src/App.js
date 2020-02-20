@@ -50,7 +50,26 @@ class App extends React.Component {
   }
 
   setCurrentUser = (user) => {
-    if (user.email !== undefined) {
+    console.log(user)
+    if (user.email !== undefined && user.preferences_categories.length > 0) {
+      this.setState(prevState => {
+        let currentUser = { ...prevState.currentUser };  
+        currentUser.id = user.id;  
+        currentUser.oauthID = user.oauthID;       
+        currentUser.first_name = user.first_name;
+        currentUser.last_name = user.last_name;
+        currentUser.email = user.email;
+        currentUser.profileImg = user.profileImg;
+        currentUser.preferences.selectedCategories = user.preferences_categories;
+        currentUser.preferences.selectedLanguage = user.preferences_language;
+        currentUser.comments = user.comments;                       
+        return { currentUser } 
+      }, () => {return (this.state)});
+      this.setState(
+        { isLoggedIn: true },
+        () => {return (this.state)}
+      );
+    } else if (user.email !== undefined) {
       this.setState(prevState => {
         let currentUser = { ...prevState.currentUser };  
         currentUser.id = user.id;  
@@ -66,7 +85,7 @@ class App extends React.Component {
       }, () => {return (this.state)});
       this.setState(
         { isLoggedIn: true },
-        () => {return (this.state)}
+        () => {return (this.state)} 
       );
     }
   }
@@ -100,6 +119,7 @@ class App extends React.Component {
     }
 
   render() {
+    console.log(this.state.currentUser)
           const { error, loading, topHeadlines} = this.props;
 
           if (error) {

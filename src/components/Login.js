@@ -120,6 +120,7 @@ class Login extends React.Component {
 
     render() {
         if (this.state.isLoggedIn) {
+            console.log(this.props.currentUser)
             return <Redirect
                         to={{
                         pathname: "/profile/" + this.props.currentUser.id,

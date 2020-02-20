@@ -107,6 +107,16 @@ padding:0 20px;
   display: none;
  }
 
+ .togglelogout{
+  background: #fff;
+  position: fixed;
+  top: 75px;
+  left: 15%;
+  width: 100px;
+  height: 40px;
+  line-height: 30px;
+ }
+
 .togglesearch-clicked{
   background: transparent;
   position: fixed;
