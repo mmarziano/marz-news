@@ -7,7 +7,7 @@ export default class Loading extends React.Component {
             <div className="container-fluid col-lg-12">
             <section className="wrapper dark">
                 <div className="row text-center">
-                    <h1>Scanning headlines...</h1>
+                    <h1>{this.props.heading}</h1>
                 </div>
                 <div className="row">
                 <div className="spinner">

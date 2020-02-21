@@ -5,6 +5,7 @@ import {
   } from '../actions/searchActions';
   
   const initialState = {
+    currentUser: null,
     searchArticles: null,
     loading: false,
     error: null

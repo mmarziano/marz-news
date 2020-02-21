@@ -5,6 +5,7 @@ import {
   } from '../actions/articleActions';
   
   const initialState = {
+    currentUser: null,
     topHeadlines: null,
     loading: false,
     error: null

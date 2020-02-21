@@ -88,7 +88,7 @@ class Signup extends React.Component {
                 signupError: false,
                 errors: [], 
             }, () => {
-                return(this.state)});
+                console.log(this.state)});
         }
     }
 
@@ -104,10 +104,11 @@ class Signup extends React.Component {
     }
 
     render() {
-        if (this.props.isLoggedIn) {
+        console.log(this.state)
+        if (this.state.signupSuccess) {
             return <Redirect
                         to={{
-                        pathname: "/profile",
+                        pathname: "/profile/" + this.props.currentUser.id,
                         state: { currentUser: this.props.currentUser }
                         }}
                     />

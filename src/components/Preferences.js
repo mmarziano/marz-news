@@ -1,6 +1,7 @@
 import React from 'react';
 import {Form, Button} from 'react-bootstrap';
 
+
 class Preferences extends React.Component {
     constructor(props) {
         super(props);
@@ -58,6 +59,19 @@ class Preferences extends React.Component {
         }      
     }
 
+
+    // componentDidUpdate() {
+        // this.state.selectedCategories.map((s) => {
+        //     this.setState(prevState => ({
+        //         subcategories: prevState.subcategories.map(
+        //         cat => (cat.name === s ? Object.assign(cat, { isChecked: true }) : cat),
+        //         () => {console.log(this.state)})
+        //         }))
+        //     }
+        // )
+    // }
+
+
     handleLanguageChange = (event) => {
         let index = this.state.languages.findIndex(i => i.abbr === event.target.id);
         let newState = Object.assign({}, this.state);
@@ -93,7 +107,8 @@ class Preferences extends React.Component {
     renderSubcategoriesCheckboxes = () => {
             return this.state.subcategories.map((category, idx) =>  
                 <Form.Group controlId={this.state.controlId}>
-                    <Form.Check type="checkbox" label={category.name} id={idx} key={idx} value={category.name} checked={category.isChecked} onChange={(event) => this.handleCategoriesChange(event)}/>
+                    <Form.Check type="checkbox" id={idx} key={category.name} value={category.name} checked={category.isChecked} onChange={(event) => this.handleCategoriesChange(event)}/>
+                    <label className={this.props.currentUser.preferences.selectedCategories.find(c => c === category.name) ? "green" : null}>{category.name}</label>
                 </Form.Group>
             )
     }
@@ -109,23 +124,30 @@ class Preferences extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.updateCurrentUser(this.state.selectedCategories, this.state.selectedLanguage);
+        this.state.selectedCategories.map((s) => {
+            this.setState(prevState => ({
+                subcategories: prevState.subcategories.map(
+                cat => (cat.name === s ? Object.assign(cat, { isChecked: true }) : cat),
+                () => {console.log(this.state)})
+                }))
+            });
+            this.setState(
+                { updateInProgress: true },
+                () => {return (this.state)} 
+              );
         this.props.togglePreferences(e);
     }
 
     
 
     render() {
-        if (this.props.selectedCategories === 0) {
-            return(
-                <div className={this.props.selectedCategories.length === 0 ? "row col-md-12 profile-card" : "hidden"}>
-                    Settings saved. Click to edit
-                </div>
-            )
-        }
         return(
                 <>
                 <div className="row col-md-12 profile-card">
                   <h4 className="preference-title">Select your 3 preferred subcategories to quickly access those news stories.</h4>
+                  <span className={this.props.currentUser.preferences.selectedCategories.length > 0 ? null : "hidden"}>
+                      Your have previously selected: {this.props.currentUser.preferences.selectedCategories.map((c) => {return c})}
+                  </span>
                   <hr />  
                   <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formSelectSubCategories">

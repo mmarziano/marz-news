@@ -100,7 +100,7 @@ class Navbar extends React.Component {
             return (
             <>
                 <li onClick={this.logout}>Logout</li>
-                <li><i className="fa fa-user-circle"></i></li>
+                <li><Link to="/profile"><i className="fa fa-user-circle"></i></Link></li>
             </>
             )
         } 

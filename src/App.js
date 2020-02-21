@@ -50,7 +50,6 @@ class App extends React.Component {
   }
 
   setCurrentUser = (user) => {
-    console.log(user)
     if (user.email !== undefined && user.preferences_categories.length > 0) {
       this.setState(prevState => {
         let currentUser = { ...prevState.currentUser };  
@@ -119,7 +118,6 @@ class App extends React.Component {
     }
 
   render() {
-    console.log(this.state.currentUser)
           const { error, loading, topHeadlines} = this.props;
 
           if (error) {
@@ -127,7 +125,7 @@ class App extends React.Component {
               }
 
           if (loading && topHeadlines === null) {
-            return (<Loading />)
+            return (<Loading heading={`Scanning Headlines...`}/>)
           }
 
           if (topHeadlines !== null) {

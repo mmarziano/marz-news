@@ -11,6 +11,7 @@ import {
   } from '../actions/articleActions';
   
   const initialState = {
+    currentUser: null,
     firstUserPreferenceArticles: null,
     secondUserPreferenceArticles: null,
     thirdUserPreferenceArticles: null,

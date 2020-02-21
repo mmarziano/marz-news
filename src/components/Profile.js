@@ -3,6 +3,7 @@ import  detective  from '../assets/images/young-detective.png';
 import Nav from 'react-bootstrap/Nav';
 import Preferences from './Preferences';
 import Navbar from './Navbar'
+import Loading from './Loading'
 
 
 
@@ -24,6 +25,7 @@ class Profile extends React.Component {
                 comments: [],
               },
               isLoggedIn: true,
+              updateInProgress: false,
               showPreferences: false,
               showComments: false,
               showArticles: false,
@@ -48,6 +50,9 @@ class Profile extends React.Component {
     }
 
     updateCurrentUser = (categories, language) => {
+        this.setState({updateInProgress: true },
+            () => {return (this.state)} 
+          );
         this.setState(prevState => {
           let currentUser = { ...prevState.currentUser };  
           currentUser.preferences.selectedCategories = categories;
@@ -74,10 +79,16 @@ class Profile extends React.Component {
                 };
             fetch(url, options)
             .then(response => response.json())
-            .then(json => {console.log(json)})
+            .then(json => {this.updating(json)})
             .catch(error => console.log(error) );
             }
       }
+
+    updating = () => {
+        setTimeout(this.setState({updateInProgress: true },
+            () => {return (this.state)} 
+          ), 5000);
+    }
 
     handleArticlesClick = (e) => {
         e.preventDefault();
@@ -151,8 +162,10 @@ class Profile extends React.Component {
     
 
     render() {
-            if (this.state.currentUser.id === null) {
-                return (<div>Getting Profile ready...</div>)
+            if (this.state.updateInProgress) {
+                return (
+                    <Loading heading={`Updating profile...`} />    
+                )
             }
 
             return(
@@ -182,7 +195,7 @@ class Profile extends React.Component {
                             </Nav>
                         </div>
                         <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
-                            <Preferences currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser} togglePreferences={this.handlePreferencesClick}/>
+                            <Preferences currentUser={this.props.location.state.currentUser} updateCurrentUser={this.updateCurrentUser} togglePreferences={this.handlePreferencesClick}/>
                         </div>
                         <div className={this.state.showComments ? "container-fluid" : "hidden"}>
                             Comments
