@@ -96,7 +96,6 @@ class App extends React.Component {
       currentUser.preferences.selectedLanguage = language;                     
       return { currentUser } 
     }, () => {return (this.state)});
-
   }
 
   setFocus = (e) => {

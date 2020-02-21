@@ -25,10 +25,9 @@ class Profile extends React.Component {
                 comments: [],
               },
               isLoggedIn: true,
-              updateInProgress: false,
               showPreferences: false,
               showComments: false,
-              showArticles: false,
+              showArticles: true,
         }      
     }
 
@@ -79,16 +78,10 @@ class Profile extends React.Component {
                 };
             fetch(url, options)
             .then(response => response.json())
-            .then(json => {this.updating(json)})
+            .then(json => {this.updateCurrentUser(json)})
             .catch(error => console.log(error) );
             }
       }
-
-    updating = () => {
-        setTimeout(this.setState({updateInProgress: true },
-            () => {return (this.state)} 
-          ), 5000);
-    }
 
     handleArticlesClick = (e) => {
         e.preventDefault();
@@ -162,11 +155,6 @@ class Profile extends React.Component {
     
 
     render() {
-            if (this.state.updateInProgress) {
-                return (
-                    <Loading heading={`Updating profile...`} />    
-                )
-            }
 
             return(
                     <>

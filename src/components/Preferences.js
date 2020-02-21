@@ -1,5 +1,6 @@
 import React from 'react';
 import {Form, Button} from 'react-bootstrap';
+import swal from '@sweetalert/with-react'
 
 
 class Preferences extends React.Component {
@@ -58,19 +59,6 @@ class Preferences extends React.Component {
                    isChecked: false}],
         }      
     }
-
-
-    // componentDidUpdate() {
-        // this.state.selectedCategories.map((s) => {
-        //     this.setState(prevState => ({
-        //         subcategories: prevState.subcategories.map(
-        //         cat => (cat.name === s ? Object.assign(cat, { isChecked: true }) : cat),
-        //         () => {console.log(this.state)})
-        //         }))
-        //     }
-        // )
-    // }
-
 
     handleLanguageChange = (event) => {
         let index = this.state.languages.findIndex(i => i.abbr === event.target.id);
@@ -131,11 +119,14 @@ class Preferences extends React.Component {
                 () => {console.log(this.state)})
                 }))
             });
-            this.setState(
-                { updateInProgress: true },
-                () => {return (this.state)} 
-              );
         this.props.togglePreferences(e);
+        swal(
+            <div>
+              <h1>Great!</h1>
+              <p>Your preferences have been updated.
+              </p>
+            </div>
+          )
     }
 
     
