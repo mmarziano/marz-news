@@ -12,7 +12,8 @@ import Login from './components/Login';
 import Signup from './components/Signup'
 import { fetchTopHeadlines } from "./actions/articleActions";
 import TopHeadlines from './components/TopHeadlines'
-import MainContainer from './components/MainContainer'
+import Navbar from './components/Navbar'
+import Home from './components/Home'
 import Profile from './components/Profile'
 import Loading from './components/Loading'
 
@@ -130,19 +131,30 @@ class App extends React.Component {
           if (topHeadlines !== null) {
             return (
             <>
+            <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/> 
             <Switch>
-                <Route exact path='/' component={() => <TopHeadlines 
+                <Route exact path='/' component={() => <Home 
                     topHeadlines={this.props.topHeadlines}
                     active={this.state.active} 
                     searchArticles={this.props.searchArticles} 
                     setCurrentUser={this.setCurrentUser} 
                     currentUser={this.state.currentUser} 
-                    updateCurrentUser={this.updateCurrentUser}/>}/>
+                    updateCurrentUser={this.updateCurrentUser}
+                    isLoggedIn={this.state.isLoggedIn}
+                  />}/>
+                <Route exact path='/topheadlines' component={() => <TopHeadlines 
+                    topHeadlines={this.props.topHeadlines}
+                    searchArticles={this.props.searchArticles} 
+                    currentUser={this.state.currentUser} 
+                    isLoggedIn={this.state.isLoggedIn}
+                  />}/>
                 <Route path='/profile/:id' component={Profile} />
                 <Route exact path='/signup' component={() => <Signup currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>}/>
                 <Route exact path='/login' component={() => <Login currentUser={this.state.currentUser} 
-                  setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn} updateCurrentUser={this.updateCurrentUser}/>} /> 
+                  setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn} 
+                  topHeadlines={this.props.topHeadlines}
+                  updateCurrentUser={this.updateCurrentUser}/>} /> 
                 <Route path='/' render={() => <div>404</div>}/>
             </Switch>
             </>

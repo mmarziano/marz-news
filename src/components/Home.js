@@ -2,13 +2,10 @@ import React from 'react';
 import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
 import { connect } from 'react-redux'
-import {
-    Redirect
-  } from "react-router-dom";
 import PageHeader from './PageHeader'
 import Navbar from './Navbar'
 
-class TopHeadlines extends React.Component {
+class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,39 +38,23 @@ class TopHeadlines extends React.Component {
     }
 
     render() {
-
-        if (!this.state.isLoggedIn) {
-            return <Redirect
-                        to={{
-                        pathname: "/",
-                        }}
-                    />
-        }
+        const { topHeadlines } = this.props;
             return(
-            <> 
             <div className="container-fluid">
-                <div className={`row${this.props.isLoggedIn ? " hero" : " hidden"}`}>
-                    <PageHeader pageheader="Top Headlines" currentUser={this.props.currentUser} />   
+                <div className={`row${this.props.isLoggedIn ? " hidden" : " hero"}`}>
+                    <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
+                    <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
                 </div>
-              
-                <div className={this.props.isLoggedIn ? " hidden" : "row"}>
-                    <HeroImage topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} top5={this.top5}/> 
-                    <MainHeadline topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} />
-                </div>  
-            </div>
-            </>)
+            </div>)
     }     
 }
 
 const mapStateToProps = state => {
     return {
-        topHeadlines: state.topHeadlines.topHeadlines,
-        searchArticles: state.searchArticles.searchArticles,
-        loading: state.topHeadlines.loading,
-        error: state.topHeadlines.error
+        searchResults: state.searchArticles,
+        loading: state.searchArticles.loading,
+        error: state.searchArticles.error
     }
 }
 
-export default connect(mapStateToProps)(TopHeadlines)
-
-    
+export default connect(mapStateToProps)(Home)

@@ -29,7 +29,7 @@ class Navbar extends React.Component {
                 comments: [],
               },
               isLoggedIn: false,
-              defaultNav: ['Top Headlines', 'Finance', 'Sports', 'Politics'],
+              defaultNav: ['Top Headlines'],
               clicked: false,
               userInput: '',
               showLogin: false,
@@ -80,7 +80,7 @@ class Navbar extends React.Component {
     }
 
     renderUserLinks = () => {
-        if (this.state.currentUser.preferences.selectedCategories.length > 0) {
+        if (this.props.currentUser.email !== null) {
             return this.state.currentUser.preferences.selectedCategories.map(p => 
                 <li key={p}>{p}</li>
             )
@@ -107,7 +107,6 @@ class Navbar extends React.Component {
     }
     
     render() {
-
         return(
                 <div className="container-fluid navbar sticky">
                     <div className="row col-md-12">

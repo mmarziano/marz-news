@@ -3,7 +3,6 @@ import {
     Redirect,
     Link
   } from "react-router-dom";
-import Navbar from './Navbar'
 import GoogleLogin from 'react-google-login';
 
 
@@ -122,16 +121,16 @@ class Login extends React.Component {
         if (this.state.isLoggedIn) {
             return <Redirect
                         to={{
-                        pathname: "/profile/" + this.props.currentUser.id,
+                        pathname: "/topheadlines",
                         state: { 
                             currentUser: this.props.currentUser, 
-                            profileImg:  this.props.currentUser.profileImg}
+                            topHeadlines:  this.props.topHeadlines,
+                            }
                         }}
                     />
         } 
             return(
                 <>
-                <Navbar currentUser={this.props.currentUser} />
                 <div className={this.state.isLoggedIn ? "hidden" : "container-fluid"}>
                     <div className="row">
                         <div className={this.state.loginError ? "error" : "hidden"}>
@@ -141,7 +140,7 @@ class Login extends React.Component {
                     <div className="row" id="login-page">
                         <div className="col-md-5 login-card">
                             <div className="col-md-6 offset-5">
-                                <h1 className="title">Welcome Back!</h1>
+                                <h1 className="title">Welcome!</h1>
                                 <span>Login to access your profile and preferences.</span><br/>
                             </div>
                             <div className="col-md-6 offset-5 text-center">  

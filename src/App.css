@@ -9,10 +9,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.green {
-  color: rgb(136, 224, 101);
-}
-
 .right {
   float: right;
 }
@@ -296,7 +292,7 @@ padding:0 20px;
   position: relative;
   height: 100vh;
   width: 100vw;
-  background: black;
+  background: #fff;
   overflow: hidden;
 }
 
@@ -452,10 +448,33 @@ label.form-check-label {
   font-family: 'Archivo Narrow', sans-serif;
   font-size: 1.1rem;
   padding-right: 20px;
-  display: flex;
+  display: inline-flex;
 }
 
 input[type="checkbox"]{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.category {
+  color:rgb(3, 131, 190);
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 1.1rem;
+  padding-right: 20px;
+  padding-left: 10px;
+  display: inline-flex;
+}
+
+.category-green {
+  color:rgb(0, 202, 61);
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 1.1rem;
+  padding-right: 20px;
+  padding-left: 10px;
+  display: inline-flex;
+}
+
+.category input[type="checkbox"]{
   display: inline-block;
   vertical-align: middle;
 }

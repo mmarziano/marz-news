@@ -1,9 +1,9 @@
 import React from 'react';
-import  detective  from '../assets/images/young-detective.png';
 import Nav from 'react-bootstrap/Nav';
 import Preferences from './Preferences';
 import Navbar from './Navbar'
 import Loading from './Loading'
+import PageHeader from './PageHeader'
 
 
 
@@ -19,7 +19,7 @@ class Profile extends React.Component {
                 email: null,
                 profileImg: null,
                 preferences: {
-                    selectedCategories: [],
+                    selectedCategories: null,
                     selectedLanguage: null
                 },
                 comments: [],
@@ -31,37 +31,41 @@ class Profile extends React.Component {
         }      
     }
 
-    componentDidMount() {
-        this.setUser();
-      }
-
-    setUser = () => {
-        let newState = Object.assign({}, this.state);
-        newState.currentUser.id = this.props.location.state.currentUser.id;
-        newState.currentUser.oauthID = this.props.location.state.currentUser.oauthID;
-        newState.currentUser.first_name = this.props.location.state.currentUser.first_name;
-        newState.currentUser.last_name = this.props.location.state.currentUser.last_name;
-        newState.currentUser.email = this.props.location.state.currentUser.email;
-        newState.currentUser.profileImg = this.props.location.state.currentUser.profileImg;
-        newState.currentUser.preferences.selectedCategories = this.props.location.state.currentUser.preferences.selectedCategories;
-        newState.currentUser.preferences.selectedLanguage = this.props.location.state.currentUser.preferences.selectedLanguage;
-        this.setState(newState, () => {return (this.state)})
+    componenttWillMount() {
+        this.getUser();
     }
 
-    updateCurrentUser = (categories, language) => {
-        this.setState({updateInProgress: true },
-            () => {return (this.state)} 
-          );
+    getUser = () => {
+        let url = 'http://localhost:3001/api/v1/profile/' + this.props.location.state.currentUser.id;
+          fetch(url)
+          .then(response => response.json())
+          .then(json => {console.log(json)})
+          .catch(error => console.log(error) );
+    }
+
+    // setUser = () => {
+    //     let newState = Object.assign({}, this.state);
+    //     newState.currentUser.id = this.props.location.state.currentUser.id;
+    //     newState.currentUser.oauthID = this.props.location.state.currentUser.oauthID;
+    //     newState.currentUser.first_name = this.props.location.state.currentUser.first_name;
+    //     newState.currentUser.last_name = this.props.location.state.currentUser.last_name;
+    //     newState.currentUser.email = this.props.location.state.currentUser.email;
+    //     newState.currentUser.profileImg = this.props.location.state.currentUser.profileImg;
+    //     newState.currentUser.preferences.selectedCategories = this.props.location.state.currentUser.preferences.selectedCategories;
+    //     newState.currentUser.preferences.selectedLanguage = this.props.location.state.currentUser.preferences.selectedLanguage;
+    //     this.setState(newState, () => {return (this.state)})
+    // }
+
+    updateCurrentUser = (user) => {
         this.setState(prevState => {
           let currentUser = { ...prevState.currentUser };  
-          currentUser.preferences.selectedCategories = categories;
-          currentUser.preferences.selectedLanguage = language;                     
+          currentUser.preferences.selectedCategories = user.preferences_categories;
+          currentUser.preferences.selectedLanguage = user.preferences_language;                     
           return { currentUser } 
-        }, () => {this.saveUser(this.state)});
+        }, () => {console.log(this.state)});
     }
 
-    saveUser = () => {
-        if (this.state.currentUser.preferences.selectedCategories.length > 0) {
+    saveUser = (categories, language) => {
             // Fetch request to update user based on selected preferences
             let url = 'http://localhost:3001/api/v1/profile/' + this.state.currentUser.id;
             let options = {
@@ -72,15 +76,14 @@ class Profile extends React.Component {
                 }, 
                 body: JSON.stringify({
                     user: {
-                        preferences_categories: this.state.currentUser.preferences.selectedCategories,
-                        preferences_language: this.state.currentUser.preferences.selectedLanguage,
+                        preferences_categories: categories,
+                        preferences_language: language,
                     }})
                 };
             fetch(url, options)
             .then(response => response.json())
             .then(json => {this.updateCurrentUser(json)})
             .catch(error => console.log(error) );
-            }
       }
 
     handleArticlesClick = (e) => {
@@ -155,20 +158,10 @@ class Profile extends React.Component {
     
 
     render() {
-
             return(
                     <>
-                    <Navbar setCurrentUser={this.props.setCurrentUser}  currentUser={this.props.location.state.currentUser} />
-                    <div className="container-fluid profile-banner profile">
-                        <div className="row col-md-12" >
-                            <div className="col-md-6 text-center">
-                                <img className="profile-img" src={this.state.currentUser.profileImg} alt={this.state.currentUser.first_name} />
-                                <h2>What's sparking your curiosity today, {this.state.currentUser.first_name}?</h2>
-                            </div>
-                            <div className="col-md-6 text-center">
-                                <img src={ detective } alt="Young Detective" />
-                            </div>
-                        </div>
+                    <PageHeader pageheader={`Looking good today`} currentUser={this.state.currentUser} />
+                    <div className="container-fluid">
                         <div className="row col-md-12">
                             <Nav variant="tabs" defaultActiveKey="/Bookmarked">
                                 <Nav.Item onClick={this.handleArticlesClick}>
@@ -183,7 +176,7 @@ class Profile extends React.Component {
                             </Nav>
                         </div>
                         <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
-                            <Preferences currentUser={this.props.location.state.currentUser} updateCurrentUser={this.updateCurrentUser} togglePreferences={this.handlePreferencesClick}/>
+                            <Preferences currentUser={this.props.location.state.currentUser} saveUser={this.saveUser} togglePreferences={this.handlePreferencesClick}/>
                         </div>
                         <div className={this.state.showComments ? "container-fluid" : "hidden"}>
                             Comments
@@ -197,7 +190,6 @@ class Profile extends React.Component {
                     </>
                  )
             } 
-        
   }
 
 export default Profile

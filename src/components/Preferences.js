@@ -95,8 +95,9 @@ class Preferences extends React.Component {
     renderSubcategoriesCheckboxes = () => {
             return this.state.subcategories.map((category, idx) =>  
                 <Form.Group controlId={this.state.controlId}>
-                    <Form.Check type="checkbox" id={idx} key={category.name} value={category.name} checked={category.isChecked} onChange={(event) => this.handleCategoriesChange(event)}/>
-                    <label className={this.props.currentUser.preferences.selectedCategories.find(c => c === category.name) ? "green" : null}>{category.name}</label>
+                    <input type="checkbox" id={idx} key={category.name} value={category.name} checked={category.isChecked} onChange={(event) => this.handleCategoriesChange(event)}/>
+                    {/* <Form.Check type="checkbox" id={idx} key={category.name} value={category.name} checked={category.isChecked} onChange={(event) => this.handleCategoriesChange(event)}/> */}
+                    <label className={`category${this.props.currentUser.preferences.selectedCategories.find(c => c === category.name) ? "-green" : ""}`}>{category.name}</label>
                 </Form.Group>
             )
     }
@@ -111,7 +112,7 @@ class Preferences extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.updateCurrentUser(this.state.selectedCategories, this.state.selectedLanguage);
+        this.props.saveUser(this.state.selectedCategories, this.state.selectedLanguage);
         this.state.selectedCategories.map((s) => {
             this.setState(prevState => ({
                 subcategories: prevState.subcategories.map(

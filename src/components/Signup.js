@@ -116,7 +116,6 @@ class Signup extends React.Component {
 
         return(
             <>
-            <Navbar currentUser={this.props.currentUser} />
             <div className={this.state.signupSuccess ? "hidden" : "container-fluid"}>
                 <div className="row">
                     <div className={this.state.signupError ? "error" : "hidden"}>
