@@ -92,6 +92,7 @@ class Navbar extends React.Component {
     }
 
     renderSignIn = () => {
+        let profile_url = "/profile/" + this.props.currentUser.id
         if (this.props.currentUser.email === null) {
             return (
                 <li><Link to="/login"><i className="fa fa-sign-in"></i></Link></li>
@@ -100,7 +101,7 @@ class Navbar extends React.Component {
             return (
             <>
                 <li onClick={this.logout}>Logout</li>
-                <li><Link to="/profile"><i className="fa fa-user-circle"></i></Link></li>
+                <li><Link to={profile_url}><i className="fa fa-user-circle"></i></Link></li>
             </>
             )
         } 

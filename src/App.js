@@ -148,7 +148,8 @@ class App extends React.Component {
                     currentUser={this.state.currentUser} 
                     isLoggedIn={this.state.isLoggedIn}
                   />}/>
-                <Route path='/profile/:id' component={Profile} />
+                <Route path='/profile/:id' component={() => <Profile currentUser={this.state.currentUser} 
+                  setCurrentUser={this.setCurrentUser} updateCurrentUser={this.updateCurrentUser}/>} />
                 <Route exact path='/signup' component={() => <Signup currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>}/>
                 <Route exact path='/login' component={() => <Login currentUser={this.state.currentUser} 

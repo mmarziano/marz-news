@@ -4,6 +4,7 @@ import  detective  from '../assets/images/young-detective.png';
 class PageHeader extends React.Component {
 
     render() {
+        console.log(this.props.currentUser)
         return(
         <div className="container-fluid profile-banner profile">        
             <div className="row col-md-12" >

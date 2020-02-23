@@ -7,6 +7,7 @@ import {
   } from "react-router-dom";
 import PageHeader from './PageHeader'
 import Navbar from './Navbar'
+import Moment from 'react-moment';
 
 class TopHeadlines extends React.Component {
     constructor(props) {
@@ -40,6 +41,29 @@ class TopHeadlines extends React.Component {
         )
     }
 
+    renderArticles = () => {
+        return this.props.topHeadlines.map(result => 
+            
+            <div className="column">
+                <figure>
+                    <div className="container-article">
+                        <li className="card-article">
+                            <img src={result.urlToImage} alt={result.title} />
+                            <p id="author">{result.author}</p>
+                            <p id="article-date"><Moment format="MM/DD/YYYY">
+                                {result.publishedAt}
+                            </Moment> </p>
+                            <a href={result.url} target="_blank" rel="noopener noreferrer"><i className="fa fa-external-link" aria-hidden="true"></i> Link to Article</a>
+                            <div className='article-overlay'>
+                                <a href={result.url} target="_blank" rel="noopener noreferrer"><h3 className='headline'>{result.title}</h3></a>
+                            </div>
+                        </li>
+                    </div>
+                </figure>
+            </div>
+        )
+    }
+
     render() {
 
         if (!this.state.isLoggedIn) {
@@ -52,14 +76,16 @@ class TopHeadlines extends React.Component {
             return(
             <> 
             <div className="container-fluid">
-                <div className={`row${this.props.isLoggedIn ? " hero" : " hidden"}`}>
+                <div className={this.props.isLoggedIn ? "row" : " hidden"}>
                     <PageHeader pageheader="Top Headlines" currentUser={this.props.currentUser} />   
                 </div>
-              
-                <div className={this.props.isLoggedIn ? " hidden" : "row"}>
-                    <HeroImage topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} top5={this.top5}/> 
-                    <MainHeadline topHeadlines={this.props.topHeadlines} activeArticle={this.state.active} />
-                </div>  
+                <div className="row col-md-12">
+                    <div className="article">
+                            <ul>
+                                {this.renderArticles()}
+                            </ul>
+                    </div>
+                </div>
             </div>
             </>)
     }     

@@ -4,6 +4,9 @@ import Preferences from './Preferences';
 import Navbar from './Navbar'
 import Loading from './Loading'
 import PageHeader from './PageHeader'
+import {
+    Redirect
+  } from "react-router-dom";
 
 
 
@@ -158,9 +161,17 @@ class Profile extends React.Component {
     
 
     render() {
+        if (this.props.currentUser.id === null) {
+            return <Redirect
+                        to={{
+                        pathname: "/",
+                        }}
+                    />
+        }
+
             return(
                     <>
-                    <PageHeader pageheader={`Looking good today`} currentUser={this.state.currentUser} />
+                    <PageHeader pageheader={`Looking good today, ${this.props.currentUser.first_name}`} currentUser={this.props.currentUser} />
                     <div className="container-fluid">
                         <div className="row col-md-12">
                             <Nav variant="tabs" defaultActiveKey="/Bookmarked">
@@ -176,7 +187,7 @@ class Profile extends React.Component {
                             </Nav>
                         </div>
                         <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
-                            <Preferences currentUser={this.props.location.state.currentUser} saveUser={this.saveUser} togglePreferences={this.handlePreferencesClick}/>
+                            <Preferences currentUser={this.props.currentUser} saveUser={this.saveUser} togglePreferences={this.handlePreferencesClick}/>
                         </div>
                         <div className={this.state.showComments ? "container-fluid" : "hidden"}>
                             Comments
