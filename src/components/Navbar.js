@@ -15,25 +15,12 @@ class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentUser: {
-                id: this.props.currentUser.id,
-                oauthID: this.props.currentUser.oauthID,
-                first_name: this.props.currentUser.first_name, 
-                last_name:  this.props.currentUser.last_name,
-                email: this.props.currentUser.email,
-                profileImg: this.props.currentUser.profileImg,
-                preferences: {
-                    selectedCategories: this.props.currentUser.preferences.selectedCategories,
-                    selectedLanguage: this.props.currentUser.preferences.selectedLanguage
-                },
-                comments: [],
-              },
-              isLoggedIn: false,
-              defaultNav: ['Top Headlines'],
-              clicked: false,
-              userInput: '',
-              showLogin: false,
-              logout: false,
+            isLoggedIn: false,
+            defaultNav: ['Top Headlines'],
+            clicked: false,
+            userInput: '',
+            showLogin: false,
+            logout: false,
         }      
     }    
 
@@ -80,8 +67,8 @@ class Navbar extends React.Component {
     }
 
     renderUserLinks = () => {
-        if (this.props.currentUser.email !== null) {
-            return this.props.currentUser.preferences.selectedCategories.map(p => 
+        if (this.props.currentUser) {
+            return this.props.currentUser.preferences_categories.map(p => 
                 <li key={p}>{p}</li>
             )
         } else {
@@ -93,7 +80,7 @@ class Navbar extends React.Component {
 
     renderSignIn = () => {
         let profile_url = "/profile/" + this.props.currentUser.id
-        if (this.props.currentUser.email === null) {
+        if (this.props.currentUser === null) {
             return (
                 <li><Link to="/login"><i className="fa fa-sign-in"></i></Link></li>
             )

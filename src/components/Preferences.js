@@ -9,7 +9,7 @@ class Preferences extends React.Component {
         this.state = {
               controlId: 0,
               selectedCategories: [],
-              selectedLanguage: props.currentUser.preferences.selectedLanguage,
+              selectedLanguage: props.currentUser.preferences_language,
               subcategories: [
                   {name: 'Business',
                    isChecked: false},
@@ -94,9 +94,9 @@ class Preferences extends React.Component {
 
     renderSubcategoriesCheckboxes = () => {
             return this.state.subcategories.map((category, idx) =>  
-                <Form.Group controlId={this.state.controlId}>
-                    <input type="checkbox" id={idx} key={category.name} value={category.name} checked={category.isChecked} onChange={(event) => this.handleCategoriesChange(event)}/>
-                    <label className={`category${this.props.currentUser.preferences.selectedCategories.find(c => c === category.name) ? "-highlight" : ""}`}>{category.name}</label>
+                <Form.Group controlId={this.state.controlId} key={category.name}>
+                    <input type="checkbox" id={idx} value={category.name} checked={category.isChecked} onChange={(event) => this.handleCategoriesChange(event)}/>
+                    <label className={`category${this.props.currentUser.preferences_categories.find(c => c === category.name) ? "-highlight" : ""}`}>{category.name}</label>
                 </Form.Group>
             )
     }
@@ -105,7 +105,7 @@ class Preferences extends React.Component {
         return this.state.languages.map((language) =>  
             <Form.Group controlId={this.state.controlId}>
                 <input type="radio" id={language.abbr} key={language.abbr} value={language.abbr} checked={language.isChecked} onChange={(event) => this.handleLanguageChange(event)}/>
-                <label className={`category${this.props.currentUser.preferences.selectedLanguage === language.abbr ? "-highlight" : ""}`}>{language.name}</label>
+                <label className={`category${this.props.currentUser.preferences_language === language.abbr ? "-highlight" : ""}`}>{language.name}</label>
             </Form.Group>
         )
     }

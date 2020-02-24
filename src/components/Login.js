@@ -92,8 +92,8 @@ class Login extends React.Component {
             this.setState({loginError: true, errors: response.message}, 
                 () => {return (this.state)}
             )
-        } else if (response.errors) {
-            this.setState({loginError: true, errors: response.errors}, 
+        } else if (response.error) {
+            this.setState({loginError: true, errors: response.error}, 
                 () => {return (this.state)}
             )
         } else {

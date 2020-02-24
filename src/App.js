@@ -22,20 +22,20 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-        currentUser: {},
-        currentUser: {
-          id: null, 
-          oauthID: null,
-          first_name: null, 
-          last_name: null, 
-          email: null,
-          profileImg: null,
-          preferences: {
-             selectedCategories: [],
-             selectedLanguage: null,
-          },
-          comments: [],
-        },
+        currentUser: null,
+        // currentUser: {
+        //   id: null, 
+        //   oauthID: null,
+        //   first_name: null, 
+        //   last_name: null, 
+        //   email: null,
+        //   profileImg: null,
+        //   preferences: {
+        //      selectedCategories: [],
+        //      selectedLanguage: null,
+        //   },
+        //   comments: [],
+        // },
         isLoggedIn: false,
         articles: [],
         active: 0,
@@ -61,8 +61,8 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(user => this.setState(
-        { user: user },
-        () => {return (this.state)}))
+        { currentUser: user },
+        () => {console.log (this.state)}))
     }
   }
 
@@ -76,8 +76,8 @@ class App extends React.Component {
         currentUser.last_name = response.user.last_name;
         currentUser.email = response.user.email;
         currentUser.profileImg = response.user.profileImg;
-        currentUser.preferences.selectedCategories = response.user.preferences_categories;
-        currentUser.preferences.selectedLanguage = response.user.preferences_language;
+        currentUser.preferences_categories = response.user.preferences_categories;
+        currentUser.preferences_language = response.user.preferences_language;
         currentUser.comments = response.user.comments;                       
         return { currentUser } 
       }, () => {console.log (this.state)});
@@ -94,8 +94,8 @@ class App extends React.Component {
         currentUser.last_name = response.user.last_name;
         currentUser.email = response.user.email;
         currentUser.profileImg = response.user.profileImg;
-        currentUser.preferences.selectedCategories = [];
-        currentUser.preferences.selectedLanguage = 'en';
+        currentUser.preferences_categories = [];
+        currentUser.preferences_language = 'en';
         currentUser.comments = response.user.comments;                       
         return { currentUser } 
       }, () => {return (this.state)});
@@ -109,8 +109,8 @@ class App extends React.Component {
   updateCurrentUser = (user) => {
     this.setState(prevState => {
       let currentUser = { ...prevState.currentUser };  
-      currentUser.preferences.selectedCategories = user.preferences_categories;
-      currentUser.preferences.selectedLanguage = user.preferences_language;                     
+      currentUser.preferences_categories = user.preferences_categories;
+      currentUser.preferences_language = user.preferences_language;                     
       return { currentUser } 
     }, () => {console.log (this.state)});
   }
