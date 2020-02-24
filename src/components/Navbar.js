@@ -80,8 +80,9 @@ class Navbar extends React.Component {
     }
 
     renderUserLinks = () => {
+        console.log(this.props.currentUser)
         if (this.props.currentUser.email !== null) {
-            return this.state.currentUser.preferences.selectedCategories.map(p => 
+            return this.props.currentUser.preferences.selectedCategories.map(p => 
                 <li key={p}>{p}</li>
             )
         } else {

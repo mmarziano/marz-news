@@ -104,7 +104,6 @@ class Signup extends React.Component {
     }
 
     render() {
-        console.log(this.state)
         if (this.state.signupSuccess) {
             return <Redirect
                         to={{

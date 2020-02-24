@@ -31,7 +31,8 @@ class Login extends React.Component {
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json', 
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Origin': 'http://localhost:3000'
             }, 
             body: JSON.stringify({
                 user: {
@@ -71,7 +72,8 @@ class Login extends React.Component {
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json', 
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Origin': 'http://localhost:3000'
             }, 
             body: JSON.stringify({
                 user: {
@@ -95,6 +97,7 @@ class Login extends React.Component {
                 () => {return (this.state)}
             )
         } else {
+            localStorage.setItem('token', response.token);
             this.setUser(response);
             this.setState(
                 { isLoggedIn: true },

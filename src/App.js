@@ -50,37 +50,37 @@ class App extends React.Component {
     this.props.fetchTopHeadlines();
   }
 
-  setCurrentUser = (user) => {
-    if (user.email !== undefined && user.preferences_categories.length > 0) {
+  setCurrentUser = (response) => {
+    if (response.user.email !== undefined && response.user.preferences_categories.length > 0) {
       this.setState(prevState => {
         let currentUser = { ...prevState.currentUser };  
-        currentUser.id = user.id;  
-        currentUser.oauthID = user.oauthID;       
-        currentUser.first_name = user.first_name;
-        currentUser.last_name = user.last_name;
-        currentUser.email = user.email;
-        currentUser.profileImg = user.profileImg;
-        currentUser.preferences.selectedCategories = user.preferences_categories;
-        currentUser.preferences.selectedLanguage = user.preferences_language;
-        currentUser.comments = user.comments;                       
+        currentUser.id = response.user.id;  
+        currentUser.oauthID = response.user.oauthID;       
+        currentUser.first_name = response.user.first_name;
+        currentUser.last_name = response.user.last_name;
+        currentUser.email = response.user.email;
+        currentUser.profileImg = response.user.profileImg;
+        currentUser.preferences.selectedCategories = response.user.preferences_categories;
+        currentUser.preferences.selectedLanguage = response.user.preferences_language;
+        currentUser.comments = response.user.comments;                       
         return { currentUser } 
-      }, () => {return (this.state)});
+      }, () => {console.log (this.state)});
       this.setState(
         { isLoggedIn: true },
         () => {return (this.state)}
       );
-    } else if (user.email !== undefined) {
+    } else if (response.user.email !== undefined) {
       this.setState(prevState => {
         let currentUser = { ...prevState.currentUser };  
-        currentUser.id = user.id;  
-        currentUser.oauthID = user.oauthID;       
-        currentUser.first_name = user.first_name;
-        currentUser.last_name = user.last_name;
-        currentUser.email = user.email;
-        currentUser.profileImg = user.profileImg;
+        currentUser.id = response.user.id;  
+        currentUser.oauthID = response.user.oauthID;       
+        currentUser.first_name = response.user.first_name;
+        currentUser.last_name = response.user.last_name;
+        currentUser.email = response.user.email;
+        currentUser.profileImg = response.user.profileImg;
         currentUser.preferences.selectedCategories = [];
         currentUser.preferences.selectedLanguage = 'en';
-        currentUser.comments = user.comments;                       
+        currentUser.comments = response.user.comments;                       
         return { currentUser } 
       }, () => {return (this.state)});
       this.setState(
@@ -90,13 +90,13 @@ class App extends React.Component {
     }
   }
 
-  updateCurrentUser = (categories, language) => {
+  updateCurrentUser = (user) => {
     this.setState(prevState => {
       let currentUser = { ...prevState.currentUser };  
-      currentUser.preferences.selectedCategories = categories;
-      currentUser.preferences.selectedLanguage = language;                     
+      currentUser.preferences.selectedCategories = user.preferences_categories;
+      currentUser.preferences.selectedLanguage = user.preferences_language;                     
       return { currentUser } 
-    }, () => {return (this.state)});
+    }, () => {console.log (this.state)});
   }
 
   setFocus = (e) => {

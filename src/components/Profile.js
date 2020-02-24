@@ -14,19 +14,6 @@ class Profile extends React.Component {
     constructor() {
         super();
         this.state = {
-            currentUser: {
-                id: null,
-                oauthID: null,
-                first_name: null, 
-                last_name:  null,
-                email: null,
-                profileImg: null,
-                preferences: {
-                    selectedCategories: null,
-                    selectedLanguage: null
-                },
-                comments: [],
-              },
               isLoggedIn: true,
               showPreferences: false,
               showComments: false,
@@ -34,17 +21,13 @@ class Profile extends React.Component {
         }      
     }
 
-    componenttWillMount() {
-        this.getUser();
-    }
-
-    getUser = () => {
-        let url = 'http://localhost:3001/api/v1/profile/' + this.props.location.state.currentUser.id;
-          fetch(url)
-          .then(response => response.json())
-          .then(json => {console.log(json)})
-          .catch(error => console.log(error) );
-    }
+    // getUser = () => {
+    //     let url = 'http://localhost:3001/api/v1/profile/' + this.props.currentUser.id;
+    //       fetch(url)
+    //       .then(response => response.json())
+    //       .then(json => {console.log(json)})
+    //       .catch(error => console.log(error) );
+    // }
 
     // setUser = () => {
     //     let newState = Object.assign({}, this.state);
@@ -70,12 +53,13 @@ class Profile extends React.Component {
 
     saveUser = (categories, language) => {
             // Fetch request to update user based on selected preferences
-            let url = 'http://localhost:3001/api/v1/profile/' + this.state.currentUser.id;
+            let url = 'http://localhost:3001/api/v1/profile/' + this.props.currentUser.id;
             let options = {
                 method: 'PATCH', 
                 headers: { 
                     'Content-Type': 'application/json', 
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
                 }, 
                 body: JSON.stringify({
                     user: {
@@ -85,7 +69,7 @@ class Profile extends React.Component {
                 };
             fetch(url, options)
             .then(response => response.json())
-            .then(json => {this.updateCurrentUser(json)})
+            .then(json => {this.props.updateCurrentUser(json)})
             .catch(error => console.log(error) );
       }
 
