@@ -22,6 +22,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+        currentUser: {},
         currentUser: {
           id: null, 
           oauthID: null,
@@ -48,6 +49,21 @@ class App extends React.Component {
   
   componentDidMount() {
     this.props.fetchTopHeadlines();
+    this.getUser();
+  }
+
+  getUser = () => {
+    if(localStorage.getItem('token')){
+      fetch('http://localhost:3001/api/v1/getuser', {
+        headers: {
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then(response => response.json())
+      .then(user => this.setState(
+        { user: user },
+        () => {return (this.state)}))
+    }
   }
 
   setCurrentUser = (response) => {

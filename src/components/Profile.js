@@ -21,36 +21,6 @@ class Profile extends React.Component {
         }      
     }
 
-    // getUser = () => {
-    //     let url = 'http://localhost:3001/api/v1/profile/' + this.props.currentUser.id;
-    //       fetch(url)
-    //       .then(response => response.json())
-    //       .then(json => {console.log(json)})
-    //       .catch(error => console.log(error) );
-    // }
-
-    // setUser = () => {
-    //     let newState = Object.assign({}, this.state);
-    //     newState.currentUser.id = this.props.location.state.currentUser.id;
-    //     newState.currentUser.oauthID = this.props.location.state.currentUser.oauthID;
-    //     newState.currentUser.first_name = this.props.location.state.currentUser.first_name;
-    //     newState.currentUser.last_name = this.props.location.state.currentUser.last_name;
-    //     newState.currentUser.email = this.props.location.state.currentUser.email;
-    //     newState.currentUser.profileImg = this.props.location.state.currentUser.profileImg;
-    //     newState.currentUser.preferences.selectedCategories = this.props.location.state.currentUser.preferences.selectedCategories;
-    //     newState.currentUser.preferences.selectedLanguage = this.props.location.state.currentUser.preferences.selectedLanguage;
-    //     this.setState(newState, () => {return (this.state)})
-    // }
-
-    updateCurrentUser = (user) => {
-        this.setState(prevState => {
-          let currentUser = { ...prevState.currentUser };  
-          currentUser.preferences.selectedCategories = user.preferences_categories;
-          currentUser.preferences.selectedLanguage = user.preferences_language;                     
-          return { currentUser } 
-        }, () => {console.log(this.state)});
-    }
-
     saveUser = (categories, language) => {
             // Fetch request to update user based on selected preferences
             let url = 'http://localhost:3001/api/v1/profile/' + this.props.currentUser.id;

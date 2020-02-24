@@ -469,11 +469,13 @@ input[type="checkbox"]{
   display: inline-flex;
 }
 
-.category-green {
-  color:rgb(0, 202, 61);
+.category-highlight {
+  color: #fff;
+  background: linear-gradient(180deg, rgb(3, 131, 190) 10%, rgb(20, 20, 20) 100%);
   font-family: 'Archivo Narrow', sans-serif;
   font-size: 1.1rem;
-  padding-right: 20px;
+  margin-left: 10px;
+  padding-right: 10px;
   padding-left: 10px;
   display: inline-flex;
 }
@@ -494,6 +496,12 @@ input[type="radio"]{
   color: rgb(95, 95, 95);
   padding-top: 20px;
   padding-bottom: 10px;
+}
+
+.subheading {
+  font-style: oblique;
+  font-size: 1em;
+
 }
 
 .line {
