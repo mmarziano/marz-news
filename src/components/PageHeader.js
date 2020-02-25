@@ -12,7 +12,7 @@ class PageHeader extends React.Component {
                     <div className="col-md-8 text-center">
                         <img className="profile-img" src={this.props.currentUser.profileImg} alt={this.props.currentUser.first_name} />
                         <h2>{this.props.heading}</h2>
-                        <SearchInput />
+                        <SearchInput currentUser={this.props.currentUser}/>
                     </div>
                     <div className="col-md-4 text-center">
                         <img src={ detective } alt="Young Detective" />
