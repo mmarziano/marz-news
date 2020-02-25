@@ -24,7 +24,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-        currentUser: null,
+        currentUser: undefined,
         // currentUser: {
         //   id: null, 
         //   oauthID: null,
@@ -82,7 +82,7 @@ class App extends React.Component {
         currentUser.preferences_language = response.user.preferences_language;
         currentUser.comments = response.user.comments;                       
         return { currentUser } 
-      }, () => {console.log (this.state)});
+      }, () => {return (this.state)});
       this.setState(
         { isLoggedIn: true },
         () => {return (this.state)}
@@ -114,7 +114,7 @@ class App extends React.Component {
       currentUser.preferences_categories = user.preferences_categories;
       currentUser.preferences_language = user.preferences_language;                     
       return { currentUser } 
-    }, () => {console.log (this.state)});
+    }, () => {return (this.state)});
   }
 
   setFocus = (e) => {
@@ -146,7 +146,7 @@ class App extends React.Component {
             return (<Loading heading={`Scanning Headlines...`}/>)
           }
 
-          if (topHeadlines !== null && this.state.isLoggedIn) {
+          if (topHeadlines !== null) {
             return (
             <>
             <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/> 
@@ -175,22 +175,22 @@ class App extends React.Component {
                   topHeadlines={this.props.topHeadlines}
                   updateCurrentUser={this.updateCurrentUser}/>} /> 
                 <Route exact path='/search' component={() => <Search currentUser={this.state.currentUser} 
-                />} />
+                isLoggedIn={this.state.isLoggedIn}/>} />
                 <Route path='/' render={() => <div>404</div>}/>
             </Switch>
             </>
             );
-          } else if (!this.state.isLoggedIn ) {
-              return <Redirect
-                          to={{
-                          pathname: "/topheadlines",
-                          state: { 
-                              currentUser: this.props.currentUser, 
-                              topHeadlines:  this.props.topHeadlines,
-                              isLoggedIn: this.props.isLoggedIn
-                              }
-                          }}
-                      />
+          // } else if (this.state.isLoggedIn ) {
+          //     return <Redirect
+          //                 to={{
+          //                 pathname: "/topheadlines",
+          //                 state: { 
+          //                     currentUser: this.props.currentUser, 
+          //                     topHeadlines:  this.props.topHeadlines,
+          //                     isLoggedIn: this.props.isLoggedIn
+          //                     }
+          //                 }}
+          //             />
           } else {
             return null;
           }

@@ -9,6 +9,12 @@ import { fetchSearch } from '../actions/searchActions';
 
 
 class Search extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            userInput: '',
+        }      
+    }    
 
     // renderResults = () => {
     //     return this.props.results.searchArticles.map(result => 
@@ -32,10 +38,24 @@ class Search extends React.Component {
     //         </div>
     //     )
     // }
+    handleUserInput = (e) => {
+        this.setState(
+            { userInput: e.target.value },
+            () => {return (this.state)}
+          );
+    }
 
+    handleSearchSubmit = (e) => {
+        e.preventDefault();
+        this.setState(
+            { userInput: '' }, () => {
+            return (this.state)});
+        this.toggleSearch();
+        this.props.fetchSearch(this.state.userInput)
+    }
         
     render() {
-        if (this.state.isLoggedIn === false) {
+        if (this.props.isLoggedIn === false) {
             return <Redirect
                         to={{
                         pathname: "/",
@@ -46,14 +66,11 @@ class Search extends React.Component {
             <> 
             <div className="container-fluid">
                 <div className={this.props.isLoggedIn ? "row" : " hidden"}>
-                    <PageHeader pageheader="Top Headlines" currentUser={this.props.currentUser} />   
+                    <PageHeader pageheader="Search" currentUser={this.props.currentUser} />   
                 </div>
                 <div className="row col-md-12">
-                    <div className="article">
-                            <ul>
-                                Hello
-                                {/* {this.renderArticles()} */}
-                            </ul>
+                    <div>
+                               Search results here...
                     </div>
                 </div>
             </div>

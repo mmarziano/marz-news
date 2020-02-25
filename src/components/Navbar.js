@@ -63,7 +63,7 @@ class Navbar extends React.Component {
     }
 
     renderUserLinks = () => {
-        if (this.props.currentUser) {
+        if (this.props.currentUser !== undefined) {
             return this.props.currentUser.preferences_categories.map(p => 
                 <li key={p}>{p}</li>
             )
@@ -75,12 +75,12 @@ class Navbar extends React.Component {
     }
 
     renderSignIn = () => {
-        let profile_url = "/profile/" + this.props.currentUser.id
-        if (this.props.currentUser === null) {
+        if (this.props.currentUser === undefined) {
             return (
                 <li><Link to="/login"><i className="fa fa-sign-in"></i></Link></li>
             )
         } else if (this.state.logout !== true) {
+            let profile_url = "/profile/" + this.props.currentUser.id
             return (
             <>
                 <li onClick={this.logout}>Logout</li>
@@ -102,15 +102,7 @@ class Navbar extends React.Component {
                                     <ul>
                                         <li><i className="fas fa-sign-out-alt" onClick={this.toggleLogout}></i></li>
                                         {this.renderSignIn()}
-                                        <li className="searchbar">
-                                            <i className="fa fa-search" onClick={this.toggleSearch} aria-hidden="true"></i>
-                                            <div className={this.state.clicked !== true ? "togglesearch" : "togglesearch-clicked"}>
-                                                <form onSubmit={this.handleSearchSubmit}>
-                                                    <input type="text" value={this.state.userInput} onChange={this.handleUserInput} placeholder="Search articles"/>
-                                                    <input className="search-button" type="submit" value="Submit" />
-                                                </form>
-                                            </div>
-                                        </li>
+                                        <li><Link to='/search'><i className="fa fa-search" aria-hidden="true"></i></Link></li>
                                         {this.renderUserLinks()}
                                     </ul>
                                 </menu>
