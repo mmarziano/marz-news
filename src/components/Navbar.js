@@ -2,13 +2,9 @@ import React from 'react';
 import {
     Link,
   } from "react-router-dom";
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+
 import  logo  from '../assets/images/marz-newslogo.png'
-import { fetchSearch } from '../actions/searchActions';
-import { fetchFirstUserPreference } from "../actions/articleActions";
-import { fetchSecondUserPreference } from "../actions/articleActions";
-import { fetchThirdUserPreference } from "../actions/articleActions";
+
 
 
 class Navbar extends React.Component {
@@ -125,24 +121,7 @@ class Navbar extends React.Component {
     }
 } 
 
-const mapStateToProps = state => {
-    return {
-        firstPreferenceArticles: state.articles.firstUserPreferenceArticles,
-        secondPreferenceArticles: state.articles.secondUserPreferenceArticles,
-        thirdPreferenceArticles: state.articles.thirdUserPreferenceArticles
-    }
-}
 
-
-const mapDispatchToProps = (dispatch) => {
-    return  {
-      fetchSearch: (input) => dispatch(fetchSearch(input)),
-      fetchFirstUserPreference: (preference) => dispatch(fetchFirstUserPreference(preference)),
-      fetchSecondUserPreference: (preference) => dispatch(fetchSecondUserPreference(preference)),
-      fetchThirdUserPreference: (preference) => dispatch(fetchThirdUserPreference(preference)),
-      }
-    };
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar))
+export default Navbar
 
 

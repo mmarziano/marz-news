@@ -1,12 +1,9 @@
 import React from 'react';
-import MainHeadline from './MainHeadline'
-import HeroImage from './HeroImage'
 import { connect } from 'react-redux'
 import {
     Redirect
   } from "react-router-dom";
 import PageHeader from './PageHeader'
-import Navbar from './Navbar'
 import Moment from 'react-moment';
 
 class TopHeadlines extends React.Component {
@@ -19,26 +16,6 @@ class TopHeadlines extends React.Component {
             showing: props.hide,
             isLoggedIn: props.isLoggedIn,
         }
-        this.setFocus = this.setFocus.bind(this);
-        this.top5 = this.top5.bind(this)
-    }
-
-    setFocus = (e) => {
-        this.setState(
-            { active: e.target.id, isActive: true },
-            () => {return (this.state)}
-          );
-    }
-
-    top5 = () => {
-        let top5articles = [];
-        for (let i = 0; i < 5; i++) {
-            top5articles.push(this.props.topHeadlines[i])
-        }
-
-        return top5articles.map((article, idx) =>  
-            <img className='thumbnail' src={article.urlToImage} onClick={this.setFocus} id={idx} key={idx} alt=""/>
-        )
     }
 
     renderArticles = () => {
@@ -65,8 +42,7 @@ class TopHeadlines extends React.Component {
     }
 
     render() {
-
-        if (!this.state.isLoggedIn) {
+        if (this.state.isLoggedIn === false) {
             return <Redirect
                         to={{
                         pathname: "/",
@@ -94,7 +70,6 @@ class TopHeadlines extends React.Component {
 const mapStateToProps = state => {
     return {
         topHeadlines: state.topHeadlines.topHeadlines,
-        searchArticles: state.searchArticles.searchArticles,
         loading: state.topHeadlines.loading,
         error: state.topHeadlines.error
     }

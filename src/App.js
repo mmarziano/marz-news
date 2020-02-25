@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import {
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import Login from './components/Login';
@@ -16,6 +17,7 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Profile from './components/Profile'
 import Loading from './components/Loading'
+import Search from './components/Search'
 
 
 class App extends React.Component {
@@ -61,8 +63,8 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(user => this.setState(
-        { currentUser: user },
-        () => {console.log (this.state)}))
+        { currentUser: user, isLoggedIn: true },
+        () => {return (this.state)}))
     }
   }
 
@@ -144,7 +146,7 @@ class App extends React.Component {
             return (<Loading heading={`Scanning Headlines...`}/>)
           }
 
-          if (topHeadlines !== null) {
+          if (topHeadlines !== null && this.state.isLoggedIn) {
             return (
             <>
             <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/> 
@@ -165,25 +167,30 @@ class App extends React.Component {
                     isLoggedIn={this.state.isLoggedIn}
                   />}/>
                 <Route path='/profile/:id' component={() => <Profile currentUser={this.state.currentUser} 
-                  setCurrentUser={this.setCurrentUser} updateCurrentUser={this.updateCurrentUser}/>} />
+                  setCurrentUser={this.setCurrentUser} updateCurrentUser={this.updateCurrentUser}/>} />  
                 <Route exact path='/signup' component={() => <Signup currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>}/>
                 <Route exact path='/login' component={() => <Login currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn} 
                   topHeadlines={this.props.topHeadlines}
                   updateCurrentUser={this.updateCurrentUser}/>} /> 
+                <Route exact path='/search' component={() => <Search currentUser={this.state.currentUser} 
+                />} />
                 <Route path='/' render={() => <div>404</div>}/>
             </Switch>
             </>
             );
-          } else if (this.state.isLoggedIn ) {
-            return (
-                <Profile 
-                  currentUser={this.state.currentUser} 
-                  updateCurrentUser={this.updateCurrentUser}
-                  setCurrentUser={this.setCurrentUser}
-                  />
-              )
+          } else if (!this.state.isLoggedIn ) {
+              return <Redirect
+                          to={{
+                          pathname: "/topheadlines",
+                          state: { 
+                              currentUser: this.props.currentUser, 
+                              topHeadlines:  this.props.topHeadlines,
+                              isLoggedIn: this.props.isLoggedIn
+                              }
+                          }}
+                      />
           } else {
             return null;
           }
@@ -195,7 +202,6 @@ class App extends React.Component {
 const mapStateToProps = state => {
     return {
         topHeadlines: state.topHeadlines.topHeadlines,
-        searchArticles: state.searchArticles.searchArticles,
         loading: state.topHeadlines.loading,
         error: state.topHeadlines.error
     }

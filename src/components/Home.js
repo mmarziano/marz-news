@@ -2,8 +2,6 @@ import React from 'react';
 import MainHeadline from './MainHeadline'
 import HeroImage from './HeroImage'
 import { connect } from 'react-redux'
-import PageHeader from './PageHeader'
-import Navbar from './Navbar'
 
 class Home extends React.Component {
     constructor(props) {
