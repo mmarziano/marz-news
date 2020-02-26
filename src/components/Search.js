@@ -39,7 +39,7 @@ class Search extends React.Component {
            )
         }
     }
-        
+
     render() {
         if (this.props.isLoggedIn === false) {
             return <Redirect
@@ -55,9 +55,7 @@ class Search extends React.Component {
                     <PageHeader pageheader="Search" currentUser={this.props.currentUser} />   
                 </div>
                 <div className="row col-md-12">
-                    <div>
                         {this.renderResults()}
-                    </div>
                 </div>
             </div>
             </>)
