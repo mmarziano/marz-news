@@ -68,10 +68,13 @@ class Preferences extends React.Component {
         if (this.props.currentUser.preferences_categories.length > 0) {
         this.props.currentUser.preferences_categories.map((cat) => {
             let index = this.state.subcategories.findIndex(s => s.name === cat)
+            let langIndex = this.state.languages.findIndex(l => l.abbr === this.props.currentUser.preferences_language)
             let newState = Object.assign({}, this.state);
             newState.selectedCategories.push(cat)
             newState.subcategories[index].isChecked = !newState.subcategories[index].isChecked;
-            this.setState(newState, () => {return (this.state)})  
+            newState.languages[langIndex].isChecked = !newState.languages[langIndex].isChecked;
+            newState.selectedLanguage = this.props.currentUser.preferences_language;
+            this.setState(newState, () => {console.log (this.state)})  
         })
         }
     }
@@ -105,7 +108,7 @@ class Preferences extends React.Component {
       }
 
     handleCategoriesChange = (event) => {
-        if (this.state.selectedCategories.length < 3) {
+        if (this.state.selectedCategories.length < 3 && !this.state.subcategories[event.target.id].isChecked) {
             let newState = Object.assign({}, this.state);
             newState.selectedCategories.push(event.target.value);
             newState.subcategories[event.target.id].isChecked = !newState.subcategories[event.target.id].isChecked;
@@ -129,21 +132,18 @@ class Preferences extends React.Component {
     }
 
     renderSubcategoriesCheckboxes = () => {
-        if (this.props.currentUser.preferences_categories.length > 0) {
-                return this.state.subcategories.map((cat, idx) => 
-                    <Form.Group controlId={this.state.controlId} key={cat.name}>
-                        <Form.Check type="checkbox" label={cat.name} value={cat.name} id={idx} className='category' onChange={(event) => this.handleCategoriesChange(event)} checked={cat.isChecked ? true : false}/>
-                    </Form.Group>  
-                )
-            }
+            return this.state.subcategories.map((cat, idx) => 
+                <Form.Group controlId={this.state.controlId} key={cat.name}>
+                    <Form.Check type="checkbox" label={cat.name} value={cat.name} id={idx} className='category' onChange={(event) => this.handleCategoriesChange(event)} checked={cat.isChecked ? true : false}/>
+                </Form.Group>  
+            )
         }  
     
     renderLanguagesRadio = () => {
         return this.state.languages.map((language) =>  
-            <Form.Group controlId={this.state.controlId}>
-                <input type="radio" id={language.abbr} key={language.abbr} value={language.abbr} checked={language.isChecked} onChange={(event) => this.handleLanguageChange(event)}/>
-                <label className={`category${this.props.currentUser.preferences_language === language.abbr ? "-highlight" : ""}`}>{language.name}</label>
-            </Form.Group>
+                <Form.Group controlId={this.state.controlId} key={language.name}>
+                        <Form.Check type="radio" label={language.name} value={language.abbr} id={language.abbr} className='category' onChange={(event) => this.handleLanguageChange(event)} checked={language.isChecked ? true : false}/>
+                </Form.Group> 
         )
     }
 
@@ -167,7 +167,7 @@ class Preferences extends React.Component {
                 <>
                 <div className="row col-md-12 profile-card">
                   <h4 className="preference-title">Select your 3 preferred subcategories to quickly access those news stories.</h4>
-                  <span className="subheading">Highlighted options indicate saved preferences.</span>
+                  <span className="subheading">Checked options indicate saved preferences.</span>
                   <Form onSubmit={this.handleSubmit}>
                       <hr />
                         <Form.Group controlId="formSelectSubCategories">
@@ -175,7 +175,7 @@ class Preferences extends React.Component {
                         </Form.Group><br />
                     <div className="line"></div>
                     <h4 className="preference-title">Select your preferred language.  Default is English.</h4>
-                    <span className="subheading">Highlighted options indicate saved preferences.</span>
+                    <span className="subheading">Checked options indicate saved preferences.</span>
                     <hr />
                         <Form.Group controlId="formSelectSubCategories">
                             {this.renderLanguagesRadio()}
