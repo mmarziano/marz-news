@@ -178,6 +178,12 @@ padding:0 20px;
   z-index: 5;
 }
 
+.login-card ::placeholder{
+  font-family: 'Bebas Neue', sans-serif;
+  color: rgb(219, 255, 255);
+  font-size: 1em;
+}
+
 .signup-card {
   background-image: url('./assets/images/signupbackground.png');
   background-position: center;
@@ -323,13 +329,20 @@ padding:0 20px;
   border: none;
   border-bottom: 2px solid rgb(3, 131, 190);
   position: relative;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1em;
+  color: rgb(3,131, 190);
 }
 
 ::placeholder{
   font-family: 'Bebas Neue', sans-serif;
   color: rgb(219, 255, 255);
-  font-size: 2em;
+  font-size: 1.75em;
 } 
+
+.search input:focus {
+  outline: 0;
+}
 
 .search button {
   color: #fff;
@@ -513,6 +526,10 @@ input[type="radio"]{
   }
 }
 
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
 
 

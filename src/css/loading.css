@@ -19,14 +19,14 @@
   }
   
   section.wrapper.dark {
-    background: #000;
+    background: transparent;
   }
   
   section h1 {
     position: fixed;
     top: 35%;
     left: 42%;
-    color: #fff;
+    color: #rgb(3, 131, 190);
     font-family: 'Bebas Neue', sans-serif;
   }
   

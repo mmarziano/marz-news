@@ -1,6 +1,5 @@
 export function fetchSearch(input, language) {
     let query = input + '&language='+ language
-    console.log(query)
     return dispatch => {
       dispatch(fetchSearchBegin());
       setTimeout(() => {return fetch('https://newsapi.org/v2/everything?q='+query+'&apiKey=36ae05704c7044be99dbb50a732950d1')

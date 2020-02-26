@@ -74,26 +74,11 @@ class Preferences extends React.Component {
             newState.subcategories[index].isChecked = !newState.subcategories[index].isChecked;
             newState.languages[langIndex].isChecked = !newState.languages[langIndex].isChecked;
             newState.selectedLanguage = this.props.currentUser.preferences_language;
-            this.setState(newState, () => {console.log (this.state)})  
+            this.setState(newState, () => {return (this.state)})  
         })
         }
     }
-        // let newState = Object.assign({}, this.state);
-        //     newState.selectedCategories.push(event.target.value);
-        //     newState.subcategories[event.target.id].isChecked = !newState.subcategories[event.target.id].isChecked;
-        //     this.setState(newState, () => {return (this.state)})
         
-        //     if (this.props.currentUser.preferences_categories.length > 0) {
-        //     this.props.currentUser.preferences_categories.map((cat) =>
-        //         this.state.subcategories.map((sub) => {
-        //         if (sub.name === cat) {
-        //             this.setState((prevState) => ({
-        //                 subcategories: prevState.subcategories, isChecked: true 
-        //         }))
-        //     }})
-        // )}
-
-
     handleLanguageChange = (event) => {
         let index = this.state.languages.findIndex(i => i.abbr === event.target.id);
         let newState = Object.assign({}, this.state);
@@ -112,13 +97,13 @@ class Preferences extends React.Component {
             let newState = Object.assign({}, this.state);
             newState.selectedCategories.push(event.target.value);
             newState.subcategories[event.target.id].isChecked = !newState.subcategories[event.target.id].isChecked;
-            this.setState(newState, () => {console.log (this.state)})
+            this.setState(newState, () => {return (this.state)})
         } else if (this.state.subcategories[event.target.id].isChecked) {
             let newState = Object.assign({}, this.state);
             let index = newState.selectedCategories.indexOf(event.target.value);
             newState.selectedCategories = newState.selectedCategories.slice(0, index).concat(newState.selectedCategories.slice(index + 1));
             newState.subcategories[event.target.id].isChecked = !newState.subcategories[event.target.id].isChecked;
-            this.setState(newState, () => {console.log (this.state)});
+            this.setState(newState, () => {return (this.state)});
         } else {
             event.preventDefault();
             swal(

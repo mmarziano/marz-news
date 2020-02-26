@@ -32,7 +32,7 @@ class SearchInput extends React.Component {
             return(
                 <div >
                     <form className="search" onSubmit={this.handleSearchSubmit}>
-                        <input type="text" value={this.state.userInput} onChange={this.handleUserInput} placeholder="Howdy! What would you like to search for?" autoFocus/>
+                        <input type="text" value={this.state.userInput} onChange={this.handleUserInput} placeholder="Howdy! What would you like to search for?" />
                         <Button variant="primary" type="submit"><i className="fa fa-search" aria-hidden="true"></i></Button>
                     </form>
                 </div>

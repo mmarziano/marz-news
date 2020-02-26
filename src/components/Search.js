@@ -5,6 +5,7 @@ import {
     Redirect
   } from "react-router-dom";
 import PageHeader from './PageHeader'
+import Loading from './Loading'
 
 
 class Search extends React.Component {
@@ -41,13 +42,18 @@ class Search extends React.Component {
     }
 
     render() {
-        if (this.props.isLoggedIn === false) {
+        if (!this.props.isLoggedIn) {
             return <Redirect
                         to={{
                         pathname: "/",
                         }}
                     />
         }
+
+        if (this.props.loading) {
+            return (<Loading heading={`Returning Search Items...`}/>)
+        }
+
             return(
             <> 
             <div className="container-fluid">
