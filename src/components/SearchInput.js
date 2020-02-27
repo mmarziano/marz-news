@@ -43,7 +43,6 @@ class SearchInput extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
         searchArticles: state.searchArticles.searchArticles,
         loading: state.searchArticles.loading,

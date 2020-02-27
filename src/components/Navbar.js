@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Link,
+    NavLink
   } from "react-router-dom";
 
 import  logo  from '../assets/images/marz-newslogo.png'
@@ -20,18 +21,12 @@ class Navbar extends React.Component {
         }      
     }    
 
-    componentDidMount() {
-        if (this.props.userPrefs !== undefined) {
-            this.props.fetchFirstUserPreference(this.props.userPrefs[0]);
-            this.props.fetchSecondUserPreference(this.props.userPrefs[1]);
-            this.props.fetchThirdUserPreference(this.props.userPrefs[2])
-        }
-    }
-
-    // toggleLogin = () => {
-    //     this.setState(
-    //         { showLogin: !this.state.showLogin }, () => {
-    //         return (this.state)});
+    // componentDidMount() {
+    //     if (this.props.currentUser) {
+    //         this.props.fetchFirstUserPreference(this.props.currentUser.preferences_categories[0]);
+    //         this.props.fetchSecondUserPreference(this.props.currentUser.preferences_categories[1]);
+    //         this.props.fetchThirdUserPreference(this.props.currentUser.preferences_categories[2])
+    //     }
     // }
 
     toggleSearch = () => {
@@ -62,14 +57,15 @@ class Navbar extends React.Component {
         this.props.fetchSearch(this.state.userInput)
     }
 
+
     renderUserLinks = () => {
         if (this.props.currentUser !== undefined) {
             return this.props.currentUser.preferences_categories.map(p => 
-                <li key={p}>{p}</li>
+                <li><Link to={p.toLowerCase()} key={p}>{p}</Link></li>
             )
         } else {
             return this.state.defaultNav.map(p => 
-                <li key={p}>{p}</li>
+                <li><Link exact to='/topheadlines' key={p}>{p}</Link></li>
             )
         }
     }

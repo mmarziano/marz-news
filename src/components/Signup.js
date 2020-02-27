@@ -53,7 +53,8 @@ class Signup extends React.Component {
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json', 
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Origin': 'http://localhost:3000'
             }, 
             body: JSON.stringify({
                 user: {
@@ -77,6 +78,7 @@ class Signup extends React.Component {
                 () => {return (this.state)}
             )
         } else {
+            localStorage.setItem('token', response.token);
             this.setUser(response);
             this.setState({
                 firstName: '',
@@ -89,7 +91,7 @@ class Signup extends React.Component {
                 signupError: false,
                 errors: [], 
             }, () => {
-                console.log(this.state)});
+                return(this.state)});
         }
     }
 
@@ -105,7 +107,7 @@ class Signup extends React.Component {
     }
 
     render() {
-        if (this.state.signupSuccess) {
+        if (this.props.currentUser) {
             return <Redirect
                         to={{
                         pathname: "/profile/" + this.props.currentUser.id,

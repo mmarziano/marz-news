@@ -8,22 +8,22 @@ import PageHeader from './PageHeader'
 import Loading from './Loading'
 
 
-class Search extends React.Component {
+class PreferredTopicArticles extends React.Component {
     constructor() {
         super();
         this.state = {
-            userInput: '',
+            topic: '',
         }      
     }    
 
     renderResults = () => {
         if (this.props.searchArticles) {
-        return this.props.searchArticles.map((result, idx) => 
+        return this.props.searchArticles.map(result => 
             
-            <div className="column" key={idx}>
+            <div className="column">
                 <figure>
                     <div className="container-article">
-                        <li className="card-article" >
+                        <li className="card-article">
                             <img src={result.urlToImage} alt={result.title} />
                             <p id="author">{result.author}</p>
                             <p id="article-date"><Moment format="MM/DD/YYYY">
@@ -61,9 +61,7 @@ class Search extends React.Component {
                     <PageHeader pageheader="Search" currentUser={this.props.currentUser} />   
                 </div>
                 <div className="row col-md-12">
-                    <ul>
                         {this.renderResults()}
-                    </ul>
                 </div>
             </div>
             </>)
@@ -80,4 +78,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps)(PreferredTopicArticles)

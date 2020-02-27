@@ -21,6 +21,11 @@ h1, h2, h3, h4, h5, h6 {
   float: left;
 }
 
+ul {
+  list-style: none;
+}
+
+
 .overlay {
   position: fixed; /* Sit on top of the page content */
   width: 100vw; /* Full width (cover the whole page) */
@@ -63,16 +68,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.navbar li {
+.navbar li a{
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5rem;
   display: table-cell;
   color: #fff;
   padding-right: 15px;
   vertical-align: center;
+  text-decoration: none;
 }
 
-.navbar li:hover {
+.navbar li a:hover {
   color: rgb(3, 131, 190);
 }
 
@@ -179,6 +185,12 @@ padding:0 20px;
 }
 
 .login-card ::placeholder{
+  font-family: 'Bebas Neue', sans-serif;
+  color: rgb(219, 255, 255);
+  font-size: 1em;
+}
+
+.signup-card ::placeholder{
   font-family: 'Bebas Neue', sans-serif;
   color: rgb(219, 255, 255);
   font-size: 1em;

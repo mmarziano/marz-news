@@ -18,7 +18,7 @@ import Home from './components/Home'
 import Profile from './components/Profile'
 import Loading from './components/Loading'
 import Search from './components/Search'
-
+import PreferredTopicArticles from './components/PreferredTopicArticles'
 
 class App extends React.Component {
   constructor() {
@@ -66,6 +66,14 @@ class App extends React.Component {
         { currentUser: user, isLoggedIn: true },
         () => {return (this.state)}))
     }
+  }
+
+  renderUserRoutes = () => {
+    if (this.state.currentUser){
+      return this.state.currentUser.preferences_categories.map(cat =>
+          <Route path='/entertainment' component={() => <PreferredTopicArticles currentUser={this.state.currentUser} />} />  
+      )
+    }  
   }
 
   setCurrentUser = (response) => {
@@ -146,7 +154,7 @@ class App extends React.Component {
             return (<Loading heading={`Scanning Headlines...`}/>)
           }
 
-          if (topHeadlines !== null) {
+          if (topHeadlines !== null ) {
             return (
             <>
             <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/> 
@@ -166,7 +174,7 @@ class App extends React.Component {
                     currentUser={this.state.currentUser} 
                     isLoggedIn={this.state.isLoggedIn}
                   />}/>
-                <Route path='/profile/:id' component={() => <Profile currentUser={this.state.currentUser} 
+                <Route exact path='/profile/:id' component={() => <Profile currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} updateCurrentUser={this.updateCurrentUser}/>} />  
                 <Route exact path='/signup' component={() => <Signup currentUser={this.state.currentUser} 
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn}/>}/>
@@ -174,8 +182,11 @@ class App extends React.Component {
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn} 
                   topHeadlines={this.props.topHeadlines}
                   updateCurrentUser={this.updateCurrentUser}/>} /> 
+                <Route exact path='/:topic' component={() => <PreferredTopicArticles currentUser={this.state.currentUser} />} />
                 <Route exact path='/search' component={() => <Search currentUser={this.state.currentUser} 
                 isLoggedIn={this.state.isLoggedIn}/>} />
+                {this.renderUserRoutes()};
+                
                 <Route path='/' render={() => <div>404</div>}/>
             </Switch>
             </>
