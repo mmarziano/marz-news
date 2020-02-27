@@ -182,7 +182,7 @@ class App extends React.Component {
                   setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn} 
                   topHeadlines={this.props.topHeadlines}
                   updateCurrentUser={this.updateCurrentUser}/>} /> 
-                <Route exact path='/:topic' component={() => <PreferredTopicArticles currentUser={this.state.currentUser} />} />
+                <Route exact path='/:topic' component={() => <PreferredTopicArticles currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} />} />
                 <Route exact path='/search' component={() => <Search currentUser={this.state.currentUser} 
                 isLoggedIn={this.state.isLoggedIn}/>} />
                 {this.renderUserRoutes()};
