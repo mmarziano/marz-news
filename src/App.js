@@ -7,7 +7,9 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory
 } from "react-router-dom";
+import history from './components/History';
 import { withRouter } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup'
@@ -45,10 +47,9 @@ class App extends React.Component {
     }
     this.setFocus = this.setFocus.bind(this)
     this.top5 = this.top5.bind(this)
-    this.setCurrentUser = this.setCurrentUser.bind(this)
+    this.setCurrentUser = this.setCurrentUser.bind(this)  
 }
-  
-  
+
   componentDidMount() {
     this.props.fetchTopHeadlines();
     this.getUser();
@@ -65,6 +66,14 @@ class App extends React.Component {
       .then(user => this.setState(
         { currentUser: user, isLoggedIn: true },
         () => {return (this.state)}))
+      const location = {
+        pathname: '/topheadlines',
+        state: { 
+          currentUser: this.state.currentUser,
+          isLoggedIn: this.state.isLoggedIn,
+         }
+      }
+      history.push(location)
     }
   }
 
@@ -154,7 +163,7 @@ class App extends React.Component {
             return (<Loading heading={`Scanning Headlines...`}/>)
           }
 
-          if (topHeadlines !== null ) {
+          if (topHeadlines !== null) {
             return (
             <>
             <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser}/> 
@@ -170,7 +179,6 @@ class App extends React.Component {
                   />}/>
                 <Route exact path='/topheadlines' component={() => <TopHeadlines 
                     topHeadlines={this.props.topHeadlines}
-                    searchArticles={this.props.searchArticles} 
                     currentUser={this.state.currentUser} 
                     isLoggedIn={this.state.isLoggedIn}
                   />}/>
@@ -191,17 +199,6 @@ class App extends React.Component {
             </Switch>
             </>
             );
-          // } else if (this.state.isLoggedIn ) {
-          //     return <Redirect
-          //                 to={{
-          //                 pathname: "/topheadlines",
-          //                 state: { 
-          //                     currentUser: this.props.currentUser, 
-          //                     topHeadlines:  this.props.topHeadlines,
-          //                     isLoggedIn: this.props.isLoggedIn
-          //                     }
-          //                 }}
-          //             />
           } else {
             return null;
           }

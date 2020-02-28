@@ -1,3 +1,7 @@
+li {
+  list-style: none;
+}
+
 /* Float four columns side by side */
 .main {
     background: #fff
@@ -28,6 +32,21 @@
     background-color: #fff;
     position: relative;
     margin: auto;
+  }
+
+  .card-article:hover {
+    background-color: rgba(0, 132, 240, 0.2)
+  }
+
+  .card-article span {
+    display: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5em;
+    color: orange;
+  }
+
+  .card-article span:hover {
+    display: block;
   }
 
   .card-article img {

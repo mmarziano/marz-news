@@ -38,8 +38,8 @@ class Home extends React.Component {
     render() {
         const { topHeadlines } = this.props;
             return(
-            <div className="container-fluid">
-                <div className={`row${this.props.isLoggedIn ? " hidden" : " hero"}`}>
+            <div className={`${this.props.isLoggedIn ? " hidden" : "container-fluid"}`}>
+                <div className='row hero'>
                     <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>
                     <MainHeadline topHeadlines={topHeadlines} activeArticle={this.state.active} />
                 </div>

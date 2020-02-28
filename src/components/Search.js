@@ -25,6 +25,7 @@ class Search extends React.Component {
                     <div className="container-article">
                         <li className="card-article" >
                             <img src={result.urlToImage} alt={result.title} />
+                            <span>Click to bookmark</span>
                             <p id="author">{result.author}</p>
                             <p id="article-date"><Moment format="MM/DD/YYYY">
                                 {result.publishedAt}

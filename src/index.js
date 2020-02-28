@@ -7,8 +7,9 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux'
 import {
-    BrowserRouter,
+    Router,
   } from "react-router-dom";
+import history from './components/History';
 import rootReducer from './reducers/rootReducer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
@@ -19,9 +20,9 @@ const store = createStore(rootReducer, composeEnhancers(
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <Router history={history}>
             <App />
-        </BrowserRouter>
+        </Router>
     </Provider>,
     document.getElementById('root')
 );

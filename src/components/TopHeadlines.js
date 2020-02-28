@@ -42,7 +42,7 @@ class TopHeadlines extends React.Component {
     }
 
     render() {
-        if (this.state.isLoggedIn === false) {
+        if (!this.props.isLoggedIn) {
             return <Redirect
                         to={{
                         pathname: "/",
@@ -52,7 +52,7 @@ class TopHeadlines extends React.Component {
             return(
             <> 
             <div className="container-fluid">
-                <div className={this.props.isLoggedIn ? "row" : " hidden"}>
+                <div className={this.props.isLoggedIn || this.props.location.state.isLoggedIn ? "row" : " hidden"}>
                     <PageHeader pageheader="Top Headlines" currentUser={this.props.currentUser} />   
                 </div>
                 <div className="row col-md-12">
