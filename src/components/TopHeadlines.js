@@ -49,7 +49,8 @@ class TopHeadlines extends React.Component {
                         }}
                     />
         }
-            return(
+
+        return(
             <> 
             <div className="container-fluid">
                 <div className={this.props.isLoggedIn || this.props.location.state.isLoggedIn ? "row" : " hidden"}>
@@ -63,8 +64,8 @@ class TopHeadlines extends React.Component {
                     </div>
                 </div>
             </div>
-            </>)
-    }     
+        </>)
+}     
 }
 
 const mapStateToProps = state => {

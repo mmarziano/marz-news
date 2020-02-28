@@ -63,11 +63,7 @@ class Navbar extends React.Component {
             return this.props.currentUser.preferences_categories.map(p => 
                 <li><Link to={p.toLowerCase()} key={p}>{p}</Link></li>
             )
-        } else {
-            return this.state.defaultNav.map(p => 
-                <li><Link exact to='/topheadlines' key={p}>{p}</Link></li>
-            )
-        }
+        } 
     }
 
     renderSignIn = () => {
@@ -98,7 +94,8 @@ class Navbar extends React.Component {
                                     <ul>
                                         <li><i className="fas fa-sign-out-alt" onClick={this.toggleLogout}></i></li>
                                         {this.renderSignIn()}
-                                        <li><Link to='/search'><i className="fa fa-search" aria-hidden="true"></i></Link></li>
+                                        <li><Link to='/search'><i className={`fa fa-search${this.props.isLoggedIn ? "" : " hidden"}`} aria-hidden="true"></i></Link></li>
+                                        <li className={this.props.isLoggedIn ? "" : " hidden"}><Link to='/topheadlines'>Top Headlines</Link></li>
                                         {this.renderUserLinks()}
                                     </ul>
                                 </menu>
