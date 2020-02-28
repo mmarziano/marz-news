@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Moment from 'react-moment';
 import {
     Redirect
   } from "react-router-dom";
 import PageHeader from './PageHeader'
 import Loading from './Loading'
+import Article from './Article'
 
 
 class Search extends React.Component {
@@ -19,25 +19,7 @@ class Search extends React.Component {
     renderResults = () => {
         if (this.props.searchArticles) {
         return this.props.searchArticles.map((result, idx) => 
-            
-            <div className="column" key={idx}>
-                <figure>
-                    <div className="container-article">
-                        <li className="card-article" >
-                            <img src={result.urlToImage} alt={result.title} />
-                            <span>Click to bookmark</span>
-                            <p id="author">{result.author}</p>
-                            <p id="article-date"><Moment format="MM/DD/YYYY">
-                                {result.publishedAt}
-                            </Moment> </p>
-                            <a href={result.url} target="_blank" rel="noopener noreferrer"><i className="fa fa-external-link" aria-hidden="true"></i> Link to Article</a>
-                            <div className='article-overlay'>
-                                <a href={result.url} target="_blank" rel="noopener noreferrer"><h3 className='headline'>{result.title}</h3></a>
-                            </div>
-                        </li>
-                    </div>
-                </figure>
-            </div>
+            <Article result={result} />
            )
         }
     }

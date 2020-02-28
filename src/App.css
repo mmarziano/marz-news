@@ -320,7 +320,7 @@ padding:0 20px;
   width: 80%;
   position: absolute;
   top: 80px;
-  left: 120px;
+  left: 150px;
 }
 
 .search input[type="text"]{
@@ -443,7 +443,7 @@ padding:0 20px;
 
 .profile-card {
   position: relative;
-  top: 70px;
+  top: 85px;
   display: flex;
   flex-direction: column;
   min-width: 0;

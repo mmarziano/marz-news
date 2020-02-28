@@ -190,9 +190,10 @@ class App extends React.Component {
                     setCurrentUser={this.setCurrentUser} isLoggedIn={this.state.isLoggedIn} 
                     topHeadlines={this.props.topHeadlines}
                     updateCurrentUser={this.updateCurrentUser}/>} /> 
-                  <Route exact path='/:topic' component={(props) => <PreferredTopicArticles currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} topic={props.location.state.topic}/>} />
                   <Route exact path='/search' component={() => <Search currentUser={this.state.currentUser} 
                   isLoggedIn={this.state.isLoggedIn}/>} />
+                  <Route exact path='/:topic' component={(props) => <PreferredTopicArticles currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} topic={props.location.state.topic}/>} />
+                 
                   {this.renderUserRoutes()};
                   
                   <Route path='/' render={() => <div>404</div>}/>
