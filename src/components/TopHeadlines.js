@@ -22,21 +22,17 @@ class TopHeadlines extends React.Component {
         return this.props.topHeadlines.map(result => 
             
             <div className="column">
-                <figure>
-                    <div className="container-article">
-                        <li className="card-article">
-                            <img src={result.urlToImage} alt={result.title} />
-                            <p id="author">{result.author}</p>
-                            <p id="article-date"><Moment format="MM/DD/YYYY">
-                                {result.publishedAt}
-                            </Moment> </p>
-                            <a href={result.url} target="_blank" rel="noopener noreferrer"><i className="fa fa-external-link" aria-hidden="true"></i> Link to Article</a>
-                            <div className='article-overlay'>
-                                <a href={result.url} target="_blank" rel="noopener noreferrer"><h3 className='headline'>{result.title}</h3></a>
-                            </div>
-                        </li>
+                <li className="card-article">
+                    <img src={result.urlToImage} alt={result.title} />
+                    <p id="author">{result.author}</p>
+                    <p id="article-date"><Moment format="MM/DD/YYYY">
+                        {result.publishedAt}
+                    </Moment> </p>
+                    <a href={result.url} target="_blank" rel="noopener noreferrer"><i className="fa fa-external-link" aria-hidden="true"></i> Link to Article</a>
+                    <div className='article-overlay'>
+                        <a href={result.url} target="_blank" rel="noopener noreferrer"><h3 className='headline'>{result.title}</h3></a>
                     </div>
-                </figure>
+                </li>
             </div>
         )
     }
@@ -57,10 +53,10 @@ class TopHeadlines extends React.Component {
                     <PageHeader pageheader="Top Headlines" currentUser={this.props.currentUser} />   
                 </div>
                 <div className="row col-md-12">
-                    <div className="article">
-                            <ul>
-                                {this.renderArticles()}
-                            </ul>
+                    <div className="container-article">
+                        <ul>
+                            {this.renderArticles()}
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -3,8 +3,10 @@ import {
     Link,
     NavLink
   } from "react-router-dom";
-
+import history from './History';
+import { connect } from 'react-redux'
 import  logo  from '../assets/images/marz-newslogo.png'
+import { fetchSearch } from '../actions/searchActions';
 
 
 
@@ -13,7 +15,6 @@ class Navbar extends React.Component {
         super(props);
         this.state = {
             isLoggedIn: false,
-            defaultNav: ['Top Headlines'],
             clicked: false,
             userInput: '',
             showLogin: false,
@@ -57,11 +58,25 @@ class Navbar extends React.Component {
         this.props.fetchSearch(this.state.userInput)
     }
 
+    redirect = (e) => {
+        e.preventDefault();
+        let location = {
+            pathname: `/${e.target.innerHTML.toLowerCase()}`,
+            state: { 
+              currentUser: this.state.currentUser,
+              isLoggedIn: this.state.isLoggedIn,
+              topic: e.target.innerHTML.toLowerCase()
+             }
+          }
+          history.push(location)
+          this.props.fetchSearch(e.target.innerHTML, this.props.currentUser.preferences_language)
+    }
 
     renderUserLinks = () => {
         if (this.props.currentUser !== undefined) {
             return this.props.currentUser.preferences_categories.map(p => 
-                <li><Link to={p.toLowerCase()} key={p}>{p}</Link></li>
+                <li onClick={this.redirect}>{p}</li>
+                // <Link to={`/${p.toLowerCase()}`} key={p}>{p}</Link>
             )
         } 
     }
@@ -84,21 +99,23 @@ class Navbar extends React.Component {
     
     render() {
         return(
-                <div className="container-fluid navbar sticky">
-                    <div className="row col-md-12">
-                        <div className="col-md-4">
-                            <a href="/"><img src={ logo } alt="Marz News Logo" className="logo" /></a>
-                        </div>
-                        <div className="col-md-8">
-                                <menu>
-                                    <ul>
-                                        <li><i className="fas fa-sign-out-alt" onClick={this.toggleLogout}></i></li>
-                                        {this.renderSignIn()}
-                                        <li><Link to='/search'><i className={`fa fa-search${this.props.isLoggedIn ? "" : " hidden"}`} aria-hidden="true"></i></Link></li>
-                                        <li className={this.props.isLoggedIn ? "" : " hidden"}><Link to='/topheadlines'>Top Headlines</Link></li>
-                                        {this.renderUserLinks()}
-                                    </ul>
-                                </menu>
+            <div className="container-fluid"> 
+                <div className="row col-md-12">
+                    <div className="navbar-sticky">
+                            <div className="col-md-4">
+                                <a href="/"><img src={ logo } alt="Marz News Logo" className="logo" /></a>
+                            </div>
+                            <div className="col-md-8">
+                                    <menu>
+                                        <ul>
+                                            <li><i className="fas fa-sign-out-alt" onClick={this.toggleLogout}></i></li>
+                                            {this.renderSignIn()}
+                                            <li><Link to='/search'><i className={`fa fa-search${this.props.isLoggedIn ? "" : " hidden"}`} aria-hidden="true"></i></Link></li>
+                                            <li className={this.props.isLoggedIn ? null : "hidden"}><Link to='/topheadlines'>Top Headlines</Link></li>
+                                            {this.renderUserLinks()}
+                                        </ul>
+                                    </menu>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +123,13 @@ class Navbar extends React.Component {
     }
 } 
 
+const mapDispatchToProps = (dispatch) => {
+    return  {
+        fetchSearch: (input, language) => dispatch(fetchSearch(input, language))
+    }
+};
 
-export default Navbar
+export default connect(null, mapDispatchToProps)(Navbar)
+
 
 

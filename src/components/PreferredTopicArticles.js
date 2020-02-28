@@ -25,8 +25,8 @@ class PreferredTopicArticles extends React.Component {
                     <div className="container-article">
                         <li className="card-article">
                             <img src={result.urlToImage} alt={result.title} />
-                            <p id="author">{result.author}</p>
-                            <p id="article-date"><Moment format="MM/DD/YYYY">
+                            <p className="author">{result.author}</p>
+                            <p className="article-date"><Moment format="MM/DD/YYYY">
                                 {result.publishedAt}
                             </Moment> </p>
                             <a href={result.url} target="_blank" rel="noopener noreferrer"><i className="fa fa-external-link" aria-hidden="true"></i> Link to Article</a>
@@ -42,6 +42,9 @@ class PreferredTopicArticles extends React.Component {
     }
 
     render() {
+        let string = this.props.topic
+        let topic = string[0].toUpperCase() + string.slice(1) + " Articles"
+
         if (!this.props.isLoggedIn) {
             return <Redirect
                         to={{
@@ -58,7 +61,7 @@ class PreferredTopicArticles extends React.Component {
             <> 
             <div className="container-fluid">
                 <div className={this.props.isLoggedIn ? "row" : " hidden"}>
-                    <PageHeader pageheader="Search" currentUser={this.props.currentUser} />   
+                    <PageHeader pageheader={topic} currentUser={this.props.currentUser} />   
                 </div>
                 <div className="row col-md-12">
                         {this.renderResults()}

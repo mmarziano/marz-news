@@ -26,6 +26,8 @@ li {
   
   /* Style the counter cards */
   .card-article {
+    width: 100%;
+    height: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
     padding: 16px;
     text-align: center;
@@ -38,27 +40,11 @@ li {
     background-color: rgba(0, 132, 240, 0.2)
   }
 
-  .card-article span {
-    display: none;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5em;
-    color: orange;
-  }
-
-  .card-article span:hover {
-    display: block;
-  }
-
   .card-article img {
     left: 0;
-    max-width:100%;
-    max-height:100%;
-    width: 100%;
-    height: 100%;
+    width: 80vw;
+    height: auto;
     opacity: 1;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     overflow: hidden;
   }
 
@@ -89,12 +75,12 @@ li {
       color: #fff;
   }
 
-  .card-article a {
+  .card-article a{
       position: absolute;
       top: 25px;
       left: 25px;
       color: #fff;
-      font-size: 1em;
+      font-size: 0.75em;
       font-family: 'Bebas Neue', sans-serif;
   }
 
@@ -107,7 +93,7 @@ li {
       position: absolute;
       top: 50px;
       left: 25px;
-      font-size: 1em;
+      font-size: 0.75em;
       font-family: 'Bebas Neue', sans-serif;
   }
 
@@ -116,7 +102,7 @@ li {
     position: absolute;
     top: 75px;
     left: 25px;
-    font-size: 1em;
+    font-size: 0.75em;
     font-family: 'Bebas Neue', sans-serif;
 }
 
