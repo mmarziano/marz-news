@@ -4,6 +4,9 @@
 * {
   font-family: 'Archivo Narrow', sans-serif;
 }
+.container-fluid {
+  width: 100vw;
+}
 
 body {
   background-color: #fff;
@@ -51,14 +54,15 @@ ul {
   justify-content: center;
   background-color: rgba(0,0,0,1);
   max-height: 75px;
-  margin: auto;
+  margin: 0;
+  margin-left: -15px;
   z-index: 1000;
   padding: 5px;
 }
 
 .carousel {
   position: absolute;
-  top: 0;
+  top: 75px;
   left: 0;
   color: rgb(3, 131, 190);
   z-index: 3;
@@ -109,16 +113,6 @@ padding:0 20px;
   background-size: cover;
 }
  
-.togglesearch-clicked .search-button{
-  width: 80px;
-  padding: 5px 0;
-  background: rgb(3, 131, 190);
-  color: #fff;
-  margin-left: -6px;
-  border: 1px solid rgb(3, 131, 190);
-  outline: none;
-  cursor: pointer;
-}
 
 @media only screen and (min-width:240px) and (max-width: 768px){
   .navbar ul li{
@@ -287,13 +281,14 @@ padding:0 20px;
 
 
 .main-img {
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   opacity: 0.4;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
-  top: 0;
+  top: 75px;
   left: 0;
 }
 
@@ -384,9 +379,9 @@ padding:0 20px;
 
 .profile-banner {
   position: relative;
+  top: 75px;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 75px;
   padding: 0;
   width: 100vw;
   background-color: rgb(3, 131, 190);
@@ -420,11 +415,18 @@ padding:0 20px;
 }
 
 .nav-item {
+  position: relative;
   line-height: 30px;
 }
 
+.nav-tabs {
+  border: none;
+  position: relative;
+  top: 80px;
+}
+
 .nav-tabs a{
-  margin-top: 10px;
+  margin-top: 15px;
   color: #b6b6b6;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5em;
@@ -441,6 +443,7 @@ padding:0 20px;
 
 .profile-card {
   position: relative;
+  top: 70px;
   display: flex;
   flex-direction: column;
   min-width: 0;

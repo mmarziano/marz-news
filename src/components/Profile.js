@@ -1,8 +1,6 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Preferences from './Preferences';
-import Navbar from './Navbar'
-import Loading from './Loading'
 import PageHeader from './PageHeader'
 import {
     Redirect
@@ -144,12 +142,10 @@ class Profile extends React.Component {
                             <Preferences currentUser={this.props.currentUser} saveUser={this.saveUser} togglePreferences={this.handlePreferencesClick}/>
                         </div>
                         <div className={this.state.showComments ? "container-fluid" : "hidden"}>
-                            Comments
-                            
+                
                         </div>
                         <div className={this.state.showArticles ? "container-fluid" : "hidden"}>
-                            Articles
-                            
+              
                         </div>
                     </div>
                     </>

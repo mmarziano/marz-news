@@ -100,8 +100,8 @@ class Navbar extends React.Component {
     render() {
         return(
             <div className="container-fluid"> 
-                <div className="row col-md-12">
                     <div className="navbar-sticky">
+                        <div className="row col-md-12">
                             <div className="col-md-4">
                                 <a href="/"><img src={ logo } alt="Marz News Logo" className="logo" /></a>
                             </div>
