@@ -147,7 +147,6 @@ class App extends React.Component {
 
     saveArticle = (idx, articles) => {
       let article = articles[idx]
-      console.log(article)
         let url = 'http://localhost:3001/articles';
         let options = {
             method: 'POST', 
