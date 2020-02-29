@@ -1,7 +1,8 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Preferences from './Preferences';
-import PageHeader from './PageHeader'
+import PageHeader from './PageHeader';
+import Bookmarked from './Bookmarked';
 import {
     Redirect
   } from "react-router-dom";
@@ -12,11 +13,31 @@ class Profile extends React.Component {
     constructor() {
         super();
         this.state = {
+              savedArticles: [],
               isLoggedIn: true,
               showPreferences: false,
               showComments: false,
               showArticles: true,
         }      
+    }
+
+    componentDidMount() {
+        this.retrieveSavedArticles()
+    }
+
+    retrieveSavedArticles() {
+        // Fetch request to retrieve user's bookmarked articles
+        let url = 'http://localhost:3001/bookmarks/' + this.props.currentUser.id;
+        fetch(url, {
+            headers: {
+              "Authorization" : `Bearer ${localStorage.getItem('token')}`
+            }
+          })
+        .then(response => response.json())
+        .then(json => this.setState(
+            { savedArticles: json },
+            () => {return (this.state)}))
+        .catch(error => console.log(error));
     }
 
     saveUser = (categories, language) => {
@@ -142,10 +163,10 @@ class Profile extends React.Component {
                             <Preferences currentUser={this.props.currentUser} saveUser={this.saveUser} togglePreferences={this.handlePreferencesClick}/>
                         </div>
                         <div className={this.state.showComments ? "container-fluid" : "hidden"}>
-                
+                             
                         </div>
                         <div className={this.state.showArticles ? "container-fluid" : "hidden"}>
-              
+                            <Bookmarked currentUser={this.props.currentUser} savedArticles={this.state.savedArticles} />
                         </div>
                     </div>
                     </>

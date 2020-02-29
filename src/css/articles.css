@@ -50,7 +50,7 @@ li {
   }
 
   .article-overlay {
-    background-color: rgba(0,0,0,0.5);
+    background-color:  rgba(3, 131, 190, 0.4);
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 8px 0 rgba(255, 255, 255, 0.19);
     width: 100%;
     max-width: 100%;
@@ -153,7 +153,39 @@ li {
       width: 100%;
       opacity: 1;
   }
+
+  .infobox {
+    background-color: rgba(3, 131, 190, 0.4);
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 170px;
+    height: 170px;
+  }
   
+  /* Bookmarked articles */
+
+  .bookmark-card {
+    position: relative;
+    top: 65px;
+    display: block;
+    margin-top: 20px;
+    background-color: rgb(3, 131, 190);
+    width: 80vw;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .bookmark-card img {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  .bookmark-card li {
+    display: inline-block;
+  }
+
+
+
   /* Responsive columns - one column layout (vertical) on small screens */
   @media screen and (max-width: 600px) {
     .column {
