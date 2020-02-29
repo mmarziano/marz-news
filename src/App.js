@@ -77,13 +77,6 @@ class App extends React.Component {
     }
   }
 
-  renderUserRoutes = () => {
-    if (this.state.currentUser){
-      return this.state.currentUser.preferences_categories.map(cat =>
-          <Route path='/entertainment' component={() => <PreferredTopicArticles currentUser={this.state.currentUser} />} />  
-      )
-    }  
-  }
 
   setCurrentUser = (response) => {
     if (response.user.email !== undefined && response.user.preferences_categories.length > 0) {
@@ -152,8 +145,39 @@ class App extends React.Component {
         )
     }
 
+    saveArticle = (idx, articles) => {
+      let article = articles[idx]
+      console.log(article)
+        let url = 'http://localhost:3001/articles';
+        let options = {
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Origin': 'http://localhost:3000',
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`
+            }, 
+            body: JSON.stringify({
+                article: {
+                    author: article.author,
+                    title:  article.title,
+                    description: article.description,
+                    url: article.url,
+                    urlToImage: article.urlToImage,
+                    publishedAt: article.publishedAt,
+                    content: article.content,
+                    source: article.source.name,
+                    user_id: this.state.currentUser.id
+                }})
+            };
+        fetch(url, options)
+        .then(response => response.json())
+        .then(json => {console.log(json)})
+        .catch(error => console.log(error) );
+    }
+
   render() {
-          const { error, loading, topHeadlines} = this.props;
+          const { error, loading, topHeadlines, searchArticles} = this.props;
 
           if (error) {
               return <div>Error! {error.message}</div>;
@@ -179,8 +203,10 @@ class App extends React.Component {
                     />}/>
                   <Route exact path='/topheadlines' component={() => <TopHeadlines 
                       topHeadlines={this.props.topHeadlines}
+                      searchArticles={this.props.searchArticles}
                       currentUser={this.state.currentUser} 
                       isLoggedIn={this.state.isLoggedIn}
+                      saveArticle={this.saveArticle}
                     />}/>
                   <Route exact path='/profile/:id' component={() => <Profile currentUser={this.state.currentUser} 
                     setCurrentUser={this.setCurrentUser} updateCurrentUser={this.updateCurrentUser}/>} />  
@@ -191,11 +217,10 @@ class App extends React.Component {
                     topHeadlines={this.props.topHeadlines}
                     updateCurrentUser={this.updateCurrentUser}/>} /> 
                   <Route exact path='/search' component={() => <Search currentUser={this.state.currentUser} 
-                  isLoggedIn={this.state.isLoggedIn}/>} />
-                  <Route exact path='/:topic' component={(props) => <PreferredTopicArticles currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} topic={props.location.state.topic}/>} />
-                 
-                  {this.renderUserRoutes()};
-                  
+                  isLoggedIn={this.state.isLoggedIn} saveArticle={this.saveArticle} searchArticles={this.props.searchArticles}/> } />
+                  <Route exact path='/:topic' component={(props) => <PreferredTopicArticles currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} 
+                  topic={props.location.state.topic} saveArticle={this.saveArticle} searchArticles={this.props.searchArticles}/>} />
+
                   <Route path='/' render={() => <div>404</div>}/>
               </Switch>
             </>
@@ -208,9 +233,10 @@ class App extends React.Component {
 
   }
 
-const mapStateToProps = state => {
+const mapStateToProps = state =>{
     return {
         topHeadlines: state.topHeadlines.topHeadlines,
+        searchArticles: state.searchArticles.searchArticles,
         loading: state.topHeadlines.loading,
         error: state.topHeadlines.error
     }

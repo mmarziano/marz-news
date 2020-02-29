@@ -74,8 +74,8 @@ class Navbar extends React.Component {
 
     renderUserLinks = () => {
         if (this.props.currentUser !== undefined) {
-            return this.props.currentUser.preferences_categories.map(p => 
-                <li onClick={this.redirect}>{p}</li>
+            return this.props.currentUser.preferences_categories.map((p, idx) => 
+                <li key={idx} onClick={this.redirect}>{p}</li>
                 // <Link to={`/${p.toLowerCase()}`} key={p}>{p}</Link>
             )
         } 

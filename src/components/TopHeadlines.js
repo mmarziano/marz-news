@@ -11,7 +11,7 @@ class TopHeadlines extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            articles: [],
+            article: [],
             active: 0,
             isActive: false,
             showing: props.hide,
@@ -19,9 +19,13 @@ class TopHeadlines extends React.Component {
         }
     }
 
+    save = () => {
+        alert('here')
+    }
+
     renderArticles = () => {
-        return this.props.topHeadlines.map(result => 
-            <Article result={result} />
+        return this.props.topHeadlines.map((result, index) => 
+            <Article result={result} index={index} saveArticle={this.props.saveArticle} articles={this.props.topHeadlines}/>
         )
     }
 
@@ -51,6 +55,7 @@ class TopHeadlines extends React.Component {
 const mapStateToProps = state => {
     return {
         topHeadlines: state.topHeadlines.topHeadlines,
+        searchArticles: state.searchArticles.searchArticles,
         loading: state.topHeadlines.loading,
         error: state.topHeadlines.error
     }
