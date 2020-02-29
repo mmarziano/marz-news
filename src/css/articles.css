@@ -170,14 +170,20 @@ li {
     top: 65px;
     display: block;
     margin-top: 20px;
-    background-color: rgb(3, 131, 190);
-    width: 80vw;
+    background-color: rgba(3, 131, 190, 0.2);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-items: left;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.19);
   }
 
   .bookmark-card img {
-    margin-top: 30px;
+    margin: 10px;
     width: 100%;
+    max-width: 350px;
+    max-height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.19);
   }
 
   .bookmark-card li {

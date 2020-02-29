@@ -177,24 +177,23 @@ class App extends React.Component {
     }
 
     handleSave = (response) => {
-      console.log(response)
-    if (response.errors) {
-      swal(
-        <div>
-          <h1>Hmmmm....</h1>
-          <p>Looks like this article has already been saved.
-          </p>
-        </div>
-      )
-    } else {
+      if (response.errors) {
         swal(
           <div>
-            <h1>Good One!</h1>
-            <p>The article has been saved.  You can managed your bookmarked articles from your profile.
+            <h1>Hmmmm....</h1>
+            <p>Looks like this article has already been saved.
             </p>
           </div>
         )
-      }
+      } else {
+          swal(
+            <div>
+              <h1>Good One!</h1>
+              <p>The article has been saved.  You can managed your bookmarked articles from your profile.
+              </p>
+            </div>
+          )
+        }
     }
 
   render() {

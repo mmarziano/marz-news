@@ -40,6 +40,24 @@ class Profile extends React.Component {
         .catch(error => console.log(error));
     }
 
+    handleRemove = (e, idx) => {
+        e.preventDefault();
+        // Fetch request to remove bookmarked article from list
+        let url = 'http://localhost:3001/bookmarks/' + idx + '/' + this.props.currentUser.id;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+              "Authorization" : `Bearer ${localStorage.getItem('token')}`
+            },
+            user_id: this.props.currentUser.id
+          })
+        .then(response => response.json())
+        .then(json => this.setState(
+            { savedArticles: json },
+            () => {return (this.state)}))
+        .catch(error => console.log(error));
+    }
+
     saveUser = (categories, language) => {
             // Fetch request to update user based on selected preferences
             let url = 'http://localhost:3001/api/v1/profile/' + this.props.currentUser.id;
@@ -166,7 +184,8 @@ class Profile extends React.Component {
                              
                         </div>
                         <div className={this.state.showArticles ? "container-fluid" : "hidden"}>
-                            <Bookmarked currentUser={this.props.currentUser} savedArticles={this.state.savedArticles} />
+                            <Bookmarked currentUser={this.props.currentUser} savedArticles={this.state.savedArticles} 
+                            handleRemove={this.handleRemove}/>
                         </div>
                     </div>
                     </>
