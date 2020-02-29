@@ -21,6 +21,7 @@ import Profile from './components/Profile'
 import Loading from './components/Loading'
 import Search from './components/Search'
 import PreferredTopicArticles from './components/PreferredTopicArticles'
+import swal from '@sweetalert/with-react'
 
 class App extends React.Component {
   constructor() {
@@ -171,8 +172,29 @@ class App extends React.Component {
             };
         fetch(url, options)
         .then(response => response.json())
-        .then(json => {console.log(json)})
+        .then(json => {this.handleSave(json)})
         .catch(error => console.log(error) );
+    }
+
+    handleSave = (response) => {
+      console.log(response)
+    if (response.errors) {
+      swal(
+        <div>
+          <h1>Hmmmm....</h1>
+          <p>Looks like this article has already been saved.
+          </p>
+        </div>
+      )
+    } else {
+        swal(
+          <div>
+            <h1>Good One!</h1>
+            <p>The article has been saved.  You can managed your bookmarked articles from your profile.
+            </p>
+          </div>
+        )
+      }
     }
 
   render() {
