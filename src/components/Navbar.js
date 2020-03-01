@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    Link,
-    NavLink
+    Link
   } from "react-router-dom";
 import history from './History';
 import { connect } from 'react-redux'
@@ -21,14 +20,6 @@ class Navbar extends React.Component {
             logout: false,
         }      
     }    
-
-    // componentDidMount() {
-    //     if (this.props.currentUser) {
-    //         this.props.fetchFirstUserPreference(this.props.currentUser.preferences_categories[0]);
-    //         this.props.fetchSecondUserPreference(this.props.currentUser.preferences_categories[1]);
-    //         this.props.fetchThirdUserPreference(this.props.currentUser.preferences_categories[2])
-    //     }
-    // }
 
     toggleSearch = () => {
         this.setState(

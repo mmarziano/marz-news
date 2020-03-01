@@ -183,8 +183,8 @@ class Profile extends React.Component {
                              
                         </div>
                         <div className={this.state.showArticles ? "container-fluid" : "hidden"}>
-                            <Bookmarked currentUser={this.props.currentUser} savedArticles={this.state.savedArticles} 
-                            handleRemove={this.handleRemove} toggleReady={this.state.toggleReady}/>
+                                <Bookmarked currentUser={this.props.currentUser} savedArticles={this.state.savedArticles} 
+                                handleRemove={this.handleRemove} toggleReady={this.state.toggleReady}/>
                         </div>
                     </div>
                     </>

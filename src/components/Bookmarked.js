@@ -11,7 +11,7 @@ export default class Bookmarked extends React.Component {
                             </div>
                             <div className="col-md-7">
                                 <h2>{bookmark.title}</h2>
-                                <p>{bookmark.content !== null ? bookmark.content.split('[').splice(0)[0] : bookmark.content}</p><span><a href={bookmark.url} target='_blank'>Read more</a></span>
+                                <p>{bookmark.content !== null ? bookmark.content.split('[').splice(0)[0] : bookmark.content}</p><span><a href={bookmark.url} target='_blank' rel="noopener noreferrer">Read more</a></span>
                             </div>
                             <div className="col-md-2">
                                 <button onClick={(event) => this.props.handleRemove(event, idx, bookmark.url)} className="btn btn-danger">Remove from list</button>
@@ -27,7 +27,7 @@ export default class Bookmarked extends React.Component {
                             </div>
                             <div className="col-md-7">
                                 <h2>{article.title}</h2>
-                                <p>{article.content !== null ? article.content.split('[').splice(0)[0] : article.content}</p><span><a href={article.url} target='_blank'>Read more</a></span>
+                                <p>{article.content !== null ? article.content.split('[').splice(0)[0] : article.content}</p><span><a href={article.url} target='_blank' rel="noopener noreferrer">Read more</a></span>
                             </div>
                             <div className="col-md-2">
                                 <button onClick={(event) => this.props.handleRemove(event, 0, article.url)} className="btn btn-danger">Remove from list</button>

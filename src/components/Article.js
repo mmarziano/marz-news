@@ -2,8 +2,8 @@ import React from 'react';
 import Moment from 'react-moment';
 
 export default class Article extends React.Component {
-    render() {
 
+    render() {
         const {result, index, articles} = this.props
 
         return(
@@ -19,7 +19,9 @@ export default class Article extends React.Component {
                     <a href={result.url} target="_blank" rel="noopener noreferrer"><i className="fa fa-external-link" aria-hidden="true"></i> Link to Article</a>
                 </div>
                 <div className='article-overlay text-center'>
-                    <a href={result.url} target="_blank" rel="noopener noreferrer"><h3 className='heading'>{result.title}</h3></a>
+                    <a href={result.url} target="_blank" rel="noopener noreferrer"><h3  className='heading'>{result.title}</h3></a>
+                    <p className="blurb">{result.content}</p>
+
                 </div>
             </li>
         </div>

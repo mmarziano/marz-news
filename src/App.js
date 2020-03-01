@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 import {
   Switch,
   Route,
-  Redirect,
-  useHistory
 } from "react-router-dom";
 import history from './components/History';
 import { withRouter } from 'react-router-dom';
@@ -197,7 +195,7 @@ class App extends React.Component {
     }
 
   render() {
-          const { error, loading, topHeadlines, searchArticles} = this.props;
+          const { error, loading, topHeadlines} = this.props;
 
           if (error) {
               return <div>Error! {error.message}</div>;
