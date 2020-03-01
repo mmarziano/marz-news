@@ -18,6 +18,7 @@ class Profile extends React.Component {
               showPreferences: false,
               showComments: false,
               showArticles: true,
+              toggleReady: true,
         }      
     }
 
@@ -52,9 +53,7 @@ class Profile extends React.Component {
             user_id: this.props.currentUser.id
           })
         .then(response => response.json())
-        .then(json => this.setState(
-            { savedArticles: json },
-            () => {return (this.state)}))
+        .then(json => this.retrieveSavedArticles())
         .catch(error => console.log(error));
     }
 
@@ -185,7 +184,7 @@ class Profile extends React.Component {
                         </div>
                         <div className={this.state.showArticles ? "container-fluid" : "hidden"}>
                             <Bookmarked currentUser={this.props.currentUser} savedArticles={this.state.savedArticles} 
-                            handleRemove={this.handleRemove}/>
+                            handleRemove={this.handleRemove} toggleReady={this.state.toggleReady}/>
                         </div>
                     </div>
                     </>

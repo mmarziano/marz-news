@@ -1,13 +1,6 @@
 import React from 'react'
 
 export default class Bookmarked extends React.Component {
-    
-    toggleRemove = (e, idx, id) => {
-        e.preventDefault();
-        let element = document.getElementById(id)
-        element.style.display = "none"
-        this.props.handleRemove(e, idx)
-    }
 
     render() {
             if (this.props.savedArticles.length > 1) {
@@ -18,10 +11,10 @@ export default class Bookmarked extends React.Component {
                             </div>
                             <div className="col-md-7">
                                 <h2>{bookmark.title}</h2>
-                                <p>{bookmark.content.split('[').splice(0)[0]}</p><span><a href={bookmark.url} target='_blank'>Read more</a></span>
+                                <p>{bookmark.content !== null ? bookmark.content.split('[').splice(0)[0] : bookmark.content}</p><span><a href={bookmark.url} target='_blank'>Read more</a></span>
                             </div>
                             <div className="col-md-2">
-                                <button onClick={(event) => this.toggleRemove(event, idx, bookmark.url)} className="btn btn-danger">Remove from list</button>
+                                <button onClick={(event) => this.props.handleRemove(event, idx, bookmark.url)} className="btn btn-danger">Remove from list</button>
                             </div>
                     </div>
                 )
@@ -34,10 +27,10 @@ export default class Bookmarked extends React.Component {
                             </div>
                             <div className="col-md-7">
                                 <h2>{article.title}</h2>
-                                <p>{article.content.split('[').splice(0)[0]}</p><span><a href={article.url} target='_blank'>Read more</a></span>
+                                <p>{article.content !== null ? article.content.split('[').splice(0)[0] : article.content}</p><span><a href={article.url} target='_blank'>Read more</a></span>
                             </div>
                             <div className="col-md-2">
-                                <button onClick={(event) => this.props.handleRemove(event, 0)} className="btn btn-danger">Remove from list</button>
+                                <button onClick={(event) => this.props.handleRemove(event, 0, article.url)} className="btn btn-danger">Remove from list</button>
                             </div>
                     </div>
             )} else {
