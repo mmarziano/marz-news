@@ -31,7 +31,7 @@ import {
         };
   
       case FETCH_SEARCH_FAILURE:
-        // The request failed. It's done. So set loading to "false".
+        // The request failed. It's done. Set loading to "false".
         // Save the error, so we can display it somewhere.
         // Since it failed, we don't have items to display anymore, so set `items` empty.
 
