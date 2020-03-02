@@ -26,23 +26,11 @@ class App extends React.Component {
     super();
     this.state = {
         currentUser: undefined,
-        // currentUser: {
-        //   id: null, 
-        //   oauthID: null,
-        //   first_name: null, 
-        //   last_name: null, 
-        //   email: null,
-        //   profileImg: null,
-        //   preferences: {
-        //      selectedCategories: [],
-        //      selectedLanguage: null,
-        //   },
-        //   comments: [],
-        // },
         isLoggedIn: false,
         articles: [],
         active: 0,
         isActive: false,
+        articles: [],
     }
     this.setFocus = this.setFocus.bind(this)
     this.top5 = this.top5.bind(this)
@@ -56,25 +44,26 @@ class App extends React.Component {
 
   getUser = () => {
     if(localStorage.getItem('token')){
-      fetch('http://localhost:3001/api/v1/getuser', {
-        headers: {
-          "Authorization" : `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-      .then(response => response.json())
-      .then(user => this.setState(
-        { currentUser: user, isLoggedIn: true },
-        () => {return (this.state)}))
-      const location = {
-        pathname: '/topheadlines',
-        state: { 
-          currentUser: this.state.currentUser,
-          isLoggedIn: this.state.isLoggedIn,
-         }
+          fetch('http://localhost:3001/api/v1/getuser', {
+            headers: {
+              "Authorization" : `Bearer ${localStorage.getItem('token')}`
+            }
+          })
+          .then(response => response.json())
+          .then(user => this.setState(
+            { currentUser: user, isLoggedIn: true },
+            () => {return (this.state)}))
+          const location = {
+            pathname: '/topheadlines',
+            state: { 
+              currentUser: this.state.currentUser,
+              isLoggedIn: this.state.isLoggedIn,
+            }
+          }
+          history.push(location)
+        } 
       }
-      history.push(location)
-    }
-  }
+
 
 
   setCurrentUser = (response) => {
@@ -146,7 +135,7 @@ class App extends React.Component {
 
     saveArticle = (idx, articles) => {
       let article = articles[idx]
-        let url = 'http://localhost:3001/articles';
+        let url = 'http://localhost:3001/bookmarks';
         let options = {
             method: 'POST', 
             headers: { 
@@ -194,9 +183,37 @@ class App extends React.Component {
         }
     }
 
-  render() {
+    saveComment = (idx, articles, text) => {
+      let article = articles[idx]
+      if (article.id) {
+        let url = 'http://localhost:3001/comments';
+        let options = {
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Origin': 'http://localhost:3000',
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`
+            }, 
+            body: JSON.stringify({
+                comment: {
+                    article_id: article.id,
+                    user_id:  this.state.currentUser.id,
+                    content: text,
+                }})
+            };
+        fetch(url, options)
+        .then(response => response.json())
+        .then(json => {console.log(json)})
+        .catch(error => console.log(error) );
+      } else {
+        swal(<p>Save article first</p>)
+      }
+    }
+  
+    render() {
+    
           const { error, loading, topHeadlines} = this.props;
-
           if (error) {
               return <div>Error! {error.message}</div>;
               }
@@ -206,6 +223,7 @@ class App extends React.Component {
           }
 
           if (topHeadlines !== null) {
+
             return (
             <>
               <Navbar setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} updateCurrentUser={this.updateCurrentUser} isLoggedIn={this.state.isLoggedIn}/> 
@@ -225,6 +243,7 @@ class App extends React.Component {
                       currentUser={this.state.currentUser} 
                       isLoggedIn={this.state.isLoggedIn}
                       saveArticle={this.saveArticle}
+                      saveComment={this.saveComment}
                     />}/>
                   <Route exact path='/profile/:id' component={() => <Profile currentUser={this.state.currentUser} 
                     setCurrentUser={this.setCurrentUser} updateCurrentUser={this.updateCurrentUser}/>} />  
@@ -235,9 +254,11 @@ class App extends React.Component {
                     topHeadlines={this.props.topHeadlines}
                     updateCurrentUser={this.updateCurrentUser}/>} /> 
                   <Route exact path='/search' component={() => <Search currentUser={this.state.currentUser} 
-                  isLoggedIn={this.state.isLoggedIn} saveArticle={this.saveArticle} searchArticles={this.props.searchArticles}/> } />
+                  isLoggedIn={this.state.isLoggedIn} saveArticle={this.saveArticle} 
+                  searchArticles={this.props.searchArticles} saveComment={this.saveComment}/> } />
                   <Route exact path='/:topic' component={(props) => <PreferredTopicArticles currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} 
-                  topic={props.location.state.topic} saveArticle={this.saveArticle} searchArticles={this.props.searchArticles}/>} />
+                  topic={props.location.state.topic} saveArticle={this.saveArticle} 
+                  searchArticles={this.props.searchArticles} saveComment={this.saveComment}/>} />
 
                   <Route path='/' render={() => <div>404</div>}/>
               </Switch>
@@ -251,7 +272,7 @@ class App extends React.Component {
 
   }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
     return {
         topHeadlines: state.topHeadlines.topHeadlines,
         searchArticles: state.searchArticles.searchArticles,

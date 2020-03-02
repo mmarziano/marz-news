@@ -19,7 +19,7 @@ class PreferredTopicArticles extends React.Component {
     renderResults = () => {
         if (this.props.searchArticles) {
         return this.props.searchArticles.map((result, index) => 
-            <Article result={result} index={index} saveArticle={this.props.saveArticle} articles={this.props.searchArticles}/>
+            <Article result={result} index={index} saveArticle={this.props.saveArticle} saveComment={this.props.saveComment} articles={this.props.searchArticles}/>
            )
         }
     }

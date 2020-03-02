@@ -102,29 +102,6 @@ class Profile extends React.Component {
         }
       }
 
-      handleCommentsClick = (e) => {
-        e.preventDefault();
-            this.setState({
-                showComments: !this.state.showComments,
-            }, 
-                () => {return (this.state)}
-            )
-            if (this.state.showPreferences) {
-                this.setState({
-                    showPreferences: false,
-                }, 
-                    () => {return (this.state)}
-                )
-            }
-            if (this.state.showArticles) {
-                this.setState({
-                    showArticles: false,
-                }, 
-                    () => {return (this.state)}
-                )
-            }
-      }
-
       handlePreferencesClick = (e) => {
         e.preventDefault();
             this.setState({
@@ -151,6 +128,7 @@ class Profile extends React.Component {
     
 
     render() {
+  
         if (this.props.currentUser.id === null) {
             return <Redirect
                         to={{
@@ -168,9 +146,6 @@ class Profile extends React.Component {
                                 <Nav.Item onClick={this.handleArticlesClick}>
                                     <Nav.Link href="/home">Bookmarked Articles</Nav.Link>
                                 </Nav.Item>
-                                <Nav.Item onClick={this.handleCommentsClick}>
-                                    <Nav.Link eventKey="link-1">My Comments</Nav.Link>
-                                </Nav.Item>
                                 <Nav.Item onClick={this.handlePreferencesClick}>
                                     <Nav.Link href="#" eventKey="link-2">Preferences</Nav.Link>
                                 </Nav.Item>
@@ -178,9 +153,6 @@ class Profile extends React.Component {
                         </div>
                         <div className={this.state.showPreferences ? "container-fluid" : "hidden"}>
                             <Preferences currentUser={this.props.currentUser} saveUser={this.saveUser} togglePreferences={this.handlePreferencesClick}/>
-                        </div>
-                        <div className={this.state.showComments ? "container-fluid" : "hidden"}>
-                             
                         </div>
                         <div className={this.state.showArticles ? "container-fluid" : "hidden"}>
                                 <Bookmarked currentUser={this.props.currentUser} savedArticles={this.state.savedArticles} 

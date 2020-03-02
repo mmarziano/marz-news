@@ -25,11 +25,12 @@ class TopHeadlines extends React.Component {
 
     renderArticles = () => {
         return this.props.topHeadlines.map((result, index) => 
-            <Article result={result} index={index} saveArticle={this.props.saveArticle} articles={this.props.topHeadlines}/>
+            <Article result={result} index={index} saveArticle={this.props.saveArticle} saveComment={this.props.saveComment} articles={this.props.topHeadlines}/>
         )
     }
 
     render() {
+  
         if (!this.props.isLoggedIn) {
             return <Redirect
                         to={{
@@ -37,7 +38,7 @@ class TopHeadlines extends React.Component {
                         }}
                     />
         }
-
+        if (this.props.topHeadlines) {
         return(
             <> 
                 {this.props.isLoggedIn || this.props.location.state.isLoggedIn ? <PageHeader pageheader="Top Headlines" currentUser={this.props.currentUser} /> : null}   
@@ -49,7 +50,8 @@ class TopHeadlines extends React.Component {
                     </div>
                 </div>
         </>)
-}     
+        }
+    }     
 }
 
 const mapStateToProps = state => {

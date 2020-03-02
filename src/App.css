@@ -1,8 +1,8 @@
 
-@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Archivo+Narrow|Anton&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|PT+Sans+Narrow|Anton&display=swap');
 
 * {
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: 'PT Sans Narrow', sans-serif;
 }
 .container-fluid {
   width: 100vw;
@@ -459,7 +459,7 @@ padding:0 20px;
 
 label.form-check-label {
   color:rgb(3, 131, 190);
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: 'PT Sans Narrow', sans-serif;
   font-size: 1.1rem;
   padding-right: 20px;
   display: inline-flex;
@@ -472,7 +472,7 @@ input[type="checkbox"]{
 
 .category {
   color:rgb(3, 131, 190);
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: 'PT Sans Narrow', sans-serif;
   font-size: 1.1rem;
   padding-right: 20px;
   padding-left: 10px;
@@ -482,7 +482,7 @@ input[type="checkbox"]{
 .category-highlight {
   color: #fff;
   background: linear-gradient(180deg, rgb(3, 131, 190) 10%, rgb(20, 20, 20) 100%);
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: 'PT Sans Narrow', sans-serif;
   font-size: 1.1rem;
   margin-left: 10px;
   padding-right: 10px;

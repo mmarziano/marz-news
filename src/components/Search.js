@@ -19,7 +19,7 @@ class Search extends React.Component {
     renderResults = () => {
         if (this.props.searchArticles) {
         return this.props.searchArticles.map((result, idx) => 
-            <Article result={result} saveArticle={this.props.saveArticle}/>
+            <Article result={result} saveArticle={this.props.saveArticle} saveComment={this.props.saveComment} />
            )
         }
     }

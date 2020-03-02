@@ -6,6 +6,7 @@ import {
 import GoogleLogin from 'react-google-login';
 
 
+
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -19,7 +20,6 @@ class Login extends React.Component {
     }
 
     responseGoogle = (response) => {
-        console.log(response)
         if (response.googleId !== undefined) {
             this.handleGoogleSubmit(response);
         }

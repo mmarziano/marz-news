@@ -50,7 +50,7 @@ li {
   }
 
   .article-overlay {
-    background-color:  rgba(3, 131, 190, 0.4);
+    background-color:  rgba(3, 131, 190, 0.6);
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 8px 0 rgba(255, 255, 255, 0.19);
     width: 100%;
     max-width: 100%;
@@ -86,7 +86,7 @@ li {
 
   .blurb {
     font-size: 1.5vw;
-    font-family: 'Archivo Narrow', sans-serif;
+    font-family: 'PT Sans Narrow', sans-serif;
     padding-left: 15px;
     padding-right: 15px;
     position: absolute;
