@@ -1,6 +1,6 @@
 import React from 'react';
-import MainHeadline from './MainHeadline'
-import HeroImage from './HeroImage'
+import MainHeadline from '../components/MainHeadline'
+import HeroImage from '../components/HeroImage'
 import { connect } from 'react-redux'
 
 class Home extends React.Component {

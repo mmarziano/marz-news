@@ -1,9 +1,17 @@
 import React from 'react';
 import Moment from 'react-moment';
+import { connect } from 'react-redux'
+import SearchContainer from '../components/Search'
+import TopHeadlines from './TopHeadlines'
 
 
-class SearchContainer extends React.Component {
-    
+class MainContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userPrefs: ['politics', 'entertainment', 'sports', 'business'],
+        }
+    }
 
     renderResults = () => {
         return this.props.results.searchArticles.map(result => 
@@ -27,27 +35,39 @@ class SearchContainer extends React.Component {
             </div>
         )
     }
-
         
     render() {
-        if (this.props.results.searchArticles !== null ) {
+
+        // if (this.props.loading) {
+        //     return (<Loading />)
+        //   }
+
+        if (this.props.searchArticles !== null ) {
             return( 
-                    <div className="article-grid text-center">
-                        <h3>Displaying results...</h3>
-                        <ul>
-                            {this.renderResults()}
-                  
-                        </ul>
+                <div className="container-fluid col-lg-12">
+                    <div className="row main">
+                        <SearchContainer results={this.props.searchResults}/>
                     </div>
+                </div>
             )
-        } else {
-            return null;
+        } 
+        
+        if (this.props.topHeadlines && this.props.searchArticles === null && this.props.hide === true) {
+            return (
+            <TopHeadlines topHeadlines={this.props.topHeadlines} active={this.props.active}/>)
         }
     }     
 }
 
+const mapStateToProps = state => {
+    return {
+        searchResults: state.searchArticles,
+        loading: state.searchArticles.loading,
+        error: state.searchArticles.error
+    }
+}
+
+export default connect(mapStateToProps)(MainContainer)
 
 
-export default SearchContainer
 
-    

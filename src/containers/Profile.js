@@ -1,8 +1,8 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Preferences from './Preferences';
-import PageHeader from './PageHeader';
-import Bookmarked from './Bookmarked';
+import PageHeader from '../components/PageHeader';
+import Bookmarked from '../components/Bookmarked';
 import {
     Redirect
   } from "react-router-dom";

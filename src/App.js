@@ -9,16 +9,16 @@ import {
 } from "react-router-dom";
 import history from './components/History';
 import { withRouter } from 'react-router-dom';
-import Login from './components/Login';
-import Signup from './components/Signup'
+import Login from './containers/Login';
+import Signup from './containers/Signup'
 import { fetchTopHeadlines } from "./actions/articleActions";
-import TopHeadlines from './components/TopHeadlines'
-import Navbar from './components/Navbar'
-import Home from './components/Home'
-import Profile from './components/Profile'
+import TopHeadlines from './containers/TopHeadlines'
+import Navbar from './containers/Navbar'
+import Home from './containers/Home'
+import Profile from './containers/Profile'
 import Loading from './components/Loading'
-import Search from './components/Search'
-import PreferredTopicArticles from './components/PreferredTopicArticles'
+import Search from './containers/Search'
+import PreferredTopicArticles from './containers/PreferredTopicArticles'
 import swal from '@sweetalert/with-react'
 
 class App extends React.Component {

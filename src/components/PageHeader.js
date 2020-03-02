@@ -1,6 +1,6 @@
 import React from 'react';
 import  detective  from '../assets/images/young-detective.png';
-import SearchInput from './SearchInput'
+import SearchInput from '../containers/SearchInput'
 
 class PageHeader extends React.Component {
 

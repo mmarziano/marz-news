@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import {
     Redirect
   } from "react-router-dom";
-import PageHeader from './PageHeader'
-import Loading from './Loading'
+import PageHeader from '../components/PageHeader'
+import Loading from '../components/Loading'
 import Article from './Article'
 
 

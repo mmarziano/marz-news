@@ -1,11 +1,12 @@
 import React from 'react'
+import Moment from 'react-moment';
 
 export default class Bookmarked extends React.Component {
 
     render() {
             if (this.props.savedArticles.length > 1) {
                 return this.props.savedArticles.map((bookmark, idx) =>
-                    <div id={bookmark.a.url} className="row bookmark-card">
+                    <div id={bookmark.a.url} className="row bookmark-card" key={idx}>
                             <div className="col-md-3">
                                 <img src={bookmark.a.urlToImage} alt={bookmark.a.title} />
                             </div>
@@ -21,7 +22,7 @@ export default class Bookmarked extends React.Component {
          } else if (this.props.savedArticles.length === 1) {
             let article = this.props.savedArticles[0]
             return (
-                    <div className="row bookmark-card">
+                    <div className="row bookmark-card" key='0'>
                             <div className="col-md-3">
                                 <img src={article.a.urlToImage} alt={article.a.title} />
                             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Link
   } from "react-router-dom";
-import history from './History';
+import history from '../components/History';
 import { connect } from 'react-redux'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
