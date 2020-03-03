@@ -46,9 +46,25 @@ ul {
 }
 
 /* NavBar */
+
+.nav-icon a{
+  background: transparent;
+  color: rgb(3, 131, 190);
+  width: 20px;
+  height: 20px;
+}
+
+.nav-icon i {
+  position: absolute;
+  right: 1vw;
+  margin-top: 10px;
+  display: none;
+}
+
 .navbar-sticky {
   position: fixed;
   width: 100vw;
+  height: 75px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,6 +103,10 @@ ul {
   color: rgb(3, 131, 190);
 }
 
+.navbar a.active {
+  color: rgb(3, 131, 190);
+}
+
 .navbar-sticky ul{
 list-style: none;
 margin: 0 auto;
@@ -105,6 +125,12 @@ position: relative;
 padding:0 20px;
 }
 
+.navbar-sticky.responsive li {
+  float: none;
+  display: block;
+  text-align: left;
+}
+
 .search-card {
   height: 500px;
   background-image: url('./assets/images/background.jpg');
@@ -114,12 +140,26 @@ padding:0 20px;
 }
  
 
-@media only screen and (min-width:240px) and (max-width: 768px){
-  .navbar ul li{
-      float:none;
-      display:block;
-      text-align:center;
-      margin:0 auto;
+@media screen and (max-width: 1304px) {
+  .navbar-sticky li:not(:first-child) {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1303px) {
+  .nav-icon i {
+    position: absolute;
+    float: right;
+    display: block;
+  }
+}
+
+  @media screen and (max-width: 768px) {
+  .nav-icon i {
+    position: absolute;
+    top: 75px;
+    float: right;
+    display: block;
   }
 }
 
@@ -396,6 +436,12 @@ padding:0 20px;
   height: 100px;
   border-radius: 100px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media screen and (max-width: 768px) {
+  .header-img {
+    display: none;
+  }
 }
 
 .profile {

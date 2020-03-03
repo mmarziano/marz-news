@@ -15,7 +15,7 @@ class PageHeader extends React.Component {
                         <SearchInput currentUser={this.props.currentUser}/>
                     </div>
                     <div className="col-md-4 text-center">
-                        <img src={ detective } alt="Young Detective" />
+                        <img className='header-img' src={ detective } alt="Young Detective" />
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@ class PageHeader extends React.Component {
                             <h2>{this.props.pageheader}</h2>
                         </div>
                         <div className="col-md-4 text-center">
-                            <img src={ detective } alt="Young Detective" />
+                            <img className='header-img' src={ detective } alt="Young Detective" />
                         </div>
                     </div>
                 </div>
