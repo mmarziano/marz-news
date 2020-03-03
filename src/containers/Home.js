@@ -1,6 +1,9 @@
 import React from 'react';
 import MainHeadline from '../components/MainHeadline'
 import HeroImage from '../components/HeroImage'
+import {
+    Redirect,
+  } from "react-router-dom";
 import { connect } from 'react-redux'
 
 class Home extends React.Component {
@@ -37,7 +40,20 @@ class Home extends React.Component {
 
     render() {
         const { topHeadlines } = this.props;
-            return(
+        
+        if (this.props.isLoggedIn) {
+            return <Redirect
+                        to={{
+                        pathname: "/topheadlines",
+                        state: { 
+                            currentUser: this.props.currentUser, 
+                            topHeadlines:  this.props.topHeadlines,
+                            }
+                        }}
+                    />
+        } 
+    
+        return(
             <div className={`${this.props.isLoggedIn ? " hidden" : "container-fluid"}`}>
                 <div className='row hero'>
                     <HeroImage topHeadlines={topHeadlines} activeArticle={this.state.active} top5={this.top5}/>

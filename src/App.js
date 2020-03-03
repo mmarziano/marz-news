@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import './css/loading.css';
 import './css/articles.css';
+import './css/dropdown.css';
 import { connect } from 'react-redux'
 import {
   Switch,

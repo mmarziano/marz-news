@@ -7,8 +7,6 @@ import { connect } from 'react-redux'
 import  logo  from '../assets/images/marz-newslogo.png'
 import { fetchSearch } from '../actions/searchActions';
 
-
-
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
@@ -131,6 +129,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(null, mapDispatchToProps)(Navbar)
-
-
-

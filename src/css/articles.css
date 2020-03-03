@@ -189,8 +189,18 @@ li {
     position: absolute;
     top: 16px;
     left: 16px;
-    width: 500px;
-    height: 170px;
+    width: 20vw;
+    height: 17vh;
+  }
+
+  @media screen and (max-width: 768px) {
+    .infobox {
+      width: 25vw;
+    }
+    
+    .infobox p, .infobox a {
+      font-size: 0.6em;
+    }
   }
   
   /* Bookmarked articles */
