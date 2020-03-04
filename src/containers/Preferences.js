@@ -66,16 +66,16 @@ class Preferences extends React.Component {
 
     setPreferences = () => {
         if (this.props.currentUser.preferences_categories.length > 0) {
-        this.props.currentUser.preferences_categories.map((cat) => {
-            let index = this.state.subcategories.findIndex(s => s.name === cat)
-            let langIndex = this.state.languages.findIndex(l => l.abbr === this.props.currentUser.preferences_language)
-            let newState = Object.assign({}, this.state);
-            newState.selectedCategories.push(cat)
-            newState.subcategories[index].isChecked = !newState.subcategories[index].isChecked;
-            newState.languages[langIndex].isChecked = !newState.languages[langIndex].isChecked;
-            newState.selectedLanguage = this.props.currentUser.preferences_language;
-            this.setState(newState, () => {return (this.state)})  
-        })
+            this.props.currentUser.preferences_categories.map((cat) => {
+                let index = this.state.subcategories.findIndex(s => s.name === cat)
+                let langIndex = this.state.languages.findIndex(l => l.abbr === this.props.currentUser.preferences_language)
+                let newState = Object.assign({}, this.state);
+                newState.selectedCategories.push(cat)
+                newState.subcategories[index].isChecked = !newState.subcategories[index].isChecked;
+                newState.languages[langIndex].isChecked = !newState.languages[langIndex].isChecked;
+                newState.selectedLanguage = this.props.currentUser.preferences_language;
+                this.setState(newState, () => {return (this.state)})  
+            })
         }
     }
         

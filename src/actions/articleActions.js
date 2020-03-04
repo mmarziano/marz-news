@@ -14,34 +14,6 @@ export function fetchTopHeadlines() {
     };
   }
 
-  const recordArticles = (articles) => {
-      let url = 'http://localhost:3001/articles';
-      articles.map(article => 
-        fetch(url, {   
-          method: 'POST', 
-          headers: { 
-              'Content-Type': 'application/json', 
-              'Accept': 'application/json',
-              'Origin': 'http://localhost:3000',
-              "Authorization" : `Bearer ${localStorage.getItem('token')}`
-          }, 
-          body: JSON.stringify({
-              article: {
-                  author: article.author,
-                  title:  article.title,
-                  description: article.description,
-                  url: article.url,
-                  urlToImage: article.urlToImage,
-                  publishedAt: article.publishedAt,
-                  content: article.content,
-                  source: article.source.name,
-              }})
-          })
-          .then(response => response.json())
-          .then(json => {return(json)})
-          .catch(error => console.log(error) )
-      )
-  }
 
 
 export const FETCH_TOPHEADLINES_BEGIN   = 'FETCH_TOPHEADLINES_BEGIN';

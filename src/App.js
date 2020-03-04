@@ -31,7 +31,6 @@ class App extends React.Component {
         articles: [],
         active: 0,
         isActive: false,
-        articles: [],
     }
     this.setFocus = this.setFocus.bind(this)
     this.top5 = this.top5.bind(this)
