@@ -16,6 +16,7 @@ class Navbar extends React.Component {
             userInput: '',
             showLogin: false,
             logout: false,
+            showBreadcrumb: false,
         }      
     }    
 
@@ -86,27 +87,40 @@ class Navbar extends React.Component {
         } 
     }
 
-    toggleResponsiveNav = () => {
-        var x = document.getElementById("navbar");
-        if (x.className === "navbar-sticky") {
-            x.className += " responsive";
-        } else {
-            x.className = "navbar-sticky";
-        }
+    renderBreadcrumb = () => {
+        return(
+                <div className="breadcrumb" id="breadcrumb">
+                    <div className="row col-md-12">
+                        <menu>
+                            <ul>
+                                <li className={this.props.isLoggedIn ? null : "hidden"}><Link to='/topheadlines'>Top Headlines</Link></li>
+                                {this.renderUserLinks()}
+                            </ul>
+                        </menu>
+                    </div>
+                </div>
+        )
+    }
+
+    toggleBreadcrumb = () => {
+        this.setState(
+            { showBreadcrumb: !this.state.showBreadcrumb }, () => {
+            return (this.state)});
     }
     
     render() {
         return(
+            <>
             <div className="container-fluid"> 
                     <div className="navbar-sticky" id="navbar">
                         <div className="row col-md-12">
                             <div className="col-md-4">
                                 <a href="/"><img src={ logo } alt="Marz News Logo" className="logo" /></a>
                             </div>
-                            <div className="col-md-8">
+                            <div id="menu" className="menu col-md-8">
                                     <menu>
                                         <ul>
-                                            <li><a href="javascript:void(0);" className="nav-icon" onclick={this.toggleResponsiveNav}><i class="fa fa-bars"></i></a></li>
+                                            <li><a href="javascript:void(0);" className="nav-icon" onClick={this.toggleBreadcrumb}><i class="fa fa-bars"></i></a></li>
                                             <li><i className="fas fa-sign-out-alt" onClick={this.toggleLogout}></i></li>
                                             {this.renderSignIn()}
                                             <li><Link to='/search'><i className={`fa fa-search${this.props.isLoggedIn ? "" : " hidden"}`} aria-hidden="true"></i></Link></li>
@@ -118,6 +132,10 @@ class Navbar extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className={this.state.showBreadcrumb ? "container-fluid" : "hidden"}> 
+                    {this.renderBreadcrumb()}
+                </div>
+            </>
         )
     }
 } 

@@ -119,23 +119,38 @@ line-height: 50px;
 text-align: center;
 cursor: pointer;
 font-family: 'Bebas Neue', sans-serif;
+font-size: 1.5em;
 transition: 0.5s;
 position: relative;
 padding:0 20px;
 }
 
-.navbar-sticky {
-  position: fixed;
-  width: 100vw;
-  height: 75px;
+#breadcrumb {
+  position: relative;
+  top: 75px;
+  background-color: rgb(0, 65, 95);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0,0,0,1);
-  max-height: 75px;
+  width: 100vw;
+  padding: 0;
   margin: 0;
   margin-left: -15px;
-  padding: 5px;
+  height: 75px;
+  max-height: 75px;
+}
+
+.breadcrumb li a, li {
+    float: right;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1em;
+    transition: 0.5s;
+    padding: 0px 5px;
+    margin-bottom: 10px;
 }
 
 .search-card {
@@ -147,41 +162,23 @@ padding:0 20px;
 }
  
 
-@media screen and (max-width: 1304px) {
-  .navbar-sticky li:not(:first-child) {
+@media screen and (max-width: 1450px) {
+  .menu li:nth-child(n+6) {
     display: none;
   }
+
+  .menu li:nth-child(n-6) {
+    padding: 5px;
+  }
 }
 
-@media screen and (max-width: 1303px) {
+@media screen and (max-width: 1450px) {
   .nav-icon i {
     position: absolute;
     float: right;
     display: block;
   }
 
-  #nav-element {
-    display: block;
-  }
-
-  #nav-element li {
-    width: 200px;
-    height: 100px;
-    position:relative;
-    float: right;
-    text-align: left;
-    font-size: 1em;
-    border: 1px solid orange
-  }
-}
-
-  @media screen and (max-width: 768px) {
-  .nav-icon i {
-    position: absolute;
-    top: 75px;
-    float: right;
-    display: block;
-  }
 }
 
 
@@ -200,9 +197,22 @@ padding:0 20px;
 
 .logo {
   max-width: 250px;
+  position: absolute;
+  top: 25px;
   height: 50px;
   z-index: 1;
   float: left;
+}
+
+@media screen and (max-width: 500px) {
+  .logo {
+    max-width: 125px;
+    position: absolute;
+    top: 25px;
+    height: 25px;
+    z-index: 1;
+    float: left;
+  }
 }
 
 /* Login Page */
@@ -465,6 +475,7 @@ padding:0 20px;
     display: none;
   }
 }
+
 
 .profile {
   background-image: url('./assets/images/background.jpg');
