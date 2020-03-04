@@ -25,7 +25,7 @@ class TopHeadlines extends React.Component {
 
     renderArticles = () => {
         return this.props.topHeadlines.map((result, index) => 
-            <Article result={result} index={index} saveArticle={this.props.saveArticle} saveComment={this.props.saveComment} articles={this.props.topHeadlines}/>
+            <Article result={result} key={index} index={index} saveArticle={this.props.saveArticle} saveComment={this.props.saveComment} articles={this.props.topHeadlines}/>
         )
     }
 

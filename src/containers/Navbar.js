@@ -120,7 +120,7 @@ class Navbar extends React.Component {
                             <div id="menu" className="menu col-md-8">
                                     <menu>
                                         <ul>
-                                            <li><a href="javascript:void(0);" className="nav-icon" onClick={this.toggleBreadcrumb}><i class="fa fa-bars"></i></a></li>
+                                            <li className="nav-icon" onClick={this.toggleBreadcrumb}><i className="fa fa-bars"></i></li>
                                             <li><i className="fas fa-sign-out-alt" onClick={this.toggleLogout}></i></li>
                                             {this.renderSignIn()}
                                             <li><Link to='/search'><i className={`fa fa-search${this.props.isLoggedIn ? "" : " hidden"}`} aria-hidden="true"></i></Link></li>
