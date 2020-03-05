@@ -162,7 +162,6 @@ padding:0 20px;
   background-size: cover;
 }
  
-
 @media screen and (max-width: 1450px) {
   .menu li:nth-child(n+6) {
     display: none;
@@ -178,9 +177,7 @@ padding:0 20px;
     display: inline-block;
     padding-left: 5px;
   }
-
 }
-
 
 #login-btn {
   color: #fff;
