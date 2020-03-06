@@ -45,6 +45,7 @@ class App extends React.Component {
   getUser = () => {
     if(localStorage.getItem('token')){
           fetch('https://marz-news-backend.herokuapp.com/api/v1/getuser', {
+            mode: 'no-cors',
             headers: {
               "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }
@@ -138,6 +139,7 @@ class App extends React.Component {
         let url = 'https://marz-news-backend.herokuapp.com/bookmarks';
         let options = {
             method: 'POST', 
+            mode: 'no-cors',
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
@@ -189,6 +191,7 @@ class App extends React.Component {
         let url = 'https://marz-news-backend.herokuapp.com/comments';
         let options = {
             method: 'POST', 
+            mode: 'no-cors',
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',

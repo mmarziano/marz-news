@@ -49,6 +49,7 @@ class Signup extends React.Component {
         let url = 'https://marz-news-backend.herokuapp.com/api/v1/signup';
         let options = {
             method: 'POST', 
+            mode: 'no-cors',
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',

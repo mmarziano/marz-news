@@ -29,6 +29,7 @@ class Login extends React.Component {
         let url = 'https://marz-news-backend.herokuapp.com/api/v1/googleAuth';
         let options = {
             method: 'POST', 
+            mode: 'no-cors',
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
@@ -70,6 +71,7 @@ class Login extends React.Component {
         let url = 'https://marz-news-backend.herokuapp.com/api/v1/login';
         let options = {
             method: 'POST', 
+            mode: 'no-cors',
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',

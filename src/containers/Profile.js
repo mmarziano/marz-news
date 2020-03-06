@@ -30,7 +30,9 @@ class Profile extends React.Component {
         // Fetch request to retrieve user's bookmarked articles
         let url = 'http://localhost:3001/bookmarks/' + this.props.currentUser.id;
         fetch(url, {
+            mode: 'no-cors',
             headers: {
+                'Access-Control-Allow-Origin': '*',
               "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }
           })
@@ -47,7 +49,9 @@ class Profile extends React.Component {
         let url = 'https://marz-news-backend.herokuapp.com/bookmarks/' + idx + '/' + this.props.currentUser.id;
         fetch(url, {
             method: 'PUT',
+            mode: 'no-cors',
             headers: {
+                'Access-Control-Allow-Origin': '*',
               "Authorization" : `Bearer ${localStorage.getItem('token')}`
             },
             user_id: this.props.currentUser.id
@@ -62,10 +66,11 @@ class Profile extends React.Component {
             let url = 'https://marz-news-backend.herokuapp.com/api/v1/profile/' + this.props.currentUser.id;
             let options = {
                 method: 'PATCH', 
+                mode: 'no-cors',
                 headers: { 
                     'Content-Type': 'application/json', 
                     'Accept': 'application/json',
-                    'mode': 'no-cors',
+                    'Access-Control-Allow-Origin': '*',
                     'Authorization' : `Bearer ${localStorage.getItem('token')}`
                 }, 
                 body: JSON.stringify({
