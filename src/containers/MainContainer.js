@@ -6,12 +6,6 @@ import TopHeadlines from './TopHeadlines'
 
 
 class MainContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userPrefs: ['politics', 'entertainment', 'sports', 'business'],
-        }
-    }
 
     renderResults = () => {
         return this.props.results.searchArticles.map(result => 
