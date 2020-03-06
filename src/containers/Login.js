@@ -3,6 +3,7 @@ import {
     Redirect,
     Link
   } from "react-router-dom";
+import Loading from '../components/Loading'
 import GoogleLogin from 'react-google-login';
 
 
@@ -13,6 +14,7 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
+            loggingIn: false,
             isLoggedIn: props.isLoggedIn,
             loginError: false,
             errors: null,
@@ -97,6 +99,10 @@ class Login extends React.Component {
                 () => {return (this.state)}
             )
         } else {
+            this.setState(
+                { loggingIn: true },
+                () => {console.log (this.state)}
+              );
             localStorage.setItem('token', response.token);
             this.setUser(response);
             this.setState(
@@ -121,6 +127,10 @@ class Login extends React.Component {
 
 
     render() {
+        if (this.state.loggingIn ) {
+            return (<Loading heading={`Logging in...`}/>)
+        }
+
         if (this.state.isLoggedIn) {
             return <Redirect
                         to={{
@@ -137,7 +147,9 @@ class Login extends React.Component {
                 <div className={this.state.isLoggedIn ? "hidden" : "container-fluid"}>
                     <div className="row">
                         <div className={this.state.loginError ? "error" : "hidden"}>
+                            <ul>
                             {this.renderErrorMsg(this.state.errors)}
+                            </ul>
                         </div>
                     </div>
                     <div className="row" id="login-page">

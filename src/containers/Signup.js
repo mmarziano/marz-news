@@ -34,7 +34,7 @@ class Signup extends React.Component {
 
     validatePassword = (state) => {
         if (state.password === state.passwordConfirmation) {
-            this.setState({passwordConfirmed: !this.state.passwordConfirmed}, 
+            this.setState({passwordConfirmed: true}, 
                 () => {return (this.state)}
             )
         } else {
@@ -46,28 +46,34 @@ class Signup extends React.Component {
 
     handleSignupSubmit = (e) => {
         e.preventDefault();
-        let url = 'http://localhost:3001/api/v1/signup';
-        let options = {
-            method: 'POST', 
-            headers: { 
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json',
-                'Origin': 'http://localhost:3000'
-            }, 
-            body: JSON.stringify({
-                user: {
-                    first_name: this.state.firstName,
-                    last_name: this.state.lastName,
-                    email: this.state.email,
-                    password: this.state.password,
-                    profileImg: 'https://api.adorable.io/avatars/100/' + this.state.firstName + 'lol@adorable.io.png',
-                    preferences_language: 'en',
-                }})
-            };
-        fetch(url, options)
-        .then(response => response.json())
-        .then(json => {this.handleResponse(json)})
-        .catch(error => console.log(error) );
+            if (!this.state.passwordConfirmed) {
+                this.setState({signupError: true, errors: ["Passwords do not match"]}, 
+                    () => {return (this.state)})
+            } else {
+        
+            let url = 'http://localhost:3001/api/v1/signup';
+            let options = {
+                method: 'POST', 
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Accept': 'application/json',
+                    'Origin': 'http://localhost:3000'
+                }, 
+                body: JSON.stringify({
+                    user: {
+                        first_name: this.state.firstName,
+                        last_name: this.state.lastName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        profileImg: 'https://api.adorable.io/avatars/100/' + this.state.firstName + 'lol@adorable.io.png',
+                        preferences_language: 'en',
+                    }})
+                };
+            fetch(url, options)
+            .then(response => response.json())
+            .then(json => {this.handleResponse(json)})
+            .catch(error => console.log(error) );
+        }
     }
 
     handleResponse = (response) => {
@@ -129,19 +135,19 @@ class Signup extends React.Component {
                             <h1 className="title">Create Your Account</h1><br/>
                             <form onSubmit={this.handleSignupSubmit}>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" name="firstName" placeholder="First Name" onChange={this.updateFields}/>
+                                    <input type="text" className="form-control" name="firstName" placeholder="First Name" onChange={this.updateFields} required/>
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" name="lastName" placeholder="Last Name" onChange={this.updateFields}/>
+                                    <input type="text" className="form-control" name="lastName" placeholder="Last Name" onChange={this.updateFields} required/>
                                 </div>
                                 <div className="form-group">
-                                    <input type="email" className="form-control" name="email" placeholder="Email Address" onChange={this.updateFields}/>
+                                    <input type="email" className="form-control" name="email" placeholder="Email Address" onChange={this.updateFields} required/>
                                 </div>
                                 <div className="form-group">
-                                    <input type="password" className={`form-control${this.state.passwordConfirmed ? "-confirmed" : ""}`} name="password" placeholder="Password" onChange={this.updateFields}/>
+                                    <input type="password" className={`form-control${this.state.passwordConfirmed ? "-confirmed" : ""}`} name="password" placeholder="Password" onChange={this.updateFields} required/>
                                 </div>
                                 <div className="form-group">
-                                    <input type="password" className={`form-control${this.state.passwordConfirmed === true ? "-confirmed" : ""}`} name="passwordConfirmation" placeholder="Confirm Password" onChange={this.confirmPassword}/><br/>
+                                    <input type="password" className={`form-control${this.state.passwordConfirmed === true ? "-confirmed" : ""}`} name="passwordConfirmation" placeholder="Confirm Password" onChange={this.confirmPassword} required/><br/>
                                 </div>
                                 
                                 <button type="submit" className="btn btn-primary">Signup</button>
