@@ -1,1 +1,1 @@
-web: bundle exec npm start
+web: bin/boot
