@@ -52,6 +52,7 @@ class Signup extends React.Component {
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
+                'mode': 'no-cors',
             }, 
             body: JSON.stringify({
                 user: {

@@ -141,6 +141,7 @@ class App extends React.Component {
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
+                'mode': 'no-cors',
                 "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }, 
             body: JSON.stringify({
@@ -191,6 +192,7 @@ class App extends React.Component {
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
+                'mode': 'no-cors',
                 "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }, 
             body: JSON.stringify({
