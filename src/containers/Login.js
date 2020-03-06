@@ -26,13 +26,13 @@ class Login extends React.Component {
       }
 
       handleGoogleSubmit = (response) => {
-        let url = 'http://localhost:3001/api/v1/googleAuth';
+        let url = 'https://marz-news-backend.herokuapp.com/api/v1/googleAuth';
         let options = {
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'http://localhost:3000'
+                'Origin': 'https://marz-news.herokuapp.com/'
             }, 
             body: JSON.stringify({
                 user: {
@@ -67,13 +67,13 @@ class Login extends React.Component {
 
     handleLoginSubmit = (e) => {
         e.preventDefault();
-        let url = 'http://localhost:3001/api/v1/login';
+        let url = 'https://marz-news-backend.herokuapp.com/api/v1/login';
         let options = {
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'http://localhost:3000'
+                'Origin': 'https://marz-news.herokuapp.com/'
             }, 
             body: JSON.stringify({
                 user: {

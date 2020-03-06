@@ -38,10 +38,6 @@ class MainContainer extends React.Component {
         
     render() {
 
-        // if (this.props.loading) {
-        //     return (<Loading />)
-        //   }
-
         if (this.props.searchArticles !== null ) {
             return( 
                 <div className="container-fluid col-lg-12">

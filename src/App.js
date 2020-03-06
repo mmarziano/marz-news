@@ -44,7 +44,7 @@ class App extends React.Component {
 
   getUser = () => {
     if(localStorage.getItem('token')){
-          fetch('http://localhost:3001/api/v1/getuser', {
+          fetch('https://marz-news-backend.herokuapp.com/api/v1/getuser', {
             headers: {
               "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }
@@ -135,13 +135,13 @@ class App extends React.Component {
 
     saveArticle = (idx, articles) => {
       let article = articles[idx]
-        let url = 'http://localhost:3001/bookmarks';
+        let url = 'https://marz-news-backend.herokuapp.com/bookmarks';
         let options = {
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'http://localhost:3000',
+                'Origin': 'https://marz-news.herokuapp.com/',
                 "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }, 
             body: JSON.stringify({
@@ -186,13 +186,13 @@ class App extends React.Component {
     saveComment = (idx, articles, text) => {
       let article = articles[idx]
       if (article.id) {
-        let url = 'http://localhost:3001/comments';
+        let url = 'https://marz-news-backend.herokuapp.com/comments';
         let options = {
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'http://localhost:3000',
+                'Origin': 'https://marz-news.herokuapp.com/',
                 "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }, 
             body: JSON.stringify({

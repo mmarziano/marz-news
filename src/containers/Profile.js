@@ -44,7 +44,7 @@ class Profile extends React.Component {
     handleRemove = (e, idx) => {
         e.preventDefault();
         // Fetch request to remove bookmarked article from list
-        let url = 'http://localhost:3001/bookmarks/' + idx + '/' + this.props.currentUser.id;
+        let url = 'https://marz-news-backend.herokuapp.com/bookmarks/' + idx + '/' + this.props.currentUser.id;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -59,7 +59,7 @@ class Profile extends React.Component {
 
     saveUser = (categories, language) => {
             // Fetch request to update user based on selected preferences
-            let url = 'http://localhost:3001/api/v1/profile/' + this.props.currentUser.id;
+            let url = 'https://marz-news-backend.herokuapp.com/api/v1/profile/' + this.props.currentUser.id;
             let options = {
                 method: 'PATCH', 
                 headers: { 

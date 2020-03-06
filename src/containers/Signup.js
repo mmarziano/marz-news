@@ -46,13 +46,13 @@ class Signup extends React.Component {
 
     handleSignupSubmit = (e) => {
         e.preventDefault();
-        let url = 'http://localhost:3001/api/v1/signup';
+        let url = 'https://marz-news-backend.herokuapp.com/api/v1/signup';
         let options = {
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'http://localhost:3000'
+                'Origin': 'https://marz-news.herokuapp.com/'
             }, 
             body: JSON.stringify({
                 user: {
