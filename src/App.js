@@ -141,7 +141,6 @@ class App extends React.Component {
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'https://marz-news.herokuapp.com/',
                 "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }, 
             body: JSON.stringify({
@@ -192,7 +191,6 @@ class App extends React.Component {
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'https://marz-news.herokuapp.com/',
                 "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }, 
             body: JSON.stringify({

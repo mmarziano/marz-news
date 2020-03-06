@@ -32,7 +32,6 @@ class Login extends React.Component {
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'https://marz-news.herokuapp.com/'
             }, 
             body: JSON.stringify({
                 user: {
@@ -73,7 +72,6 @@ class Login extends React.Component {
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',
-                'Origin': 'https://marz-news.herokuapp.com/'
             }, 
             body: JSON.stringify({
                 user: {
